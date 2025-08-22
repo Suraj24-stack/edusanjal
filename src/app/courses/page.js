@@ -1,12 +1,12 @@
-const CourseGrid = require('../../components/courses/CourseGrid')
-const CourseFilters = require('../../components/courses/CourseFilters')
-const CourseBanner = require('../../components/courses/CourseBanner')
-const PopularCourses = require('../../components/courses/PopularCourses')
+import CourseGrid from '../courses/components/courseGrid';
+import CourseFilters from '../courses/components/courseFilter';
+import CourseBanner from '../courses/components/courseBanner';
+import PopularCourses from '../courses/components/popularCourse';
 
-const metadata = {
+export const metadata = {
   title: 'Courses - EduSanjal',
   description: 'Explore thousands of courses across various disciplines in Nepal. Find the perfect course that matches your career goals.',
-}
+};
 
 function CoursesPage() {
   return (
@@ -16,7 +16,7 @@ function CoursesPage() {
       <PopularCourses />
       <CourseGrid />
     </div>
-  )
+  );
 }
 
-module.exports = CoursesPage
+export default CoursesPage;

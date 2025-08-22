@@ -1,7 +1,7 @@
-const HeroSection = require('../app/component/Hero')
-const FeaturedBanners = require('../app/component/FeaturedBanner')
-const AdmissionFair = require('../app/component/AdmissionFair')
-
+import HeroSection from '../app/component/Hero';
+import FeaturedBanners from '../app/component/FeaturedBanner';
+import AdmissionFair from '../app/component/AdmissionFair';
+import Courses from '../app/courses/page';
 
 function Home() {
   return (
@@ -9,9 +9,9 @@ function Home() {
       <HeroSection />
       <FeaturedBanners />
       <AdmissionFair />
-      
+      <Courses />
     </div>
-  )
+  );
 }
 
-module.exports = Home
+export default Home;
