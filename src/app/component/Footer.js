@@ -103,7 +103,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-primary-400" />
-                <span className="text-gray-300">+977-1-4567890</span>
+                <span className="text-gray-300">+9779848213092</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-primary-400" />
@@ -131,7 +131,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 EduSanjal. All rights reserved. | Made with ❤️ in Nepal
+            © 2025 SurajKhadka. All rights reserved.
           </p>
         </div>
       </div>

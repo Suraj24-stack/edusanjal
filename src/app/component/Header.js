@@ -479,47 +479,6 @@ const Header = () => {
         )}
       </header>
 
-      {/* Navigation Menu - Also Sticky */}
-      <nav className="bg-white border-b border-gray-200 sticky top-16 z-40">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center space-x-8 h-12 overflow-x-auto">
-            <Link href="/courses" className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 whitespace-nowrap py-2 border-b-2 border-transparent hover:border-blue-600 transition-all duration-200">
-              <span className="text-orange-500">📚</span>
-              <span className="text-sm font-medium">Courses</span>
-            </Link>
-            <Link href="/colleges" className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 whitespace-nowrap py-2 border-b-2 border-transparent hover:border-blue-600 transition-all duration-200">
-              <span className="text-blue-500">🏛️</span>
-              <span className="text-sm font-medium">Colleges</span>
-            </Link>
-            <Link href="/schools" className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 whitespace-nowrap py-2 border-b-2 border-transparent hover:border-blue-600 transition-all duration-200">
-              <span className="text-red-500">🏫</span>
-              <span className="text-sm font-medium">Schools</span>
-            </Link>
-            <Link href="/degrees" className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 whitespace-nowrap py-2 border-b-2 border-transparent hover:border-blue-600 transition-all duration-200">
-              <span className="text-purple-500">🎓</span>
-              <span className="text-sm font-medium">Degrees</span>
-            </Link>
-            <Link href="/admissions" className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 whitespace-nowrap py-2 border-b-2 border-transparent hover:border-blue-600 transition-all duration-200">
-              <span className="text-pink-500">📝</span>
-              <span className="text-sm font-medium">Admissions</span>
-            </Link>
-            <Link href="/vacancies" className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 whitespace-nowrap py-2 border-b-2 border-transparent hover:border-blue-600 transition-all duration-200">
-              <span className="text-green-500">💼</span>
-              <span className="text-sm font-medium">Vacancies</span>
-            </Link>
-            <Link href="/news" className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 whitespace-nowrap py-2 border-b-2 border-transparent hover:border-blue-600 transition-all duration-200">
-              <span className="text-gray-500">📰</span>
-              <span className="text-sm font-medium">News</span>
-            </Link>
-            <button className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 whitespace-nowrap py-2 border-b-2 border-transparent hover:border-blue-600 transition-all duration-200">
-              <span className="text-gray-500">⚙️</span>
-              <span className="text-sm font-medium">More</span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </nav>
-
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden bg-white border-b border-gray-200 shadow-lg sticky top-28 z-30">

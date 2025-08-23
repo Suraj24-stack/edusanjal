@@ -1,4 +1,5 @@
 import "./globals.css";
+import Header from "./component/Header";
 import NavBar from "./component/NavBar";
 import Footer from "./component/Footer";
 
@@ -13,6 +14,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="font-sans antialiased min-h-screen bg-gray-50">
         {/* Header / navigation visible on every route */}
+        
+        <Header/>
         <NavBar />
         
         {/* Route content */}
