@@ -93,7 +93,7 @@ const collegesData = [
 
 const CollegeCard = ({ college }) => {
   return (
-    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-indigo-200">
+    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-[#F2A900]/30">
       <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={college.image}
@@ -103,7 +103,7 @@ const CollegeCard = ({ college }) => {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute top-3 right-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+        <div className="absolute top-3 right-3 bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
           #{college.ranking}
         </div>
         <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -115,7 +115,7 @@ const CollegeCard = ({ college }) => {
       
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-300 leading-tight">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300 leading-tight">
             {college.name}
           </h3>
           <div className="flex items-center text-gray-500 ml-2 flex-shrink-0">
@@ -137,13 +137,13 @@ const CollegeCard = ({ college }) => {
             <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Students</div>
             <div className="text-sm font-bold text-gray-900 mt-1">{college.students}</div>
           </div>
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-3 border border-green-100">
-            <div className="text-xs font-semibold text-green-700 uppercase tracking-wide">Tuition</div>
-            <div className="text-sm font-bold text-green-800 mt-1">{college.tuition}</div>
+          <div className="bg-gradient-to-r from-[#F2A900]/10 to-[#F2A900]/20 rounded-xl p-3 border border-[#F2A900]/30">
+            <div className="text-xs font-semibold text-[#0B3C5D] uppercase tracking-wide">Tuition</div>
+            <div className="text-sm font-bold text-[#0B3C5D] mt-1">{college.tuition}</div>
           </div>
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-3 border border-blue-100">
-            <div className="text-xs font-semibold text-blue-700 uppercase tracking-wide">Acceptance</div>
-            <div className="text-sm font-bold text-blue-800 mt-1">{college.acceptance}</div>
+          <div className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 rounded-xl p-3 border border-[#0B3C5D]/30">
+            <div className="text-xs font-semibold text-[#0B3C5D] uppercase tracking-wide">Acceptance</div>
+            <div className="text-sm font-bold text-[#0B3C5D] mt-1">{college.acceptance}</div>
           </div>
         </div>
         
@@ -151,7 +151,7 @@ const CollegeCard = ({ college }) => {
           <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Popular Programs</div>
           <div className="flex flex-wrap gap-1.5">
             {college.programs.slice(0, 3).map((program, index) => (
-              <span key={index} className="bg-gradient-to-r from-indigo-100 to-purple-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-medium border border-indigo-200">
+              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-[#0B3C5D] px-3 py-1 rounded-full text-xs font-medium border border-[#0B3C5D]/20">
                 {program}
               </span>
             ))}
@@ -161,7 +161,7 @@ const CollegeCard = ({ college }) => {
           </div>
         </div>
         
-        <button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
+        <button className="w-full bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
           Explore University
         </button>
       </div>
@@ -175,14 +175,14 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
       <div className="p-4 sm:p-6">
         <div className="flex items-center justify-between">
           <h3 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center">
-            <svg className="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 mr-2 text-[#0B3C5D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
             </svg>
             Filters
           </h3>
           <button
             onClick={toggleOpen}
-            className="sm:hidden bg-indigo-100 text-indigo-600 p-2 rounded-xl hover:bg-indigo-200 transition-colors"
+            className="sm:hidden bg-[#0B3C5D]/10 text-[#0B3C5D] p-2 rounded-xl hover:bg-[#0B3C5D]/20 transition-colors"
           >
             <svg className={`w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -196,7 +196,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.type}
               onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Types</option>
               <option value="Private">Private</option>
@@ -209,7 +209,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.maxTuition}
               onChange={(e) => onFilterChange({ ...filters, maxTuition: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">Any Price</option>
               <option value="20000">Under $20,000</option>
@@ -223,7 +223,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="ranking">Ranking</option>
               <option value="name">Name</option>
@@ -302,8 +302,8 @@ export default function CollegesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 shadow-xl">
+      <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
+        <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="py-8 sm:py-12">
               <div className="h-8 bg-white/20 rounded-lg mb-4 w-3/4 animate-pulse" />
@@ -323,15 +323,15 @@ export default function CollegesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
       {/* Modern Header with Gradient */}
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 shadow-xl">
+      <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-8 sm:py-12">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               Discover Your Future
             </h1>
-            <p className="text-lg sm:text-xl text-indigo-100 max-w-2xl">
+            <p className="text-lg sm:text-xl text-white/90 max-w-2xl">
               Explore top colleges and universities to find the perfect match for your educational journey
             </p>
           </div>
@@ -347,7 +347,7 @@ export default function CollegesPage() {
               placeholder="Search universities by name or location..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
+              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-300"
             />
             <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
               <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -397,7 +397,7 @@ export default function CollegesPage() {
                   setSearchTerm('');
                   setFilters({ type: '', maxTuition: '', sortBy: 'ranking' });
                 }}
-                className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-300"
+                className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] px-6 py-3 rounded-xl font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-300"
               >
                 Clear All Filters
               </button>
@@ -405,8 +405,6 @@ export default function CollegesPage() {
           </div>
         )}
       </div>
-
-
     </div>
   );
 }

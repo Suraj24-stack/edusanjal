@@ -93,7 +93,7 @@ export default function CourseGrid() {
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#0B3C5D]">
           All Courses
         </h2>
         <div className="text-sm text-gray-600">
@@ -111,7 +111,7 @@ export default function CourseGrid() {
         <div className="text-center mt-12">
           <button
             onClick={loadMore}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-medium"
+            className="bg-[#0B3C5D] hover:bg-[#092F49] text-white px-8 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-200 font-medium"
           >
             Load More Courses
           </button>

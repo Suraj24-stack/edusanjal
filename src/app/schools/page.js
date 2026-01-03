@@ -140,8 +140,8 @@ const SchoolCard = ({ school }) => {
     if (tuition === "Free" || tuition === "Free*") return "from-green-50 to-emerald-50 border-green-100 text-green-800";
     const amount = parseInt(tuition.replace(/[$,*]/g, ''));
     if (amount > 50000) return "from-red-50 to-pink-50 border-red-100 text-red-800";
-    if (amount > 30000) return "from-yellow-50 to-orange-50 border-yellow-100 text-orange-800";
-    return "from-blue-50 to-indigo-50 border-blue-100 text-blue-800";
+    if (amount > 30000) return "from-[#F2A900]/10 to-[#F2A900]/20 border-[#F2A900]/30 text-[#0B3C5D]";
+    return "from-[#0B3C5D]/10 to-[#0B3C5D]/20 border-[#0B3C5D]/30 text-[#0B3C5D]";
   };
 
   const getTypeIcon = (type) => {
@@ -171,7 +171,7 @@ const SchoolCard = ({ school }) => {
   };
 
   return (
-    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-emerald-200">
+    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-[#F2A900]/30">
       <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={school.image}
@@ -181,12 +181,12 @@ const SchoolCard = ({ school }) => {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute top-3 right-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+        <div className="absolute top-3 right-3 bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
           #{school.ranking}
         </div>
         <div className="absolute top-3 left-3 flex items-center space-x-2">
           <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-white/90 backdrop-blur-sm ${
-            school.type === 'Private' ? 'text-indigo-800' : 
+            school.type === 'Private' ? 'text-[#0B3C5D]' : 
             school.type === 'Public' ? 'text-green-800' : 'text-purple-800'
           }`}>
             {getTypeIcon(school.type)}
@@ -202,7 +202,7 @@ const SchoolCard = ({ school }) => {
       
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors duration-300 leading-tight">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300 leading-tight">
             {school.name}
           </h3>
           <div className="flex items-center text-gray-500 ml-2 flex-shrink-0">
@@ -234,9 +234,9 @@ const SchoolCard = ({ school }) => {
             <div className="text-xs font-semibold uppercase tracking-wide opacity-80">Tuition</div>
             <div className="text-sm font-bold mt-1">{school.tuition}</div>
           </div>
-          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-3 border border-blue-100">
-            <div className="text-xs font-semibold text-blue-700 uppercase tracking-wide">Acceptance</div>
-            <div className="text-sm font-bold text-blue-800 mt-1">{school.acceptance}</div>
+          <div className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 rounded-xl p-3 border border-[#0B3C5D]/30">
+            <div className="text-xs font-semibold text-[#0B3C5D] uppercase tracking-wide">Acceptance</div>
+            <div className="text-sm font-bold text-[#0B3C5D] mt-1">{school.acceptance}</div>
           </div>
         </div>
         
@@ -244,7 +244,7 @@ const SchoolCard = ({ school }) => {
           <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Key Programs</div>
           <div className="flex flex-wrap gap-1.5">
             {school.programs.slice(0, 3).map((program, index) => (
-              <span key={index} className="bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-medium border border-emerald-200">
+              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-[#0B3C5D] px-3 py-1 rounded-full text-xs font-medium border border-[#0B3C5D]/20">
                 {program}
               </span>
             ))}
@@ -254,7 +254,7 @@ const SchoolCard = ({ school }) => {
           </div>
         </div>
         
-        <button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
+        <button className="w-full bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
           Explore School
         </button>
       </div>
@@ -268,14 +268,14 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
       <div className="p-4 sm:p-6">
         <div className="flex items-center justify-between">
           <h3 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center">
-            <svg className="w-5 h-5 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 mr-2 text-[#0B3C5D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
             </svg>
             Filters
           </h3>
           <button
             onClick={toggleOpen}
-            className="sm:hidden bg-emerald-100 text-emerald-600 p-2 rounded-xl hover:bg-emerald-200 transition-colors"
+            className="sm:hidden bg-[#0B3C5D]/10 text-[#0B3C5D] p-2 rounded-xl hover:bg-[#0B3C5D]/20 transition-colors"
           >
             <svg className={`w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -289,7 +289,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.type}
               onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Types</option>
               <option value="Private">Private</option>
@@ -303,7 +303,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.level}
               onChange={(e) => onFilterChange({ ...filters, level: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Levels</option>
               <option value="K-12">K-12</option>
@@ -317,7 +317,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.boardingType}
               onChange={(e) => onFilterChange({ ...filters, boardingType: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Types</option>
               <option value="Boarding & Day">Boarding & Day</option>
@@ -331,7 +331,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="ranking">Ranking</option>
               <option value="name">Name</option>
@@ -346,22 +346,22 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
   );
 };
 
-const StatsCard = ({ icon, title, value, description, color = "emerald" }) => {
+const StatsCard = ({ icon, title, value, description, color = "primary" }) => {
   const colorClasses = {
-    emerald: "from-emerald-500 to-teal-500",
+    primary: "from-[#0B3C5D] to-[#0B3C5D]/90",
+    secondary: "from-[#F2A900] to-[#D9A100]",
     blue: "from-blue-500 to-indigo-500",
-    purple: "from-purple-500 to-pink-500",
-    orange: "from-orange-500 to-red-500"
+    green: "from-green-500 to-emerald-500"
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-2xl hover:border-[#F2A900]/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
       <div className="flex items-center">
-        <div className={`bg-gradient-to-r ${colorClasses[color]} p-3 rounded-xl text-white`}>
+        <div className={`bg-gradient-to-r ${colorClasses[color]} p-3 rounded-xl text-white group-hover:scale-110 transition-transform duration-300`}>
           {icon}
         </div>
         <div className="ml-4">
-          <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
+          <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300">{value}</h3>
           <p className="text-sm font-semibold text-gray-600">{title}</p>
           <p className="text-xs text-gray-500">{description}</p>
         </div>
@@ -454,8 +454,8 @@ export default function SchoolsPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
-        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 shadow-xl">
+      <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
+        <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="py-8 sm:py-12">
               <div className="h-8 bg-white/20 rounded-lg mb-4 w-3/4 animate-pulse" />
@@ -475,15 +475,15 @@ export default function SchoolsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 shadow-xl">
+      <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-8 sm:py-12">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               Top Schools & Academies
             </h1>
-            <p className="text-lg sm:text-xl text-emerald-100 max-w-2xl">
+            <p className="text-lg sm:text-xl text-white/90 max-w-2xl">
               Discover exceptional K-12 educational institutions that shape future leaders
             </p>
           </div>
@@ -498,28 +498,28 @@ export default function SchoolsPage() {
             title="Total Schools"
             value={stats.totalSchools}
             description="Featured institutions"
-            color="emerald"
+            color="primary"
           />
           <StatsCard 
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2z" clipRule="evenodd" /></svg>}
             title="Private Schools"
             value={stats.privateSchools}
             description="Independent institutions"
-            color="blue"
+            color="secondary"
           />
           <StatsCard 
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4z" clipRule="evenodd" /></svg>}
             title="Public Schools"
             value={stats.publicSchools}
             description="Public & charter schools"
-            color="purple"
+            color="blue"
           />
           <StatsCard 
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg>}
             title="Avg Acceptance"
             value={`${stats.avgAcceptance}%`}
             description="Average acceptance rate"
-            color="orange"
+            color="green"
           />
         </div>
 
@@ -531,7 +531,7 @@ export default function SchoolsPage() {
               placeholder="Search schools by name, location, or programs..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-300"
             />
             <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
               <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -581,7 +581,7 @@ export default function SchoolsPage() {
                   setSearchTerm('');
                   setFilters({ type: '', level: '', boardingType: '', sortBy: 'ranking' });
                 }}
-                className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-emerald-700 hover:to-teal-700 transition-all duration-300"
+                className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] px-6 py-3 rounded-xl font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-300"
               >
                 Clear All Filters
               </button>
@@ -595,12 +595,12 @@ export default function SchoolsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <div className="flex items-center justify-center mb-4">
-              <div className="bg-gradient-to-r from-emerald-600 to-teal-600 w-8 h-8 rounded-lg flex items-center justify-center mr-3">
+              <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 w-8 h-8 rounded-lg flex items-center justify-center mr-3">
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
                 </svg>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 bg-clip-text text-transparent">
                 Schools Directory
               </span>
             </div>

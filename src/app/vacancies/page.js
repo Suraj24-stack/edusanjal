@@ -173,9 +173,9 @@ const JobCard = ({ job }) => {
       case 'Full-time':
         return "from-green-50 to-emerald-50 border-green-100 text-green-800";
       case 'Part-time':
-        return "from-blue-50 to-cyan-50 border-blue-100 text-blue-800";
+        return "from-[#0B3C5D]/10 to-[#0B3C5D]/20 border-[#0B3C5D]/30 text-[#0B3C5D]";
       case 'Contract':
-        return "from-orange-50 to-amber-50 border-orange-100 text-orange-800";
+        return "from-[#F2A900]/10 to-[#F2A900]/20 border-[#F2A900]/30 text-[#0B3C5D]";
       case 'Government':
         return "from-purple-50 to-indigo-50 border-purple-100 text-purple-800";
       default:
@@ -186,7 +186,7 @@ const JobCard = ({ job }) => {
   const getCategoryColor = (category) => {
     switch (category) {
       case 'Technology':
-        return "bg-gradient-to-r from-blue-500 to-indigo-500";
+        return "bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90";
       case 'Banking':
         return "bg-gradient-to-r from-green-500 to-emerald-500";
       case 'Engineering':
@@ -215,7 +215,7 @@ const JobCard = ({ job }) => {
   const daysLeft = getDaysUntilDeadline(job.deadline);
 
   return (
-    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-emerald-200">
+    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-[#F2A900]/30">
       <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={job.image}
@@ -236,8 +236,8 @@ const JobCard = ({ job }) => {
         {/* Days Left */}
         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-sm font-bold shadow-lg ${
           daysLeft <= 7 ? 'bg-gradient-to-r from-red-600 to-pink-600 text-white' :
-          daysLeft <= 14 ? 'bg-gradient-to-r from-orange-600 to-amber-600 text-white' :
-          'bg-gradient-to-r from-emerald-600 to-teal-600 text-white'
+          daysLeft <= 14 ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D]' :
+          'bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white'
         }`}>
           {daysLeft > 0 ? `${daysLeft} days left` : 'Expired'}
         </div>
@@ -252,7 +252,7 @@ const JobCard = ({ job }) => {
       
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors duration-300 leading-tight">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300 leading-tight">
             {job.title}
           </h3>
           <div className="flex items-center text-gray-500 ml-2 flex-shrink-0">
@@ -302,7 +302,7 @@ const JobCard = ({ job }) => {
           <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Key Skills</div>
           <div className="flex flex-wrap gap-1.5">
             {job.skills.slice(0, 3).map((skill, index) => (
-              <span key={index} className="bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-medium border border-emerald-200">
+              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-[#0B3C5D] px-3 py-1 rounded-full text-xs font-medium border border-[#0B3C5D]/20">
                 {skill}
               </span>
             ))}
@@ -313,7 +313,7 @@ const JobCard = ({ job }) => {
         </div>
         
         <div className="flex space-x-2">
-          <button className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
+          <button className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
             Apply Now
           </button>
           <button className="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors duration-200 font-semibold text-sm">
@@ -333,14 +333,14 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
       <div className="p-4 sm:p-6">
         <div className="flex items-center justify-between">
           <h3 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center">
-            <svg className="w-5 h-5 mr-2 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 mr-2 text-[#0B3C5D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
             </svg>
             Job Filters
           </h3>
           <button
             onClick={toggleOpen}
-            className="sm:hidden bg-emerald-100 text-emerald-600 p-2 rounded-xl hover:bg-emerald-200 transition-colors"
+            className="sm:hidden bg-[#0B3C5D]/10 text-[#0B3C5D] p-2 rounded-xl hover:bg-[#0B3C5D]/20 transition-colors"
           >
             <svg className={`w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -354,7 +354,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.category}
               onChange={(e) => onFilterChange({ ...filters, category: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Categories</option>
               <option value="Technology">Technology</option>
@@ -372,7 +372,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.type}
               onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Types</option>
               <option value="Full-time">Full-time</option>
@@ -387,7 +387,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.location}
               onChange={(e) => onFilterChange({ ...filters, location: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Locations</option>
               <option value="Kathmandu">Kathmandu</option>
@@ -403,7 +403,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.experience}
               onChange={(e) => onFilterChange({ ...filters, experience: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Levels</option>
               <option value="0-1">0-1 years</option>
@@ -418,7 +418,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="recent">Most Recent</option>
               <option value="deadline">Deadline</option>
@@ -432,22 +432,22 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
   );
 };
 
-const StatsCard = ({ icon, title, value, description, color = "emerald" }) => {
+const StatsCard = ({ icon, title, value, description, color = "primary" }) => {
   const colorClasses = {
-    emerald: "from-emerald-500 to-teal-500",
+    primary: "from-[#0B3C5D] to-[#0B3C5D]/90",
+    secondary: "from-[#F2A900] to-[#D9A100]",
     blue: "from-blue-500 to-indigo-500",
-    orange: "from-orange-500 to-red-500",
-    purple: "from-purple-500 to-pink-500"
+    green: "from-green-500 to-emerald-500"
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-2xl hover:border-[#F2A900]/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
       <div className="flex items-center">
-        <div className={`bg-gradient-to-r ${colorClasses[color]} p-3 rounded-xl text-white`}>
+        <div className={`bg-gradient-to-r ${colorClasses[color]} p-3 rounded-xl text-white group-hover:scale-110 transition-transform duration-300`}>
           {icon}
         </div>
         <div className="ml-4">
-          <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
+          <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300">{value}</h3>
           <p className="text-sm font-semibold text-gray-600">{title}</p>
           <p className="text-xs text-gray-500">{description}</p>
         </div>
@@ -557,8 +557,8 @@ export default function VacanciesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
-        <div className="bg-gradient-to-r from-emerald-600 to-teal-600 shadow-xl">
+      <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
+        <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="py-8 sm:py-12">
               <div className="h-8 bg-white/20 rounded-lg mb-4 w-3/4 animate-pulse" />
@@ -578,15 +578,15 @@ export default function VacanciesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 shadow-xl">
+      <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-8 sm:py-12">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               Jobs in Nepal 🇳🇵
             </h1>
-            <p className="text-lg sm:text-xl text-emerald-100 max-w-2xl">
+            <p className="text-lg sm:text-xl text-white/90 max-w-2xl">
               Discover amazing career opportunities across Nepal. From tech startups to government positions, find your dream job today.
             </p>
           </div>
@@ -601,14 +601,14 @@ export default function VacanciesPage() {
             title="Total Jobs"
             value={stats.totalJobs}
             description="Available positions"
-            color="emerald"
+            color="primary"
           />
           <StatsCard 
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg>}
             title="Urgent Hiring"
             value={stats.urgentJobs}
             description="Immediate openings"
-            color="orange"
+            color="secondary"
           />
           <StatsCard 
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" /></svg>}
@@ -622,7 +622,7 @@ export default function VacanciesPage() {
             title="Top Category"
             value={stats.mostPopular}
             description="Most in-demand"
-            color="purple"
+            color="green"
           />
         </div>
 
@@ -634,7 +634,7 @@ export default function VacanciesPage() {
               placeholder="Search jobs by title, company, skills, or location..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300"
+              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-300"
             />
             <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
               <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -684,7 +684,7 @@ export default function VacanciesPage() {
                   setSearchTerm('');
                   setFilters({ category: '', type: '', location: '', experience: '', sortBy: 'recent' });
                 }}
-                className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-emerald-700 hover:to-teal-700 transition-all duration-300"
+                className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] px-6 py-3 rounded-xl font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-300"
               >
                 Clear All Filters
               </button>

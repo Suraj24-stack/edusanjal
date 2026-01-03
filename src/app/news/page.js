@@ -163,12 +163,12 @@ export default function NewsPage() {
 
   const getCategoryColor = (category) => {
     const colors = {
-      'Education': 'bg-blue-100 text-blue-800 border-blue-200',
+      'Education': 'bg-[#0B3C5D]/10 text-[#0B3C5D] border-[#0B3C5D]/30',
       'Politics': 'bg-red-100 text-red-800 border-red-200',
       'Technology': 'bg-green-100 text-green-800 border-green-200',
       'Local Government': 'bg-purple-100 text-purple-800 border-purple-200',
       'Health': 'bg-pink-100 text-pink-800 border-pink-200',
-      'Sports': 'bg-orange-100 text-orange-800 border-orange-200',
+      'Sports': 'bg-[#F2A900]/10 text-[#0B3C5D] border-[#F2A900]/30',
       'Economy': 'bg-yellow-100 text-yellow-800 border-yellow-200'
     };
     return colors[category] || 'bg-gray-100 text-gray-800 border-gray-200';
@@ -225,14 +225,14 @@ export default function NewsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
       {/* Header */}
       <div className="bg-white shadow-sm border-b sticky top-0 z-50 backdrop-blur-sm bg-white/95">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-6">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-lg">N</span>
                 </div>
                 <div>
@@ -251,18 +251,18 @@ export default function NewsPage() {
                   placeholder="Search news..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full lg:w-64 transition-all"
+                  className="pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent w-full lg:w-64 transition-all"
                 />
               </div>
               
               <button 
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="lg:hidden p-2.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                className="lg:hidden p-2.5 text-gray-600 hover:text-[#0B3C5D] hover:bg-[#0B3C5D]/5 rounded-lg transition-colors"
               >
                 <Filter size={20} />
               </button>
               
-              <button className="p-2.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors relative">
+              <button className="p-2.5 text-gray-600 hover:text-[#0B3C5D] hover:bg-[#0B3C5D]/5 rounded-lg transition-colors relative">
                 <Bell size={20} />
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
               </button>
@@ -302,7 +302,7 @@ export default function NewsPage() {
                     }}
                     className={`p-3 rounded-lg text-sm font-medium transition-all flex items-center space-x-2 ${
                       activeCategory === category.name
-                        ? 'bg-blue-600 text-white'
+                        ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D]'
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                   >
@@ -325,8 +325,8 @@ export default function NewsPage() {
                 onClick={() => setActiveCategory(category.name)}
                 className={`px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 flex items-center space-x-2 ${
                   activeCategory === category.name
-                    ? 'bg-blue-600 text-white shadow-lg scale-105'
-                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 hover:border-gray-300'
+                    ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] shadow-lg scale-105'
+                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200 hover:border-[#F2A900]/30'
                 }`}
               >
                 <span>{category.icon}</span>
@@ -339,8 +339,8 @@ export default function NewsPage() {
 
         {/* Search Results Info */}
         {searchTerm && (
-          <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-blue-800">
+          <div className="mb-6 p-4 bg-[#0B3C5D]/5 border border-[#0B3C5D]/20 rounded-lg">
+            <p className="text-[#0B3C5D]">
               Found <span className="font-semibold">{searchFilteredNews.length}</span> results for "{searchTerm}"
             </p>
           </div>
@@ -376,7 +376,7 @@ export default function NewsPage() {
                   }`}
                 >
                   <div className={`${index === 0 ? 'lg:w-1/2' : ''} relative overflow-hidden`}>
-                    <div className="aspect-video bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    <div className="aspect-video bg-gradient-to-br from-[#0B3C5D]/5 via-[#0B3C5D]/10 to-[#F2A900]/5 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
                       <div className="text-center text-gray-500">
                         <BookOpen size={index === 0 ? 64 : 48} />
                         <p className="mt-2 text-sm">News Image</p>
@@ -394,7 +394,7 @@ export default function NewsPage() {
                         onClick={() => handleBookmark(news.id)}
                         className={`p-2 rounded-full backdrop-blur-sm transition-all ${
                           bookmarkedNews.has(news.id)
-                            ? 'bg-yellow-500 text-white'
+                            ? 'bg-[#F2A900] text-[#0B3C5D]'
                             : 'bg-white/80 text-gray-600 hover:bg-white'
                         }`}
                       >
@@ -417,7 +417,7 @@ export default function NewsPage() {
                       </div>
                     </div>
                     
-                    <h2 className={`font-bold text-gray-900 mb-3 hover:text-blue-600 cursor-pointer transition-colors group-hover:text-blue-600 line-clamp-2 ${
+                    <h2 className={`font-bold text-gray-900 mb-3 hover:text-[#0B3C5D] cursor-pointer transition-colors group-hover:text-[#0B3C5D] line-clamp-2 ${
                       index === 0 ? 'text-xl lg:text-2xl' : 'text-lg'
                     }`}>
                       {news.title}
@@ -429,7 +429,7 @@ export default function NewsPage() {
 
                     {/* Author Info */}
                     <div className="flex items-center mb-4">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-3">
+                      <div className="w-8 h-8 bg-gradient-to-br from-[#0B3C5D] to-[#0B3C5D]/90 rounded-full flex items-center justify-center mr-3">
                         <span className="text-white text-xs font-medium">
                           {news.author?.charAt(0)}
                         </span>
@@ -479,7 +479,7 @@ export default function NewsPage() {
                           <span>{news.likes + (likedNews.has(news.id) ? 1 : 0)}</span>
                         </button>
                         
-                        <button className="flex items-center space-x-1 text-sm text-gray-500 hover:text-blue-500 transition-colors">
+                        <button className="flex items-center space-x-1 text-sm text-gray-500 hover:text-[#0B3C5D] transition-colors">
                           <MessageCircle size={16} />
                           <span>{news.comments}</span>
                         </button>
@@ -490,7 +490,7 @@ export default function NewsPage() {
                         </button>
                       </div>
                       
-                      <button className="text-blue-600 hover:text-blue-800 font-medium text-sm">
+                      <button className="text-[#0B3C5D] hover:text-[#F2A900] font-medium text-sm transition-colors">
                         Read More →
                       </button>
                     </div>
@@ -501,7 +501,7 @@ export default function NewsPage() {
 
             {/* Load More Button */}
             <div className="text-center">
-              <button className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+              <button className="px-8 py-3 bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] rounded-lg hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-300 font-medium shadow-lg hover:shadow-xl">
                 Load More Articles
               </button>
             </div>
@@ -513,7 +513,7 @@ export default function NewsPage() {
             <div className="bg-white rounded-xl shadow-sm p-4 lg:p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center">
-                  <TrendingUp className="text-orange-500 mr-2" size={20} />
+                  <TrendingUp className="text-[#F2A900] mr-2" size={20} />
                   <h3 className="font-bold text-gray-900">Trending Now</h3>
                 </div>
                 <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Live</span>
@@ -523,7 +523,7 @@ export default function NewsPage() {
                   <article key={news.id} className="border-b border-gray-100 pb-4 last:border-b-0 group cursor-pointer">
                     <div className="flex items-start space-x-3">
                       <span className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white mt-0.5 ${
-                        index < 3 ? 'bg-gradient-to-r from-red-500 to-orange-500' : 'bg-gray-400'
+                        index < 3 ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100]' : 'bg-gray-400'
                       }`}>
                         {index + 1}
                       </span>
@@ -538,7 +538,7 @@ export default function NewsPage() {
                             {news.category}
                           </span>
                         </div>
-                        <h4 className="font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors text-sm leading-snug line-clamp-2">
+                        <h4 className="font-semibold text-gray-900 mb-1 group-hover:text-[#0B3C5D] transition-colors text-sm leading-snug line-clamp-2">
                           {news.title}
                         </h4>
                         <p className="text-xs text-gray-600 mb-2 line-clamp-2">{news.summary}</p>
@@ -564,7 +564,7 @@ export default function NewsPage() {
             </div>
 
             {/* Live Analytics */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl p-4 lg:p-6">
+            <div className="bg-gradient-to-br from-[#0B3C5D]/5 to-[#0B3C5D]/10 rounded-xl p-4 lg:p-6">
               <h3 className="font-bold text-gray-900 mb-4 flex items-center">
                 📊 Live Analytics
                 <span className="ml-2 w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
@@ -576,42 +576,42 @@ export default function NewsPage() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Today's Articles</span>
-                  <span className="font-bold text-blue-600">12</span>
+                  <span className="font-bold text-[#0B3C5D]">12</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">This Week</span>
-                  <span className="font-bold text-blue-600">47</span>
+                  <span className="font-bold text-[#0B3C5D]">47</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Most Active</span>
-                  <span className="font-bold text-blue-600">Education</span>
+                  <span className="font-bold text-[#0B3C5D]">Education</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
-                  <div className="bg-blue-600 h-2 rounded-full" style={{width: '78%'}}></div>
+                  <div className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] h-2 rounded-full" style={{width: '78%'}}></div>
                 </div>
                 <p className="text-xs text-gray-600 text-center">78% more active than yesterday</p>
               </div>
             </div>
 
             {/* Newsletter Signup */}
-            <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-xl p-4 lg:p-6 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
+            <div className="bg-gradient-to-br from-[#0B3C5D] to-[#0B3C5D]/90 text-white rounded-xl p-4 lg:p-6 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#F2A900]/20 to-[#F2A900]/10"></div>
               <div className="relative">
                 <h3 className="font-bold mb-2">📧 Stay Updated</h3>
-                <p className="text-gray-300 text-sm mb-4">
+                <p className="text-gray-200 text-sm mb-4">
                   Get breaking news and daily updates delivered to your inbox
                 </p>
                 <div className="space-y-3">
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full px-3 py-2.5 rounded-lg bg-gray-800/50 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50 backdrop-blur-sm"
+                    className="w-full px-3 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:border-[#F2A900] focus:ring-2 focus:ring-[#F2A900]/50 backdrop-blur-sm"
                   />
-                  <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg">
+                  <button className="w-full bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] font-medium py-2.5 px-4 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg">
                     Subscribe Free
                   </button>
                 </div>
-                <p className="text-xs text-gray-400 mt-3 text-center">
+                <p className="text-xs text-gray-300 mt-3 text-center">
                   🔒 Join 15,000+ readers • No spam • Unsubscribe anytime
                 </p>
               </div>

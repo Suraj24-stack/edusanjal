@@ -48,10 +48,10 @@ export default function PopularCourses() {
   return (
     <div className="mb-12">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+        <h2 className="text-3xl md:text-4xl font-bold text-[#0B3C5D]">
           🔥 Popular Courses
         </h2>
-        <button className="text-blue-600 hover:text-blue-700 font-medium hover:underline">
+        <button className="text-[#F2A900] hover:text-[#D9A100] font-medium hover:underline">
           View All
         </button>
       </div>

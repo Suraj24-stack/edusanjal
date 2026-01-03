@@ -186,7 +186,7 @@ const timelineData = [
     month: "October",
     tasks: ["Take SAT/ACT", "Complete essays", "Submit early applications", "Schedule interviews"],
     priority: "high",
-    color: "bg-orange-500"
+    color: "bg-[#F2A900]"
   },
   {
     month: "November",
@@ -204,7 +204,7 @@ const timelineData = [
     month: "January-March",
     tasks: ["Wait for decisions", "Visit campuses", "Compare financial aid offers"],
     priority: "low",
-    color: "bg-blue-500"
+    color: "bg-[#0B3C5D]"
   },
   {
     month: "April-May",
@@ -218,13 +218,13 @@ const AdmissionCard = ({ admission }) => {
   const getTypeColor = (type) => {
     switch (type) {
       case 'University':
-        return "from-orange-50 to-amber-50 border-orange-100 text-orange-800";
+        return "from-[#F2A900]/10 to-[#F2A900]/20 border-[#F2A900]/30 text-[#0B3C5D]";
       case 'High School':
         return "from-green-50 to-emerald-50 border-green-100 text-green-800";
       case 'Graduate School':
         return "from-purple-50 to-pink-50 border-purple-100 text-purple-800";
       case 'Community College':
-        return "from-blue-50 to-cyan-50 border-blue-100 text-blue-800";
+        return "from-[#0B3C5D]/10 to-[#0B3C5D]/20 border-[#0B3C5D]/30 text-[#0B3C5D]";
       default:
         return "from-gray-50 to-slate-50 border-gray-100 text-gray-800";
     }
@@ -233,7 +233,7 @@ const AdmissionCard = ({ admission }) => {
   const getLevelColor = (level) => {
     switch (level) {
       case "Undergraduate":
-        return "bg-gradient-to-r from-blue-500 to-indigo-500";
+        return "bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90";
       case "Graduate":
         return "bg-gradient-to-r from-purple-500 to-pink-500";
       case "Secondary":
@@ -247,13 +247,13 @@ const AdmissionCard = ({ admission }) => {
     const percentage = parseFloat(rate);
     if (percentage <= 5) return "from-red-50 to-pink-50 border-red-100 text-red-800";
     if (percentage <= 15) return "from-orange-50 to-red-50 border-orange-100 text-orange-800";
-    if (percentage <= 30) return "from-yellow-50 to-orange-50 border-yellow-100 text-yellow-800";
-    if (percentage <= 50) return "from-blue-50 to-indigo-50 border-blue-100 text-blue-800";
+    if (percentage <= 30) return "from-[#F2A900]/10 to-[#F2A900]/20 border-[#F2A900]/30 text-[#0B3C5D]";
+    if (percentage <= 50) return "from-[#0B3C5D]/10 to-[#0B3C5D]/20 border-[#0B3C5D]/30 text-[#0B3C5D]";
     return "from-green-50 to-emerald-50 border-green-100 text-green-800";
   };
 
   return (
-    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-amber-200">
+    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-[#F2A900]/30">
       <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={admission.image}
@@ -263,7 +263,7 @@ const AdmissionCard = ({ admission }) => {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute top-3 right-3 bg-gradient-to-r from-amber-600 to-orange-600 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+        <div className="absolute top-3 right-3 bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
           {admission.acceptanceRate}
         </div>
         <div className="absolute top-3 left-3 flex items-center space-x-2">
@@ -280,7 +280,7 @@ const AdmissionCard = ({ admission }) => {
       
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors duration-300 leading-tight">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300 leading-tight">
             {admission.institution}
           </h3>
           <div className="flex items-center text-gray-500 ml-2 flex-shrink-0">
@@ -309,9 +309,9 @@ const AdmissionCard = ({ admission }) => {
             <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Avg GPA</div>
             <div className="text-sm font-bold text-gray-900 mt-1">{admission.avgGPA}</div>
           </div>
-          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-3 border border-blue-100">
-            <div className="text-xs font-semibold text-blue-700 uppercase tracking-wide">Test Score</div>
-            <div className="text-sm font-bold text-blue-800 mt-1">
+          <div className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 rounded-xl p-3 border border-[#0B3C5D]/30">
+            <div className="text-xs font-semibold text-[#0B3C5D] uppercase tracking-wide">Test Score</div>
+            <div className="text-sm font-bold text-[#0B3C5D] mt-1">
               {admission.avgSAT !== "Optional" && admission.avgSAT !== "N/A" ? admission.avgSAT : 
                admission.avgMCAT !== "N/A" ? admission.avgMCAT :
                admission.avgGMAT !== "N/A" ? admission.avgGMAT :
@@ -324,7 +324,7 @@ const AdmissionCard = ({ admission }) => {
           <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Key Requirements</div>
           <div className="flex flex-wrap gap-1.5">
             {admission.requirements.slice(0, 3).map((requirement, index) => (
-              <span key={index} className="bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 px-3 py-1 rounded-full text-xs font-medium border border-amber-200">
+              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-[#0B3C5D] px-3 py-1 rounded-full text-xs font-medium border border-[#0B3C5D]/20">
                 {requirement}
               </span>
             ))}
@@ -335,7 +335,7 @@ const AdmissionCard = ({ admission }) => {
         </div>
         
         <div className="flex space-x-2">
-          <button className="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
+          <button className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
             Apply Now
           </button>
           <button className="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors duration-200 font-semibold text-sm">
@@ -355,14 +355,14 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
       <div className="p-4 sm:p-6">
         <div className="flex items-center justify-between">
           <h3 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center">
-            <svg className="w-5 h-5 mr-2 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 mr-2 text-[#0B3C5D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
             </svg>
             Admission Filters
           </h3>
           <button
             onClick={toggleOpen}
-            className="sm:hidden bg-amber-100 text-amber-600 p-2 rounded-xl hover:bg-amber-200 transition-colors"
+            className="sm:hidden bg-[#0B3C5D]/10 text-[#0B3C5D] p-2 rounded-xl hover:bg-[#0B3C5D]/20 transition-colors"
           >
             <svg className={`w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -376,7 +376,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.type}
               onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Types</option>
               <option value="University">University</option>
@@ -391,7 +391,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.level}
               onChange={(e) => onFilterChange({ ...filters, level: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Levels</option>
               <option value="Undergraduate">Undergraduate</option>
@@ -405,7 +405,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.deadline}
               onChange={(e) => onFilterChange({ ...filters, deadline: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Deadlines</option>
               <option value="Soon">Due Soon (&lt; 30 days)</option>
@@ -420,7 +420,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="deadline">Deadline</option>
               <option value="acceptance">Acceptance Rate</option>
@@ -436,15 +436,15 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
 
 const TimelineCard = ({ timeline }) => {
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-xl hover:border-[#F2A900]/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
       <div className="flex items-center mb-4">
-        <div className={`w-4 h-4 rounded-full ${timeline.color} mr-3`}></div>
-        <h3 className="text-xl font-bold text-gray-900">{timeline.month}</h3>
+        <div className={`w-4 h-4 rounded-full ${timeline.color} mr-3 group-hover:scale-110 transition-transform duration-300`}></div>
+        <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300">{timeline.month}</h3>
       </div>
       <div className="space-y-2">
         {timeline.tasks.map((task, index) => (
           <div key={index} className="flex items-center text-sm text-gray-700">
-            <svg className="w-4 h-4 text-amber-500 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-4 h-4 text-[#F2A900] mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
             {task}
@@ -455,22 +455,22 @@ const TimelineCard = ({ timeline }) => {
   );
 };
 
-const StatsCard = ({ icon, title, value, description, color = "amber" }) => {
+const StatsCard = ({ icon, title, value, description, color = "primary" }) => {
   const colorClasses = {
-    amber: "from-amber-500 to-orange-500",
+    primary: "from-[#0B3C5D] to-[#0B3C5D]/90",
+    secondary: "from-[#F2A900] to-[#D9A100]",
     blue: "from-blue-500 to-indigo-500",
-    green: "from-green-500 to-emerald-500",
-    purple: "from-purple-500 to-pink-500"
+    green: "from-green-500 to-emerald-500"
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-2xl hover:border-[#F2A900]/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
       <div className="flex items-center">
-        <div className={`bg-gradient-to-r ${colorClasses[color]} p-3 rounded-xl text-white`}>
+        <div className={`bg-gradient-to-r ${colorClasses[color]} p-3 rounded-xl text-white group-hover:scale-110 transition-transform duration-300`}>
           {icon}
         </div>
         <div className="ml-4">
-          <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
+          <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300">{value}</h3>
           <p className="text-sm font-semibold text-gray-600">{title}</p>
           <p className="text-xs text-gray-500">{description}</p>
         </div>
@@ -573,8 +573,8 @@ export default function AdmissionsPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
-        <div className="bg-gradient-to-r from-amber-600 to-orange-600 shadow-xl">
+      <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
+        <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="py-8 sm:py-12">
               <div className="h-8 bg-white/20 rounded-lg mb-4 w-3/4 animate-pulse" />
@@ -594,15 +594,15 @@ export default function AdmissionsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-white to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-amber-600 to-orange-600 shadow-xl">
+      <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-8 sm:py-12">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               College Admissions Hub
             </h1>
-            <p className="text-lg sm:text-xl text-amber-100 max-w-2xl">
+            <p className="text-lg sm:text-xl text-white/90 max-w-2xl">
               Navigate your path to higher education with comprehensive admission information and guidance
             </p>
           </div>
@@ -617,7 +617,7 @@ export default function AdmissionsPage() {
             title="Total Applications"
             value={stats.totalApplications}
             description="Available programs"
-            color="amber"
+            color="primary"
           />
           <StatsCard 
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg>}
@@ -638,7 +638,7 @@ export default function AdmissionsPage() {
             title="Urgent Deadlines"
             value={stats.upcomingDeadlines}
             description="Due this year"
-            color="purple"
+            color="secondary"
           />
         </div>
 
@@ -650,7 +650,7 @@ export default function AdmissionsPage() {
                 onClick={() => setActiveTab('applications')}
                 className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-200 ${
                   activeTab === 'applications' 
-                    ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg' 
+                    ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] shadow-lg' 
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
@@ -660,7 +660,7 @@ export default function AdmissionsPage() {
                 onClick={() => setActiveTab('timeline')}
                 className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-200 ${
                   activeTab === 'timeline' 
-                    ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-lg' 
+                    ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] shadow-lg' 
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
@@ -680,7 +680,7 @@ export default function AdmissionsPage() {
                   placeholder="Search institutions, requirements, or application types..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-300"
+                  className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-300"
                 />
                 <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                   <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -730,7 +730,7 @@ export default function AdmissionsPage() {
                       setSearchTerm('');
                       setFilters({ type: '', level: '', deadline: '', sortBy: 'deadline' });
                     }}
-                    className="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-amber-700 hover:to-orange-700 transition-all duration-300"
+                    className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] px-6 py-3 rounded-xl font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-300"
                   >
                     Clear All Filters
                   </button>

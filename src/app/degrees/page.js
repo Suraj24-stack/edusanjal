@@ -159,9 +159,9 @@ const DegreeCard = ({ degree }) => {
       case 'High':
         return "from-orange-50 to-red-50 border-orange-100 text-orange-800";
       case 'Medium-High':
-        return "from-yellow-50 to-orange-50 border-yellow-100 text-yellow-800";
+        return "from-[#F2A900]/10 to-[#F2A900]/20 border-[#F2A900]/30 text-[#0B3C5D]";
       case 'Medium':
-        return "from-blue-50 to-indigo-50 border-blue-100 text-blue-800";
+        return "from-[#0B3C5D]/10 to-[#0B3C5D]/20 border-[#0B3C5D]/30 text-[#0B3C5D]";
       default:
         return "from-green-50 to-emerald-50 border-green-100 text-green-800";
     }
@@ -170,9 +170,9 @@ const DegreeCard = ({ degree }) => {
   const getLevelColor = (level) => {
     switch (level) {
       case "Bachelor's":
-        return "bg-gradient-to-r from-blue-500 to-indigo-500";
+        return "bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90";
       case "Master's":
-        return "bg-gradient-to-r from-purple-500 to-pink-500";
+        return "bg-gradient-to-r from-[#F2A900] to-[#D9A100]";
       case "Doctorate":
         return "bg-gradient-to-r from-red-500 to-pink-500";
       case "Associate":
@@ -218,7 +218,7 @@ const DegreeCard = ({ degree }) => {
   };
 
   return (
-    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-cyan-200">
+    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-[#F2A900]/30">
       <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={degree.image}
@@ -228,7 +228,7 @@ const DegreeCard = ({ degree }) => {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute top-3 right-3 bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
+        <div className="absolute top-3 right-3 bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
           #{degree.ranking}
         </div>
         <div className="absolute top-3 left-3 flex items-center space-x-2">
@@ -249,7 +249,7 @@ const DegreeCard = ({ degree }) => {
       
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-cyan-600 transition-colors duration-300 leading-tight">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300 leading-tight">
             {degree.title}
           </h3>
           <div className="flex items-center text-gray-500 ml-2 flex-shrink-0">
@@ -267,9 +267,9 @@ const DegreeCard = ({ degree }) => {
             <div className="text-xs font-semibold text-green-700 uppercase tracking-wide">Avg Salary</div>
             <div className="text-sm font-bold text-green-800 mt-1">{degree.avgSalary}</div>
           </div>
-          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-3 border border-blue-100">
-            <div className="text-xs font-semibold text-blue-700 uppercase tracking-wide">Job Growth</div>
-            <div className="text-sm font-bold text-blue-800 mt-1">{degree.jobGrowth}</div>
+          <div className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 rounded-xl p-3 border border-[#0B3C5D]/30">
+            <div className="text-xs font-semibold text-[#0B3C5D] uppercase tracking-wide">Job Growth</div>
+            <div className="text-sm font-bold text-[#0B3C5D] mt-1">{degree.jobGrowth}</div>
           </div>
           <div className="bg-gray-50 rounded-xl p-3">
             <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Students</div>
@@ -285,7 +285,7 @@ const DegreeCard = ({ degree }) => {
           <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Top Career Paths</div>
           <div className="flex flex-wrap gap-1.5">
             {degree.careers.slice(0, 3).map((career, index) => (
-              <span key={index} className="bg-gradient-to-r from-cyan-100 to-blue-100 text-cyan-800 px-3 py-1 rounded-full text-xs font-medium border border-cyan-200">
+              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-[#0B3C5D] px-3 py-1 rounded-full text-xs font-medium border border-[#0B3C5D]/20">
                 {career}
               </span>
             ))}
@@ -295,7 +295,7 @@ const DegreeCard = ({ degree }) => {
           </div>
         </div>
         
-        <button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
+        <button className="w-full bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
           Explore Degree
         </button>
       </div>
@@ -309,14 +309,14 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
       <div className="p-4 sm:p-6">
         <div className="flex items-center justify-between">
           <h3 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center">
-            <svg className="w-5 h-5 mr-2 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 mr-2 text-[#0B3C5D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
             </svg>
             Filters
           </h3>
           <button
             onClick={toggleOpen}
-            className="sm:hidden bg-cyan-100 text-cyan-600 p-2 rounded-xl hover:bg-cyan-200 transition-colors"
+            className="sm:hidden bg-[#0B3C5D]/10 text-[#0B3C5D] p-2 rounded-xl hover:bg-[#0B3C5D]/20 transition-colors"
           >
             <svg className={`w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -330,7 +330,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.level}
               onChange={(e) => onFilterChange({ ...filters, level: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Levels</option>
               <option value="Associate">Associate</option>
@@ -345,7 +345,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.field}
               onChange={(e) => onFilterChange({ ...filters, field: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Fields</option>
               <option value="Technology">Technology</option>
@@ -360,7 +360,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.difficulty}
               onChange={(e) => onFilterChange({ ...filters, difficulty: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Levels</option>
               <option value="Medium">Medium</option>
@@ -375,7 +375,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="ranking">Popularity</option>
               <option value="title">Name</option>
@@ -390,22 +390,22 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
   );
 };
 
-const StatsCard = ({ icon, title, value, description, color = "cyan" }) => {
+const StatsCard = ({ icon, title, value, description, color = "primary" }) => {
   const colorClasses = {
-    cyan: "from-cyan-500 to-blue-500",
-    purple: "from-purple-500 to-pink-500",
-    orange: "from-orange-500 to-red-500",
+    primary: "from-[#0B3C5D] to-[#0B3C5D]/90",
+    secondary: "from-[#F2A900] to-[#D9A100]",
+    blue: "from-blue-500 to-indigo-500",
     green: "from-green-500 to-emerald-500"
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-xl transition-all duration-300">
+    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg p-6 hover:shadow-2xl hover:border-[#F2A900]/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
       <div className="flex items-center">
-        <div className={`bg-gradient-to-r ${colorClasses[color]} p-3 rounded-xl text-white`}>
+        <div className={`bg-gradient-to-r ${colorClasses[color]} p-3 rounded-xl text-white group-hover:scale-110 transition-transform duration-300`}>
           {icon}
         </div>
         <div className="ml-4">
-          <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
+          <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300">{value}</h3>
           <p className="text-sm font-semibold text-gray-600">{title}</p>
           <p className="text-xs text-gray-500">{description}</p>
         </div>
@@ -506,8 +506,8 @@ export default function DegreesPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-white to-blue-50">
-        <div className="bg-gradient-to-r from-cyan-600 to-blue-600 shadow-xl">
+      <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
+        <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="py-8 sm:py-12">
               <div className="h-8 bg-white/20 rounded-lg mb-4 w-3/4 animate-pulse" />
@@ -527,15 +527,15 @@ export default function DegreesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-cyan-600 to-blue-600 shadow-xl">
+      <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-8 sm:py-12">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               Explore Degree Programs
             </h1>
-            <p className="text-lg sm:text-xl text-cyan-100 max-w-2xl">
+            <p className="text-lg sm:text-xl text-white/90 max-w-2xl">
               Discover the perfect degree program to launch your career and achieve your professional goals
             </p>
           </div>
@@ -550,21 +550,21 @@ export default function DegreesPage() {
             title="Total Degrees"
             value={stats.totalDegrees}
             description="Popular programs"
-            color="cyan"
+            color="primary"
           />
           <StatsCard 
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5z" clipRule="evenodd" /></svg>}
             title="Tech Degrees"
             value={stats.techDegrees}
             description="Technology programs"
-            color="purple"
+            color="secondary"
           />
           <StatsCard 
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6z" clipRule="evenodd" /></svg>}
             title="Business Degrees"
             value={stats.businessDegrees}
             description="Business programs"
-            color="orange"
+            color="blue"
           />
           <StatsCard 
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>}
@@ -583,7 +583,7 @@ export default function DegreesPage() {
               placeholder="Search degrees by name, field, or career path..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-300"
             />
             <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
               <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -633,7 +633,7 @@ export default function DegreesPage() {
                   setSearchTerm('');
                   setFilters({ level: '', field: '', difficulty: '', sortBy: 'ranking' });
                 }}
-                className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all duration-300"
+                className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] px-6 py-3 rounded-xl font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-300"
               >
                 Clear All Filters
               </button>
