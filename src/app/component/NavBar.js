@@ -17,49 +17,49 @@ const NavBar = () => {
       href: '/courses',
       description: 'Explore thousands of courses',
       icon: '📚',
-      color: 'from-blue-500 to-indigo-500'
+      color: 'from-[#0B3C5D] to-[#0B3C5D]/90'
     },
     { 
       name: 'Colleges', 
       href: '/colleges',
       description: 'Find your perfect college',
       icon: '🏛️',
-      color: 'from-purple-500 to-pink-500'
+      color: 'from-[#0B3C5D] to-[#0B3C5D]/90'
     },
     { 
       name: 'Schools', 
       href: '/schools',
       description: 'Discover top schools',
       icon: '🏫',
-      color: 'from-emerald-500 to-teal-500'
+      color: 'from-[#0B3C5D] to-[#0B3C5D]/90'
     },
     { 
       name: 'Degrees', 
       href: '/degrees',
       description: 'Browse degree programs',
       icon: '🎓',
-      color: 'from-cyan-500 to-blue-500'
+      color: 'from-[#0B3C5D] to-[#0B3C5D]/90'
     },
     { 
       name: 'Admissions', 
       href: '/admissions',
       description: 'Admission guidance',
       icon: '📝',
-      color: 'from-amber-500 to-orange-500'
+      color: 'from-[#F2A900] to-[#D9A100]'
     },
     { 
       name: 'Vacancies', 
       href: '/vacancies',
       description: 'Job opportunities',
       icon: '💼',
-      color: 'from-green-500 to-emerald-500'
+      color: 'from-[#0B3C5D] to-[#0B3C5D]/90'
     },
     { 
       name: 'News', 
       href: '/news',
       description: 'Latest education news',
       icon: '📰',
-      color: 'from-red-500 to-pink-500'
+      color: 'from-[#0B3C5D] to-[#0B3C5D]/90'
     },
   ];
 
@@ -70,14 +70,14 @@ const NavBar = () => {
       description: 'Financial aid opportunities',
       icon: '💰',
       isNew: true,
-      color: 'from-yellow-500 to-orange-500'
+      color: 'from-[#F2A900] to-[#D9A100]'
     },
     { 
       name: 'Results', 
       href: '/results',
       description: 'Exam results & grades',
       icon: '📊',
-      color: 'from-indigo-500 to-purple-500'
+      color: 'from-[#0B3C5D] to-[#0B3C5D]/90'
     },
     { 
       name: 'Events', 
@@ -113,7 +113,7 @@ const NavBar = () => {
       href: '/contact',
       description: 'Get in touch',
       icon: '📞',
-      color: 'from-blue-500 to-indigo-500'
+      color: 'from-[#0B3C5D] to-[#0B3C5D]/90'
     },
   ];
 
@@ -143,7 +143,7 @@ const NavBar = () => {
                 href={item.href}
                 className={`group relative px-4 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 ${
                   isActive(item.href)
-                    ? 'text-white bg-gradient-to-r shadow-lg shadow-primary-500/25'
+                    ? 'text-white bg-gradient-to-r shadow-lg shadow-[#0B3C5D]/25'
                     : 'text-gray-700 hover:text-gray-900 hover:bg-white/60 hover:shadow-md hover:shadow-black/10'
                 } ${isActive(item.href) ? item.color : ''}`}
               >
@@ -154,11 +154,11 @@ const NavBar = () => {
                 
                 {/* Active indicator */}
                 {isActive(item.href) && (
-                  <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-primary-500 to-purple-500 rounded-full shadow-lg"></div>
+                  <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gradient-to-r from-[#F2A900] to-[#D9A100] rounded-full shadow-lg"></div>
                 )}
                 
                 {/* Hover effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-100 to-purple-100 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0B3C5D]/5 to-[#F2A900]/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               </Link>
             ))}
           </div>
@@ -169,13 +169,13 @@ const NavBar = () => {
               onClick={() => setIsMoreOpen(!isMoreOpen)}
               className={`group flex items-center space-x-2.5 px-5 py-2.5 font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 ${
                 isMoreOpen 
-                  ? 'text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg shadow-indigo-500/25' 
+                  ? 'text-[#0B3C5D] bg-gradient-to-r from-[#F2A900] to-[#D9A100] shadow-lg shadow-[#F2A900]/25' 
                   : 'text-gray-700 hover:text-gray-900 bg-white/60 hover:bg-white/80 hover:shadow-md hover:shadow-black/10'
               }`}
             >
-              <Sparkles className={`w-4 h-4 transition-all duration-300 ${isMoreOpen ? 'text-white' : 'text-indigo-500 group-hover:text-indigo-600'}`} />
+              <Sparkles className={`w-4 h-4 transition-all duration-300 ${isMoreOpen ? 'text-[#0B3C5D]' : 'text-[#0B3C5D] group-hover:text-[#0B3C5D]'}`} />
               <span className="text-sm tracking-wide">More</span>
-              <ChevronDown className={`w-4 h-4 transition-all duration-300 ${isMoreOpen ? 'rotate-180 text-white' : 'text-gray-500 group-hover:text-gray-700'}`} />
+              <ChevronDown className={`w-4 h-4 transition-all duration-300 ${isMoreOpen ? 'rotate-180 text-[#0B3C5D]' : 'text-gray-500 group-hover:text-gray-700'}`} />
             </button>
             
             {/* Dropdown Menu */}
@@ -189,7 +189,7 @@ const NavBar = () => {
                   {/* Header */}
                   <div className="px-6 py-3 border-b border-gray-100/50">
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"></div>
+                      <div className="w-2 h-2 bg-gradient-to-r from-[#F2A900] to-[#D9A100] rounded-full"></div>
                       <h3 className="text-sm font-bold text-gray-900">Explore More</h3>
                     </div>
                     <p className="text-xs text-gray-500 mt-1">Additional resources & tools</p>
@@ -209,7 +209,7 @@ const NavBar = () => {
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center space-x-2 mb-1">
-                            <span className="font-semibold text-gray-900 group-hover:text-gray-800 transition-colors duration-200">
+                            <span className="font-semibold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-200">
                               {item.name}
                             </span>
                             {item.isNew && (
@@ -222,7 +222,7 @@ const NavBar = () => {
                             {item.description}
                           </p>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-gray-600 group-hover:translate-x-1 transition-all duration-200" />
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#0B3C5D] group-hover:translate-x-1 transition-all duration-200" />
                       </Link>
                     ))}
                   </div>
@@ -235,7 +235,7 @@ const NavBar = () => {
         {/* Mobile Navigation Toggle */}
         <div className="lg:hidden flex items-center justify-between h-16">
           <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full animate-pulse"></div>
+            <div className="w-2 h-2 bg-gradient-to-r from-[#F2A900] to-[#D9A100] rounded-full animate-pulse"></div>
             <span className="text-lg font-bold text-gray-900 tracking-wide">Navigation</span>
           </div>
           <button
@@ -265,7 +265,7 @@ const NavBar = () => {
                     href={item.href}
                     className={`group flex items-center space-x-4 px-4 py-4 rounded-xl transition-all duration-300 transform hover:scale-[1.02] ${
                       isActive(item.href)
-                        ? `text-white bg-gradient-to-r ${item.color} shadow-lg shadow-primary-500/25`
+                        ? `text-white bg-gradient-to-r ${item.color} shadow-lg shadow-[#0B3C5D]/25`
                         : 'text-gray-700 hover:text-gray-900 hover:bg-white/80 hover:shadow-md hover:shadow-black/5'
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}

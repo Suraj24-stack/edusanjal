@@ -53,24 +53,24 @@ const AdmissionFair = () => {
           </p>
           
           {/* Fair Info */}
-          <div className="bg-gradient-to-r from-primary-50 to-accent-50 rounded-2xl p-6 max-w-4xl mx-auto mb-8">
+          <div className="bg-gradient-to-r from-[#0B3C5D]/5 to-[#F2A900]/5 rounded-2xl p-6 max-w-4xl mx-auto mb-8 border border-[#F2A900]/20">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div className="flex items-center justify-center space-x-3">
-                <Calendar className="w-6 h-6 text-primary-600" />
+                <Calendar className="w-6 h-6 text-[#0B3C5D]" />
                 <div>
                   <p className="font-semibold text-gray-900">Date</p>
                   <p className="text-gray-600">Dec 15-17, 2024</p>
                 </div>
               </div>
               <div className="flex items-center justify-center space-x-3">
-                <MapPin className="w-6 h-6 text-primary-600" />
+                <MapPin className="w-6 h-6 text-[#F2A900]" />
                 <div>
                   <p className="font-semibold text-gray-900">Venue</p>
                   <p className="text-gray-600">Kathmandu Convention Center</p>
                 </div>
               </div>
               <div className="flex items-center justify-center space-x-3">
-                <Users className="w-6 h-6 text-primary-600" />
+                <Users className="w-6 h-6 text-[#0B3C5D]" />
                 <div>
                   <p className="font-semibold text-gray-900">Participants</p>
                   <p className="text-gray-600">100+ Colleges</p>
@@ -81,7 +81,7 @@ const AdmissionFair = () => {
             <div className="mt-6">
               <Link
                 href="/admission-fair"
-                className="btn-primary inline-flex items-center space-x-2"
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
               >
                 <span>Register for Fair</span>
                 <ExternalLink className="w-4 h-4" />
@@ -95,13 +95,13 @@ const AdmissionFair = () => {
           {fairColleges.map((college) => (
             <div
               key={college.id}
-              className={`card group hover:scale-105 transition-all duration-300 ${
-                college.featured ? 'ring-2 ring-primary-200' : ''
+              className={`bg-white rounded-2xl shadow-lg hover:shadow-2xl overflow-hidden group hover:scale-105 transition-all duration-300 border ${
+                college.featured ? 'ring-2 ring-[#F2A900]/30 border-[#F2A900]/20' : 'border-gray-200'
               }`}
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center">
+                <div className="w-full h-full bg-gradient-to-br from-[#0B3C5D] to-[#0B3C5D]/80 flex items-center justify-center">
                   <div className="text-white text-6xl font-bold opacity-20">
                     {college.name.charAt(0)}
                   </div>
@@ -111,7 +111,7 @@ const AdmissionFair = () => {
                 <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold ${
                   college.badge === 'VERIFIED' ? 'bg-green-500 text-white' :
                   college.badge === 'PREMIUM' ? 'bg-purple-500 text-white' :
-                  'bg-yellow-500 text-gray-900'
+                  'bg-[#F2A900] text-[#0B3C5D]'
                 }`}>
                   {college.badge}
                 </div>
@@ -125,7 +125,7 @@ const AdmissionFair = () => {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#0B3C5D] transition-colors duration-200">
                   {college.name}
                 </h3>
                 
@@ -138,12 +138,12 @@ const AdmissionFair = () => {
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div className="text-center bg-gray-50 rounded-lg p-2">
-                    <div className="font-semibold text-primary-600">{college.students}</div>
+                  <div className="text-center bg-[#0B3C5D]/5 rounded-lg p-2 border border-[#0B3C5D]/10">
+                    <div className="font-semibold text-[#0B3C5D]">{college.students}</div>
                     <div className="text-xs text-gray-600">Students</div>
                   </div>
-                  <div className="text-center bg-gray-50 rounded-lg p-2">
-                    <div className="font-semibold text-primary-600">{college.established}</div>
+                  <div className="text-center bg-[#F2A900]/5 rounded-lg p-2 border border-[#F2A900]/10">
+                    <div className="font-semibold text-[#0B3C5D]">{college.established}</div>
                     <div className="text-xs text-gray-600">Established</div>
                   </div>
                 </div>
@@ -155,7 +155,7 @@ const AdmissionFair = () => {
                     {college.programs.map((program, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-medium"
+                        className="px-3 py-1 bg-[#0B3C5D]/10 text-[#0B3C5D] rounded-full text-xs font-medium border border-[#0B3C5D]/20"
                       >
                         {program}
                       </span>
@@ -167,13 +167,13 @@ const AdmissionFair = () => {
                 <div className="flex space-x-3">
                   <Link
                     href={`/colleges/${college.id}`}
-                    className="flex-1 btn-primary text-center text-sm py-2"
+                    className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] font-semibold text-center text-sm py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
                   >
                     Apply
                   </Link>
                   <Link
                     href={`/colleges/${college.id}/info`}
-                    className="flex-1 btn-secondary text-center text-sm py-2"
+                    className="flex-1 bg-white hover:bg-gray-50 text-[#0B3C5D] font-semibold text-center text-sm py-2 rounded-lg border-2 border-[#0B3C5D] transition-all duration-200 hover:scale-105"
                   >
                     Learn More
                   </Link>
@@ -187,7 +187,7 @@ const AdmissionFair = () => {
         <div className="text-center mt-12">
           <Link
             href="/admission-fair"
-            className="btn-primary text-lg px-8 py-4 hover:scale-105 transition-transform duration-200"
+            className="inline-block bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] font-semibold text-lg px-8 py-4 rounded-xl hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
           >
             View All Participating Colleges
           </Link>

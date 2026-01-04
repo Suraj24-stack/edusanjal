@@ -21,7 +21,7 @@ const FeaturedBanners = () => {
       title: 'Texas College of Management',
       subtitle: 'BIT / BCS / BBA / BHM / MBA / MCS / MBA in HM / HR',
       description: 'Your Partner for Excellence',
-      bgColor: 'bg-gradient-to-r from-blue-600 to-purple-600',
+      bgColor: 'bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90',
       textColor: 'text-white',
       ctaText: 'Learn More',
       website: 'www.texascollege.edu.np'
@@ -52,7 +52,7 @@ const FeaturedBanners = () => {
       title: 'NCIT',
       subtitle: 'Information Technology',
       description: 'BE Software, BE Civil, BE Computer, BE IT, B.Arch, BCA (IT), BBA',
-      bgColor: 'bg-gradient-to-r from-indigo-600 to-blue-600',
+      bgColor: 'bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/80',
       textColor: 'text-white',
       ctaText: 'Apply Now',
       badge: 'ADMISSIONS OPEN!',
@@ -71,7 +71,7 @@ const FeaturedBanners = () => {
   ]
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
       <div className="container-custom">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -86,12 +86,12 @@ const FeaturedBanners = () => {
           {banners.map((banner) => (
             <div
               key={banner.id}
-              className={`${banner.bgColor} ${banner.textColor} rounded-2xl p-6 relative overflow-hidden group hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl`}
+              className={`${banner.bgColor} ${banner.textColor} rounded-2xl p-6 relative overflow-hidden group hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl border border-white/10`}
             >
               {/* Badge */}
               {banner.badge && (
                 <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-4 ${
-                  banner.isUrgent ? 'bg-yellow-400 text-gray-900' : 'bg-white/20 backdrop-blur-sm'
+                  banner.isUrgent ? 'bg-[#F2A900] text-[#0B3C5D]' : 'bg-white/20 backdrop-blur-sm'
                 }`}>
                   {banner.badge}
                 </div>
@@ -100,7 +100,7 @@ const FeaturedBanners = () => {
               {/* Rating */}
               {banner.rating && (
                 <div className="flex items-center mb-3">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400 mr-1" />
+                  <Star className="w-4 h-4 fill-[#F2A900] text-[#F2A900] mr-1" />
                   <span className="font-semibold">{banner.rating}</span>
                   <span className="text-sm opacity-80 ml-1">(245 reviews)</span>
                 </div>
@@ -145,7 +145,7 @@ const FeaturedBanners = () => {
         <div className="text-center mt-12">
           <Link
             href="/colleges"
-            className="btn-primary text-lg px-8 py-4 hover:scale-105 transition-transform duration-200"
+            className="inline-block bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] font-semibold text-lg px-8 py-4 rounded-xl hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
           >
             View All Colleges
           </Link>

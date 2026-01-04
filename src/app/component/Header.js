@@ -39,10 +39,10 @@ const Header = () => {
 
   const searchCategories = [
     { id: 'all', name: 'All', icon: Search, color: 'bg-gray-500' },
-    { id: 'courses', name: 'Courses', icon: BookOpen, color: 'bg-blue-500' },
+    { id: 'courses', name: 'Courses', icon: BookOpen, color: 'bg-[#0B3C5D]' },
     { id: 'colleges', name: 'Colleges', icon: Building2, color: 'bg-green-500' },
     { id: 'schools', name: 'Schools', icon: GraduationCap, color: 'bg-purple-500' },
-    { id: 'jobs', name: 'Jobs', icon: Briefcase, color: 'bg-orange-500' },
+    { id: 'jobs', name: 'Jobs', icon: Briefcase, color: 'bg-[#F2A900]' },
     { id: 'events', name: 'Events', icon: Calendar, color: 'bg-pink-500' },
   ];
 
@@ -184,25 +184,25 @@ const Header = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2 flex-shrink-0">
-              <div className="w-8 h-8 bg-blue-600 rounded transform rotate-12">
+              <div className="w-8 h-8 bg-[#0B3C5D] rounded transform rotate-12">
                 <div className="w-full h-full bg-white rounded transform -rotate-12 flex items-center justify-center">
-                  <span className="text-blue-600 font-bold text-sm">E</span>
+                  <span className="text-[#0B3C5D] font-bold text-sm">E</span>
                 </div>
               </div>
-              <span className="text-2xl font-bold text-blue-600 hidden sm:block">edusanjal</span>
+              <span className="text-2xl font-bold text-[#0B3C5D] hidden sm:block">edusanjal</span>
             </Link>
 
             {/* Desktop Search Bar */}
             <div className="hidden md:flex flex-1 max-w-3xl mx-8" ref={searchRef}>
               <div className="relative w-full">
                 <div className={`flex items-center bg-white rounded-xl border-2 transition-all duration-300 ${
-                  isSearchOpen ? 'border-blue-500 shadow-xl' : 'border-gray-200 shadow-md hover:border-gray-300'
+                  isSearchOpen ? 'border-[#F2A900] shadow-xl' : 'border-gray-200 shadow-md hover:border-gray-300'
                 }`}>
                   {/* Category Selector */}
                   <div className="relative">
                     <button
                       onClick={() => setIsFilterOpen(!isFilterOpen)}
-                      className="flex items-center space-x-2 px-4 py-3 text-gray-600 hover:text-blue-600 border-r border-gray-200 transition-colors duration-200 rounded-l-xl"
+                      className="flex items-center space-x-2 px-4 py-3 text-gray-600 hover:text-[#0B3C5D] border-r border-gray-200 transition-colors duration-200 rounded-l-xl"
                     >
                       <currentCategory.icon className="w-5 h-5" />
                       <span className="hidden lg:block font-medium">
@@ -228,7 +228,7 @@ const Header = () => {
                                   }}
                                   className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-all duration-200 ${
                                     selectedCategory === category.id 
-                                      ? 'bg-blue-50 text-blue-600' 
+                                      ? 'bg-[#F2A900]/10 text-[#0B3C5D]' 
                                       : 'hover:bg-gray-50 text-gray-700'
                                   }`}
                                 >
@@ -237,7 +237,7 @@ const Header = () => {
                                   </div>
                                   <span className="font-medium">{category.name}</span>
                                   {selectedCategory === category.id && (
-                                    <div className="ml-auto w-2 h-2 bg-blue-600 rounded-full"></div>
+                                    <div className="ml-auto w-2 h-2 bg-[#F2A900] rounded-full"></div>
                                   )}
                                 </button>
                               );
@@ -277,19 +277,19 @@ const Header = () => {
                       className={`p-2 rounded-lg transition-all duration-200 ${
                         isListening 
                           ? 'bg-red-100 text-red-600 animate-pulse' 
-                          : 'text-gray-400 hover:text-blue-600 hover:bg-gray-100'
+                          : 'text-gray-400 hover:text-[#0B3C5D] hover:bg-gray-100'
                       }`}
                     >
                       <Mic className="w-4 h-4" />
                     </button>
 
-                    <button className="p-2 text-gray-400 hover:text-blue-600 rounded-lg hover:bg-gray-100 transition-all duration-200">
+                    <button className="p-2 text-gray-400 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-all duration-200">
                       <Camera className="w-4 h-4" />
                     </button>
 
                     <button
                       onClick={submitSearch}
-                      className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md"
+                      className="px-4 py-2 bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] font-medium rounded-lg hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-200 shadow-md"
                     >
                       <Search className="w-4 h-4" />
                     </button>
@@ -309,7 +309,7 @@ const Header = () => {
                           </h3>
                           <button
                             onClick={clearRecentSearches}
-                            className="text-xs text-gray-500 hover:text-blue-600"
+                            className="text-xs text-gray-500 hover:text-[#0B3C5D]"
                           >
                             Clear all
                           </button>
@@ -348,7 +348,7 @@ const Header = () => {
                                 setSearchQuery(search);
                                 submitSearch();
                               }}
-                              className="p-2 text-left text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 text-sm"
+                              className="p-2 text-left text-gray-700 hover:bg-[#F2A900]/10 hover:text-[#0B3C5D] rounded-lg transition-all duration-200 text-sm"
                             >
                               {search}
                             </button>
@@ -376,7 +376,7 @@ const Header = () => {
                             >
                               <div className="text-2xl">{result.image}</div>
                               <div className="flex-1">
-                                <h4 className="font-semibold text-gray-900 group-hover:text-blue-600">
+                                <h4 className="font-semibold text-gray-900 group-hover:text-[#0B3C5D]">
                                   {result.title}
                                 </h4>
                                 <p className="text-sm text-gray-600">{result.subtitle}</p>
@@ -386,13 +386,13 @@ const Header = () => {
                                     <span className="text-xs text-gray-500">{result.location}</span>
                                   </div>
                                   <div className="flex items-center space-x-1">
-                                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                                    <Star className="w-3 h-3 text-[#F2A900] fill-current" />
                                     <span className="text-xs text-gray-500">{result.rating}</span>
                                   </div>
                                 </div>
                               </div>
                               <div className="text-right">
-                                <p className="font-semibold text-blue-600 text-sm">{result.price}</p>
+                                <p className="font-semibold text-[#0B3C5D] text-sm">{result.price}</p>
                                 <ChevronRight className="w-4 h-4 text-gray-400 ml-auto mt-1" />
                               </div>
                             </Link>
@@ -407,19 +407,19 @@ const Header = () => {
 
             {/* Right Side - Auth & Notifications */}
             <div className="hidden md:flex items-center space-x-4 flex-shrink-0">
-              <button className="relative p-2 text-gray-600 hover:text-blue-600 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+              <button className="relative p-2 text-gray-600 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-colors duration-200">
                 <Bell className="w-5 h-5" />
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
               </button>
 
-              <button className="flex items-center space-x-2 p-2 text-gray-600 hover:text-blue-600 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+              <button className="flex items-center space-x-2 p-2 text-gray-600 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-colors duration-200">
                 <User className="w-5 h-5" />
                 <span className="hidden lg:block text-sm font-medium">Profile</span>
               </button>
 
               <Link 
                 href="/signin" 
-                className="px-4 py-2 text-gray-700 hover:text-blue-600 font-medium rounded-lg hover:bg-gray-50 transition-all duration-200"
+                className="px-4 py-2 text-gray-700 hover:text-[#0B3C5D] font-medium rounded-lg hover:bg-gray-50 transition-all duration-200"
               >
                 Sign in
               </Link>
@@ -429,14 +429,14 @@ const Header = () => {
             <div className="md:hidden flex items-center space-x-2">
               <button 
                 onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
-                className="p-2 text-gray-600 hover:text-blue-600 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                className="p-2 text-gray-600 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-colors duration-200"
               >
                 <Search className="w-5 h-5" />
               </button>
               
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 text-gray-600 hover:text-blue-600 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                className="p-2 text-gray-600 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-colors duration-200"
               >
                 {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
@@ -469,7 +469,7 @@ const Header = () => {
                 </div>
                 <button
                   onClick={submitSearch}
-                  className="px-4 py-3 bg-blue-600 text-white rounded-r-lg"
+                  className="px-4 py-3 bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] rounded-r-lg"
                 >
                   <Search className="w-5 h-5" />
                 </button>
@@ -485,31 +485,31 @@ const Header = () => {
           <div className="container mx-auto px-4 py-6">
             {/* Mobile Navigation */}
             <div className="space-y-2 mb-6">
-              <Link href="/courses" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/courses" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                 <span className="text-orange-500">📚</span>
                 <span className="font-medium">Courses</span>
               </Link>
-              <Link href="/colleges" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/colleges" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                 <span className="text-blue-500">🏛️</span>
                 <span className="font-medium">Colleges</span>
               </Link>
-              <Link href="/schools" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/schools" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                 <span className="text-red-500">🏫</span>
                 <span className="font-medium">Schools</span>
               </Link>
-              <Link href="/degrees" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/degrees" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                 <span className="text-purple-500">🎓</span>
                 <span className="font-medium">Degrees</span>
               </Link>
-              <Link href="/admissions" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/admissions" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                 <span className="text-pink-500">📝</span>
                 <span className="font-medium">Admissions</span>
               </Link>
-              <Link href="/vacancies" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/vacancies" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                 <span className="text-green-500">💼</span>
                 <span className="font-medium">Vacancies</span>
               </Link>
-              <Link href="/news" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+              <Link href="/news" className="flex items-center space-x-3 p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                 <span className="text-gray-500">📰</span>
                 <span className="font-medium">News</span>
               </Link>
@@ -517,12 +517,12 @@ const Header = () => {
 
             {/* Mobile User Actions */}
             <div className="space-y-4 mb-6 pt-6 border-t border-gray-200">
-              <button className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200">
+              <button className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200">
                 <User className="w-5 h-5" />
                 <span className="font-medium">My Profile</span>
               </button>
               
-              <button className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-all duration-200">
+              <button className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200">
                 <Bell className="w-5 h-5" />
                 <span className="font-medium">Notifications</span>
                 <span className="ml-auto w-2 h-2 bg-red-500 rounded-full"></span>
@@ -533,14 +533,14 @@ const Header = () => {
             <div className="space-y-3">
               <Link 
                 href="/signin" 
-                className="block w-full py-3 text-center text-gray-700 hover:text-blue-600 font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200" 
+                className="block w-full py-3 text-center text-gray-700 hover:text-[#0B3C5D] font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200" 
                 onClick={() => setIsMenuOpen(false)}
               >
                 Sign in
               </Link>
               <Link 
                 href="/signup" 
-                className="block w-full py-3 text-center bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md" 
+                className="block w-full py-3 text-center bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] font-medium rounded-lg hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-200 shadow-md" 
                 onClick={() => setIsMenuOpen(false)}
               >
                 Sign up

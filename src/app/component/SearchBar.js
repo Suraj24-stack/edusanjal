@@ -51,7 +51,7 @@ const SearchComponent = () => {
       id: 'courses', 
       name: 'Courses', 
       icon: BookOpen, 
-      gradient: 'from-blue-500 to-blue-600',
+      gradient: 'from-[#0B3C5D] to-[#0B3C5D]/90',
       count: '856'
     },
     { 
@@ -72,7 +72,7 @@ const SearchComponent = () => {
       id: 'jobs', 
       name: 'Jobs', 
       icon: Briefcase, 
-      gradient: 'from-orange-500 to-orange-600',
+      gradient: 'from-[#F2A900] to-[#D9A100]',
       count: '123'
     },
     { 
@@ -96,8 +96,8 @@ const SearchComponent = () => {
   ];
 
   const quickFilters = [
-    { name: 'Top Rated', icon: Star, color: 'text-yellow-500', bg: 'bg-yellow-50', border: 'border-yellow-200' },
-    { name: 'Latest', icon: Zap, color: 'text-blue-500', bg: 'bg-blue-50', border: 'border-blue-200' },
+    { name: 'Top Rated', icon: Star, color: 'text-[#F2A900]', bg: 'bg-[#F2A900]/10', border: 'border-[#F2A900]/30' },
+    { name: 'Latest', icon: Zap, color: 'text-[#0B3C5D]', bg: 'bg-[#0B3C5D]/10', border: 'border-[#0B3C5D]/30' },
     { name: 'Near Me', icon: MapPin, color: 'text-green-500', bg: 'bg-green-50', border: 'border-green-200' },
     { name: 'Free', icon: Heart, color: 'text-red-500', bg: 'bg-red-50', border: 'border-red-200' },
   ];
@@ -271,11 +271,11 @@ const SearchComponent = () => {
         {/* Search Bar */}
         <div className={`relative overflow-hidden bg-white/80 backdrop-blur-xl rounded-2xl border transition-all duration-500 ${
           isSearchOpen 
-            ? 'border-blue-400/50 shadow-2xl shadow-blue-500/10 scale-[1.02]' 
+            ? 'border-[#F2A900]/50 shadow-2xl shadow-[#F2A900]/10 scale-[1.02]' 
             : 'border-gray-200/60 shadow-xl hover:border-gray-300/80 hover:shadow-2xl'
         }`}>
           {/* Animated gradient border */}
-          <div className={`absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl opacity-0 transition-opacity duration-500 ${
+          <div className={`absolute inset-0 bg-gradient-to-r from-[#0B3C5D]/20 via-[#F2A900]/20 to-[#0B3C5D]/20 rounded-2xl opacity-0 transition-opacity duration-500 ${
             isSearchOpen ? 'opacity-100' : ''
           }`} />
           
@@ -284,7 +284,7 @@ const SearchComponent = () => {
             <div className="relative flex-shrink-0">
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center space-x-3 px-5 py-4 text-gray-700 hover:text-blue-600 border-r border-gray-200/60 transition-all duration-300 hover:bg-blue-50/50 group"
+                className="flex items-center space-x-3 px-5 py-4 text-gray-700 hover:text-[#0B3C5D] border-r border-gray-200/60 transition-all duration-300 hover:bg-[#0B3C5D]/5 group"
               >
                 <div className={`w-10 h-10 bg-gradient-to-r ${currentCategory.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                   <currentCategory.icon className="w-5 h-5 text-white" />
@@ -300,9 +300,9 @@ const SearchComponent = () => {
               {isFilterOpen && (
                 <div className="absolute top-full left-0 mt-3 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/60 z-50 overflow-hidden" ref={filterRef}>
                   {/* Header */}
-                  <div className="px-6 py-4 bg-gradient-to-r from-blue-50/80 to-purple-50/80 border-b border-gray-200/60">
+                  <div className="px-6 py-4 bg-gradient-to-r from-[#0B3C5D]/5 to-[#F2A900]/5 border-b border-gray-200/60">
                     <h3 className="text-lg font-bold text-gray-900 flex items-center space-x-2">
-                      <Sparkles className="w-5 h-5 text-blue-500" />
+                      <Sparkles className="w-5 h-5 text-[#F2A900]" />
                       <span>Search Categories</span>
                     </h3>
                     <p className="text-sm text-gray-600 mt-1">Choose your preferred search category</p>
@@ -323,7 +323,7 @@ const SearchComponent = () => {
                             }}
                             className={`relative p-4 rounded-xl transition-all duration-300 group ${
                               isSelected 
-                                ? 'bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 scale-105' 
+                                ? 'bg-gradient-to-br from-[#F2A900]/10 to-[#F2A900]/20 border-2 border-[#F2A900]/30 scale-105' 
                                 : 'hover:bg-gray-50 border-2 border-transparent hover:scale-105'
                             }`}
                           >
@@ -334,14 +334,14 @@ const SearchComponent = () => {
                                 <IconComponent className="w-6 h-6 text-white" />
                               </div>
                               <div className="text-center">
-                                <div className={`font-semibold text-sm ${isSelected ? 'text-blue-600' : 'text-gray-700'}`}>
+                                <div className={`font-semibold text-sm ${isSelected ? 'text-[#0B3C5D]' : 'text-gray-700'}`}>
                                   {category.name}
                                 </div>
                                 <div className="text-xs text-gray-500">{category.count}</div>
                               </div>
                             </div>
                             {isSelected && (
-                              <div className="absolute top-2 right-2 w-3 h-3 bg-blue-500 rounded-full animate-pulse" />
+                              <div className="absolute top-2 right-2 w-3 h-3 bg-[#F2A900] rounded-full animate-pulse" />
                             )}
                           </button>
                         );
@@ -352,7 +352,7 @@ const SearchComponent = () => {
                   {/* Quick Filters */}
                   <div className="px-4 pb-4">
                     <h4 className="text-sm font-semibold text-gray-900 mb-3 flex items-center space-x-2">
-                      <Zap className="w-4 h-4 text-orange-500" />
+                      <Zap className="w-4 h-4 text-[#F2A900]" />
                       <span>Quick Filters</span>
                     </h4>
                     <div className="flex flex-wrap gap-2">
@@ -396,7 +396,7 @@ const SearchComponent = () => {
                         setSearchQuery(chip);
                         setIsSearchOpen(true);
                       }}
-                      className="px-3 py-1.5 bg-gray-100/80 hover:bg-blue-100 text-xs font-medium text-gray-600 hover:text-blue-600 rounded-full transition-all duration-200 hover:scale-105"
+                      className="px-3 py-1.5 bg-gray-100/80 hover:bg-[#F2A900]/10 text-xs font-medium text-gray-600 hover:text-[#0B3C5D] rounded-full transition-all duration-200 hover:scale-105"
                     >
                       {chip}
                     </button>
@@ -423,21 +423,21 @@ const SearchComponent = () => {
                 className={`p-3 rounded-xl transition-all duration-300 ${
                   isListening 
                     ? 'bg-red-100 text-red-600 animate-pulse scale-110' 
-                    : 'text-gray-400 hover:text-blue-600 hover:bg-blue-50 hover:scale-110'
+                    : 'text-gray-400 hover:text-[#0B3C5D] hover:bg-[#0B3C5D]/5 hover:scale-110'
                 }`}
               >
                 <Mic className="w-5 h-5" />
               </button>
 
               {/* Visual Search */}
-              <button className="p-3 text-gray-400 hover:text-purple-600 rounded-xl hover:bg-purple-50 transition-all duration-300 hover:scale-110">
+              <button className="p-3 text-gray-400 hover:text-[#F2A900] rounded-xl hover:bg-[#F2A900]/5 transition-all duration-300 hover:scale-110">
                 <Camera className="w-5 h-5" />
               </button>
 
               {/* Search Button */}
               <button
                 onClick={submitSearch}
-                className="px-8 py-3 bg-gradient-to-r from-blue-600 via-blue-700 to-purple-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:via-blue-800 hover:to-purple-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                className="px-8 py-3 bg-gradient-to-r from-[#F2A900] via-[#D9A100] to-[#F2A900] text-[#0B3C5D] font-semibold rounded-xl hover:from-[#D9A100] hover:via-[#C09000] hover:to-[#D9A100] transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center space-x-2"
               >
                 <Search className="w-5 h-5" />
                 <span className="hidden sm:inline">Search</span>
@@ -454,7 +454,7 @@ const SearchComponent = () => {
               <div className="p-6 border-b border-gray-100/60">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-bold text-gray-900 flex items-center space-x-2">
-                    <History className="w-5 h-5 text-blue-500" />
+                    <History className="w-5 h-5 text-[#0B3C5D]" />
                     <span>Recent Searches</span>
                   </h3>
                   <button
@@ -472,18 +472,18 @@ const SearchComponent = () => {
                         setSearchQuery(search);
                         submitSearch();
                       }}
-                      className="flex items-center space-x-3 p-3 text-left hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 rounded-xl transition-all duration-300 hover:scale-105 border border-transparent hover:border-blue-200/50 group"
+                      className="flex items-center space-x-3 p-3 text-left hover:bg-gradient-to-r hover:from-[#0B3C5D]/5 hover:to-[#F2A900]/5 rounded-xl transition-all duration-300 hover:scale-105 border border-transparent hover:border-[#F2A900]/20 group"
                     >
-                      <div className="w-8 h-8 bg-gray-100 group-hover:bg-blue-100 rounded-lg flex items-center justify-center transition-colors duration-300">
-                        <Clock className="w-4 h-4 text-gray-400 group-hover:text-blue-500" />
+                      <div className="w-8 h-8 bg-gray-100 group-hover:bg-[#F2A900]/10 rounded-lg flex items-center justify-center transition-colors duration-300">
+                        <Clock className="w-4 h-4 text-gray-400 group-hover:text-[#0B3C5D]" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-gray-700 group-hover:text-blue-600 truncate">
+                        <div className="text-sm font-medium text-gray-700 group-hover:text-[#0B3C5D] truncate">
                           {search}
                         </div>
                         <div className="text-xs text-gray-500">Recent</div>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-blue-500 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                      <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-[#0B3C5D] opacity-0 group-hover:opacity-100 transition-all duration-300" />
                     </button>
                   ))}
                 </div>
@@ -494,9 +494,9 @@ const SearchComponent = () => {
             {!searchQuery && (
               <div className="p-6 border-b border-gray-100/60">
                 <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                  <TrendingUp className="w-5 h-5 text-orange-500" />
+                  <TrendingUp className="w-5 h-5 text-[#F2A900]" />
                   <span>Trending Searches</span>
-                  <span className="px-2 py-1 bg-orange-100 text-orange-600 text-xs font-bold rounded-full">HOT</span>
+                  <span className="px-2 py-1 bg-[#F2A900]/10 text-[#0B3C5D] text-xs font-bold rounded-full">HOT</span>
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {popularSearches.map((search, index) => (
@@ -506,11 +506,11 @@ const SearchComponent = () => {
                         setSearchQuery(search.term);
                         submitSearch();
                       }}
-                      className="flex items-center space-x-4 p-4 text-left hover:bg-gradient-to-r hover:from-orange-50 hover:to-red-50 rounded-xl transition-all duration-300 hover:scale-105 border border-transparent hover:border-orange-200/50 group"
+                      className="flex items-center space-x-4 p-4 text-left hover:bg-gradient-to-r hover:from-[#F2A900]/5 hover:to-[#F2A900]/10 rounded-xl transition-all duration-300 hover:scale-105 border border-transparent hover:border-[#F2A900]/20 group"
                     >
                       <div className="text-2xl">{search.icon}</div>
                       <div className="flex-1">
-                        <div className="font-semibold text-gray-700 group-hover:text-orange-600">
+                        <div className="font-semibold text-gray-700 group-hover:text-[#0B3C5D]">
                           {search.term}
                         </div>
                         <div className="text-sm text-green-600 font-medium flex items-center space-x-1">
@@ -518,7 +518,7 @@ const SearchComponent = () => {
                           <span>{search.trend}</span>
                         </div>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-orange-500 opacity-0 group-hover:opacity-100 transition-all duration-300" />
+                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-[#F2A900] opacity-0 group-hover:opacity-100 transition-all duration-300" />
                     </button>
                   ))}
                 </div>
@@ -529,9 +529,9 @@ const SearchComponent = () => {
             {searchQuery && (
               <div className="p-6">
                 <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center space-x-2">
-                  <Search className="w-5 h-5 text-blue-500" />
+                  <Search className="w-5 h-5 text-[#0B3C5D]" />
                   <span>Results for "{searchQuery}"</span>
-                  <span className="px-3 py-1 bg-blue-100 text-blue-600 text-sm font-bold rounded-full">
+                  <span className="px-3 py-1 bg-[#F2A900]/10 text-[#0B3C5D] text-sm font-bold rounded-full">
                     {mockResults.filter(result => selectedCategory === 'all' || result.category === selectedCategory).length}
                   </span>
                 </h3>
@@ -546,14 +546,14 @@ const SearchComponent = () => {
                       href={`/${result.category}/${result.id}`}
                       className={`flex items-center space-x-5 p-4 rounded-xl transition-all duration-300 hover:scale-[1.02] border-2 group ${
                         index === focusedResult
-                          ? 'bg-blue-50 border-blue-200 shadow-lg'
-                          : 'hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-purple-50/50 border-transparent hover:border-blue-200/50'
+                          ? 'bg-[#F2A900]/5 border-[#F2A900]/30 shadow-lg'
+                          : 'hover:bg-gradient-to-r hover:from-[#0B3C5D]/5 hover:to-[#F2A900]/5 border-transparent hover:border-[#F2A900]/20'
                       }`}
                     >
                       <div className="relative">
                         <div className="text-3xl">{result.image}</div>
                         {result.verified && (
-                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                          <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#0B3C5D] rounded-full flex items-center justify-center">
                             <span className="text-white text-xs">✓</span>
                           </div>
                         )}
@@ -561,11 +561,11 @@ const SearchComponent = () => {
                       
                       <div className="flex-1">
                         <div className="flex items-center space-x-3 mb-2">
-                          <h4 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                          <h4 className="font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300">
                             {result.title}
                           </h4>
                           {result.popular && (
-                            <span className="px-2 py-1 bg-orange-100 text-orange-600 text-xs font-bold rounded-full flex items-center space-x-1">
+                            <span className="px-2 py-1 bg-[#F2A900]/10 text-[#0B3C5D] text-xs font-bold rounded-full flex items-center space-x-1">
                               <Star className="w-3 h-3 fill-current" />
                               <span>Popular</span>
                             </span>
@@ -580,20 +580,20 @@ const SearchComponent = () => {
                             <span className="text-gray-600">{result.location}</span>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                            <Star className="w-4 h-4 text-[#F2A900] fill-current" />
                             <span className="font-medium text-gray-700">{result.rating}</span>
                             <span className="text-gray-500">({result.reviews})</span>
                           </div>
                           <div className="flex items-center space-x-2">
-                            <Users className="w-4 h-4 text-blue-400" />
+                            <Users className="w-4 h-4 text-[#0B3C5D]" />
                             <span className="text-gray-600">{result.students}</span>
                           </div>
                         </div>
                       </div>
                       
                       <div className="text-right flex flex-col items-end space-y-2">
-                        <p className="font-bold text-blue-600 text-lg">{result.price}</p>
-                        <div className="flex items-center space-x-2 text-gray-500 group-hover:text-blue-500 transition-colors duration-300">
+                        <p className="font-bold text-[#0B3C5D] text-lg">{result.price}</p>
+                        <div className="flex items-center space-x-2 text-gray-500 group-hover:text-[#0B3C5D] transition-colors duration-300">
                           <span className="text-sm font-medium">View Details</span>
                           <ChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
                         </div>
