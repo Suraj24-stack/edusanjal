@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
+import ApplicationModal from '../component/ApplicationModal'; // ADDED: Import ApplicationModal
 
 // Sample schools data
 const schoolsData = [
@@ -135,7 +136,8 @@ const schoolsData = [
   }
 ];
 
-const SchoolCard = ({ school }) => {
+// MODIFIED: Added onApply prop to SchoolCard
+const SchoolCard = ({ school, onApply }) => {
   const getTuitionColor = (tuition) => {
     if (tuition === "Free" || tuition === "Free*") return "from-green-50 to-emerald-50 border-green-100 text-green-800";
     const amount = parseInt(tuition.replace(/[$,*]/g, ''));
@@ -254,9 +256,23 @@ const SchoolCard = ({ school }) => {
           </div>
         </div>
         
-        <button className="w-full bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
-          Explore School
-        </button>
+        {/* MODIFIED: Changed from single button to two buttons */}
+        <div className="flex gap-3">
+          <button className="flex-1 bg-white border-2 border-[#0B3C5D] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm hover:bg-[#0B3C5D]/5 transform hover:scale-[1.02] active:scale-[0.98]">
+            View Details
+          </button>
+          
+          {/* ADDED: Apply Now button */}
+          <button 
+            onClick={() => onApply(school)}
+            className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+            </svg>
+            Apply Now
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -398,11 +414,21 @@ export default function SchoolsPage() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  
+  // ADDED: State for application modal
+  const [showApplicationModal, setShowApplicationModal] = useState(false);
+  const [selectedSchool, setSelectedSchool] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  // ADDED: Handler for Apply Now button
+  const handleApplyClick = (school) => {
+    setSelectedSchool(school);
+    setShowApplicationModal(true);
+  };
 
   const filteredSchools = useMemo(() => {
     let filtered = schoolsData.filter(school => {
@@ -560,10 +586,10 @@ export default function SchoolsPage() {
           </div>
         </div>
 
-        {/* Schools Grid */}
+        {/* Schools Grid - MODIFIED: Added onApply prop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {filteredSchools.map(school => (
-            <SchoolCard key={school.id} school={school} />
+            <SchoolCard key={school.id} school={school} onApply={handleApplyClick} />
           ))}
         </div>
 
@@ -589,6 +615,17 @@ export default function SchoolsPage() {
           </div>
         )}
       </div>
+
+      {/* ADDED: Application Modal */}
+      {showApplicationModal && selectedSchool && (
+        <ApplicationModal
+          school={selectedSchool}
+          onClose={() => {
+            setShowApplicationModal(false);
+            setSelectedSchool(null);
+          }}
+        />
+      )}
 
       {/* Footer */}
       <footer className="bg-white/60 backdrop-blur-sm border-t border-white/20 mt-16">
