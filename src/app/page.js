@@ -4,7 +4,7 @@ import AdmissionFair from '../app/component/AdmissionFair';
 import Courses from '../app/courses/page';
 
 export const metadata = {
-  title: "EduSanjal - Find Best Colleges, Courses & Schools in Nepal",
+  title: "EduLink - Find Best Colleges, Courses & Schools in Nepal",
   description: "Discover top colleges, universities, schools, and courses in Nepal. Get admission guidance, scholarships, and career counseling. Your trusted partner for educational excellence.",
   keywords: "Nepal colleges, universities Nepal, courses Nepal, admission Nepal, scholarships, career guidance, study abroad",
 };

@@ -189,7 +189,7 @@ const Header = () => {
                   <span className="text-[#0B3C5D] font-bold text-sm">E</span>
                 </div>
               </div>
-              <span className="text-2xl font-bold text-[#0B3C5D] hidden sm:block">edusanjal</span>
+              <span className="text-2xl font-bold text-[#0B3C5D] hidden sm:block">EduLink</span>
             </Link>
 
             {/* Desktop Search Bar */}

@@ -38,7 +38,7 @@ const Footer = () => {
                   <span className="text-[#0B3C5D] font-bold text-sm">E</span>
                 </div>
               </div>
-              <span className="text-2xl font-bold text-white">edusanjal</span>
+              <span className="text-2xl font-bold text-white">EduLink</span>
             </Link>
             <p className="text-gray-300 leading-relaxed">
               Your trusted partner for educational excellence in Nepal. Connecting students with the best colleges, courses, and opportunities.
@@ -107,7 +107,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-[#F2A900]" />
-                <span className="text-gray-300">info@edusanjal.com</span>
+                <span className="text-gray-300">info@EduLink.com</span>
               </div>
             </div>
 
@@ -131,7 +131,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2025 SurajKhadka. All rights reserved.
+            © 2025 surazk.tech All rights reserved.
           </p>
         </div>
       </div>

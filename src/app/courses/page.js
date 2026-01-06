@@ -4,7 +4,7 @@ import CourseBanner from '../courses/components/courseBanner';
 import PopularCourses from '../courses/components/popularCourse';
 
 export const metadata = {
-  title: 'Courses - EduSanjal',
+  title: 'Courses - EduLink',
   description: 'Explore thousands of courses across various disciplines in Nepal. Find the perfect course that matches your career goals.',
 };
 

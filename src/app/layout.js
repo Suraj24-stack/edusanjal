@@ -4,7 +4,7 @@ import NavBar from "./component/NavBar";
 import Footer from "./component/Footer";
 
 export const metadata = {
-  title: "EduSanjal - Your Partner for Excellence in Education",
+  title: "EduLink - Your Partner for Excellence in Education",
   description: "Find the best colleges, courses, and educational opportunities in Nepal. Your trusted partner for academic excellence.",
   keywords: "education, colleges, courses, Nepal, admission, university, school, EduSanjal, scholarships, study abroad",
 };
