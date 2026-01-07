@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
+import JobApplicationModal from '../component/JobApplicationModal'; // ADDED: Import Job Application Modal
 
 // Sample vacancies data for Nepal
 const vacanciesData = [
@@ -9,6 +10,7 @@ const vacanciesData = [
     id: 1,
     title: "Software Engineer",
     company: "Leapfrog Technology",
+    name: "Leapfrog Technology - Software Engineer",
     location: "Kathmandu, Nepal",
     type: "Full-time",
     category: "Technology",
@@ -29,6 +31,7 @@ const vacanciesData = [
     id: 2,
     title: "Banking Officer",
     company: "Nepal Investment Bank",
+    name: "Nepal Investment Bank - Banking Officer",
     location: "Kathmandu, Nepal",
     type: "Full-time",
     category: "Banking",
@@ -49,6 +52,7 @@ const vacanciesData = [
     id: 3,
     title: "Civil Engineer",
     company: "Department of Roads",
+    name: "Department of Roads - Civil Engineer",
     location: "Pokhara, Nepal",
     type: "Government",
     category: "Engineering",
@@ -69,6 +73,7 @@ const vacanciesData = [
     id: 4,
     title: "English Teacher",
     company: "Kathmandu University School",
+    name: "Kathmandu University School - English Teacher",
     location: "Dhulikhel, Nepal",
     type: "Full-time",
     category: "Education",
@@ -89,6 +94,7 @@ const vacanciesData = [
     id: 5,
     title: "Marketing Manager",
     company: "Himalayan Bank Limited",
+    name: "Himalayan Bank Limited - Marketing Manager",
     location: "Lalitpur, Nepal",
     type: "Full-time",
     category: "Marketing",
@@ -109,6 +115,7 @@ const vacanciesData = [
     id: 6,
     title: "Nurse",
     company: "Tribhuvan University Teaching Hospital",
+    name: "Tribhuvan University Teaching Hospital - Nurse",
     location: "Kathmandu, Nepal",
     type: "Full-time",
     category: "Healthcare",
@@ -129,6 +136,7 @@ const vacanciesData = [
     id: 7,
     title: "Data Analyst",
     company: "F1Soft International",
+    name: "F1Soft International - Data Analyst",
     location: "Kathmandu, Nepal",
     type: "Full-time",
     category: "Technology",
@@ -149,6 +157,7 @@ const vacanciesData = [
     id: 8,
     title: "Project Coordinator",
     company: "World Wildlife Fund Nepal",
+    name: "World Wildlife Fund Nepal - Project Coordinator",
     location: "Kathmandu, Nepal",
     type: "Contract",
     category: "Non-Profit",
@@ -167,7 +176,8 @@ const vacanciesData = [
   }
 ];
 
-const JobCard = ({ job }) => {
+// MODIFIED: Added onApply prop
+const JobCard = ({ job, onApply }) => {
   const getTypeColor = (type) => {
     switch (type) {
       case 'Full-time':
@@ -312,8 +322,12 @@ const JobCard = ({ job }) => {
           </div>
         </div>
         
+        {/* MODIFIED: Added onClick handler */}
         <div className="flex space-x-2">
-          <button className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
+          <button 
+            onClick={() => onApply(job)}
+            className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
+          >
             Apply Now
           </button>
           <button className="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors duration-200 font-semibold text-sm">
@@ -484,11 +498,21 @@ export default function VacanciesPage() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  
+  // ADDED: State for application modal
+  const [showApplicationModal, setShowApplicationModal] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
+
+  // ADDED: Handler for Apply Now button
+  const handleApplyClick = (job) => {
+    setSelectedJob(job);
+    setShowApplicationModal(true);
+  };
 
   const filteredJobs = useMemo(() => {
     let filtered = vacanciesData.filter(job => {
@@ -663,10 +687,10 @@ export default function VacanciesPage() {
           </div>
         </div>
 
-        {/* Jobs Grid */}
+        {/* Jobs Grid - MODIFIED: Added onApply prop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {filteredJobs.map(job => (
-            <JobCard key={job.id} job={job} />
+            <JobCard key={job.id} job={job} onApply={handleApplyClick} />
           ))}
         </div>
 
@@ -692,6 +716,17 @@ export default function VacanciesPage() {
           </div>
         )}
       </div>
+
+      {/* ADDED: Job Application Modal */}
+      {showApplicationModal && selectedJob && (
+        <JobApplicationModal
+          job={selectedJob}
+          onClose={() => {
+            setShowApplicationModal(false);
+            setSelectedJob(null);
+          }}
+        />
+      )}
     </div>
   );
 }
