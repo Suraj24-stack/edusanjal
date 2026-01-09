@@ -43,7 +43,7 @@ const NavBar = () => {
   const isActive = (href) => pathname === href;
 
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center justify-between h-16">
@@ -52,10 +52,10 @@ const NavBar = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
                   isActive(item.href)
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                    ? 'bg-[#2d5f7f] text-white shadow-md'
+                    : 'text-gray-700 hover:bg-[#2d5f7f] hover:text-white hover:shadow-md'
                 }`}
               >
                 {item.name}
@@ -67,10 +67,10 @@ const NavBar = () => {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsMoreOpen(!isMoreOpen)}
-              className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+              className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
                 isMoreOpen
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                  ? 'bg-[#2d5f7f] text-white shadow-md'
+                  : 'text-gray-700 hover:bg-[#2d5f7f] hover:text-white hover:shadow-md'
               }`}
             >
               More
@@ -91,7 +91,7 @@ const NavBar = () => {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#2d5f7f] hover:text-white transition-colors duration-150"
                     onClick={() => setIsMoreOpen(false)}
                   >
                     {item.name}
@@ -107,7 +107,7 @@ const NavBar = () => {
           <span className="text-lg font-semibold text-gray-900">Menu</span>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-md text-gray-700 hover:bg-gray-100"
+            className="p-2 rounded-md text-gray-700 hover:bg-[#2d5f7f] hover:text-white transition-colors duration-200"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? (
@@ -128,10 +128,10 @@ const NavBar = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`block px-3 py-2 rounded-md text-sm font-medium ${
+                className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
                   isActive(item.href)
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-[#2d5f7f] text-white'
+                    : 'text-gray-700 hover:bg-[#2d5f7f] hover:text-white'
                 }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -147,7 +147,7 @@ const NavBar = () => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-100"
+                  className="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-[#2d5f7f] hover:text-white transition-colors duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
