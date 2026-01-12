@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import ApplicationModal from '../component/ApplicationModal';
 
 // Sample admissions data
@@ -151,27 +151,6 @@ const admissionsData = [
   }
 ];
 
-const levels = [
-  "Short-Term-Training",
-  "Pre-Diploma", 
-  "Plus Two or Diploma",
-  "Bachelors",
-  "Chartered Accountancy (CA)",
-  "Post Graduate Diploma"
-];
-
-const affiliations = [
-  "ACCA",
-  "Agriculture and Forestry University",
-  "CPA Australia",
-  "Government of Nepal",
-  "Kathmandu University",
-  "London Metropolitan University",
-  "NEB",
-  "Purbanchal University",
-  "Tribhuvan University"
-];
-
 const AdmissionCard = ({ admission, onApply }) => {
   return (
     <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-200">
@@ -204,18 +183,28 @@ const AdmissionCard = ({ admission, onApply }) => {
       </div>
 
       <div className="pt-4 border-t border-gray-200">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-4">
           <div className="text-sm text-gray-600">
             <span className="font-semibold">Programs:</span> {admission.programs.join(', ')}
           </div>
         </div>
         
-        <div className="mt-4">
+        <div className="flex gap-3">
+          <button
+            className="flex-1 bg-white border-2 border-gray-300 hover:border-[#2d5f7f] hover:bg-gray-50 text-gray-700 hover:text-[#2d5f7f] py-2 px-4 rounded-lg transition-all duration-200 font-medium text-sm flex items-center justify-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            View Details
+          </button>
+          
           <button
             onClick={() => onApply(admission)}
-            className="w-full bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-white py-3 px-4 rounded-lg transition-all duration-300 font-semibold text-sm shadow-md hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+            className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-white py-2 px-4 rounded-lg transition-all duration-200 font-medium text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2"
           >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z" />
             </svg>
             Apply Now
@@ -228,10 +217,6 @@ const AdmissionCard = ({ admission, onApply }) => {
 
 export default function AdmissionsPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedLevels, setSelectedLevels] = useState([]);
-  const [selectedAffiliations, setSelectedAffiliations] = useState([]);
-  const [levelSearch, setLevelSearch] = useState('');
-  const [affiliationSearch, setAffiliationSearch] = useState('');
   const [showApplicationModal, setShowApplicationModal] = useState(false);
   const [selectedAdmission, setSelectedAdmission] = useState(null);
 
@@ -240,30 +225,6 @@ export default function AdmissionsPage() {
     setShowApplicationModal(true);
   };
 
-  const toggleLevel = (level) => {
-    setSelectedLevels(prev => 
-      prev.includes(level) 
-        ? prev.filter(l => l !== level)
-        : [...prev, level]
-    );
-  };
-
-  const toggleAffiliation = (affiliation) => {
-    setSelectedAffiliations(prev => 
-      prev.includes(affiliation)
-        ? prev.filter(a => a !== affiliation)
-        : [...prev, affiliation]
-    );
-  };
-
-  const filteredLevels = levels.filter(level => 
-    level.toLowerCase().includes(levelSearch.toLowerCase())
-  );
-
-  const filteredAffiliations = affiliations.filter(affiliation => 
-    affiliation.toLowerCase().includes(affiliationSearch.toLowerCase())
-  );
-
   const filteredAdmissions = useMemo(() => {
     return admissionsData.filter(admission => {
       const matchesSearch = 
@@ -271,12 +232,9 @@ export default function AdmissionsPage() {
         admission.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         admission.programs.some(p => p.toLowerCase().includes(searchTerm.toLowerCase()));
       
-      const matchesLevel = selectedLevels.length === 0 || selectedLevels.includes(admission.level);
-      const matchesAffiliation = selectedAffiliations.length === 0 || selectedAffiliations.includes(admission.affiliation);
-      
-      return matchesSearch && matchesLevel && matchesAffiliation;
+      return matchesSearch;
     });
-  }, [searchTerm, selectedLevels, selectedAffiliations]);
+  }, [searchTerm]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200">
@@ -293,138 +251,54 @@ export default function AdmissionsPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex gap-6">
-          {/* Sidebar Filters */}
-          <div className="w-80 flex-shrink-0">
-            {/* Level Filter */}
-            <div className="bg-white rounded-lg border border-gray-200 mb-4">
-              <button 
-                className="w-full px-4 py-3 flex items-center justify-between text-left font-semibold text-gray-900 hover:bg-gray-50"
-              >
-                <span>Level</span>
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              <div className="px-4 pb-4">
-                <input
-                  type="text"
-                  placeholder="Search level"
-                  value={levelSearch}
-                  onChange={(e) => setLevelSearch(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3"
-                />
-                
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {filteredLevels.map((level) => (
-                    <label key={level} className="flex items-start cursor-pointer hover:bg-gray-50 p-1 rounded">
-                      <input
-                        type="checkbox"
-                        checked={selectedLevels.includes(level)}
-                        onChange={() => toggleLevel(level)}
-                        className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      <span className="ml-2 text-sm text-gray-700">{level}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Affiliation Filter */}
-            <div className="bg-white rounded-lg border border-gray-200">
-              <button 
-                className="w-full px-4 py-3 flex items-center justify-between text-left font-semibold text-gray-900 hover:bg-gray-50"
-              >
-                <span>Affiliation</span>
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              <div className="px-4 pb-4">
-                <input
-                  type="text"
-                  placeholder="Search affiliation"
-                  value={affiliationSearch}
-                  onChange={(e) => setAffiliationSearch(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-3"
-                />
-                
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {filteredAffiliations.map((affiliation) => (
-                    <label key={affiliation} className="flex items-start cursor-pointer hover:bg-gray-50 p-1 rounded">
-                      <input
-                        type="checkbox"
-                        checked={selectedAffiliations.includes(affiliation)}
-                        onChange={() => toggleAffiliation(affiliation)}
-                        className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                      />
-                      <span className="ml-2 text-sm text-gray-700">{affiliation}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="flex-1">
-            {/* Search Bar */}
-            <div className="mb-6">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search for admissions..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Results Count */}
-            <div className="mb-4">
-              <p className="text-sm text-gray-600">
-                Showing {filteredAdmissions.length} of {admissionsData.length} admissions
-              </p>
-            </div>
-
-            {/* Admissions List */}
-            <div className="space-y-4">
-              {filteredAdmissions.map((admission) => (
-                <AdmissionCard key={admission.id} admission={admission} onApply={handleApplyClick} />
-              ))}
-            </div>
-
-            {/* No Results */}
-            {filteredAdmissions.length === 0 && (
-              <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
-                <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.467-.881-6.08-2.33M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                </svg>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">No admissions found</h3>
-                <p className="text-gray-600 mb-4">Try adjusting your search or filters</p>
-                <button
-                  onClick={() => {
-                    setSearchTerm('');
-                    setSelectedLevels([]);
-                    setSelectedAffiliations([]);
-                  }}
-                  className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-white px-6 py-2 rounded-lg font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all"
-                >
-                  Clear All Filters
-                </button>
-              </div>
-            )}
+        {/* Search Bar */}
+        <div className="mb-6">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search for admissions..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
           </div>
         </div>
+
+        {/* Results Count */}
+        <div className="mb-4">
+          <p className="text-sm text-gray-600">
+            Showing {filteredAdmissions.length} of {admissionsData.length} admissions
+          </p>
+        </div>
+
+        {/* Admissions List */}
+        <div className="space-y-4">
+          {filteredAdmissions.map((admission) => (
+            <AdmissionCard key={admission.id} admission={admission} onApply={handleApplyClick} />
+          ))}
+        </div>
+
+        {/* No Results */}
+        {filteredAdmissions.length === 0 && (
+          <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
+            <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.467-.881-6.08-2.33M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+            </svg>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No admissions found</h3>
+            <p className="text-gray-600 mb-4">Try adjusting your search</p>
+            <button
+              onClick={() => setSearchTerm('')}
+              className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-white px-6 py-2 rounded-lg font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all"
+            >
+              Clear Search
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Application Modal */}
