@@ -183,17 +183,17 @@ const AdmissionCard = ({ admission, onApply }) => {
       </div>
 
       <div className="pt-4 border-t border-gray-200">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-3">
           <div className="text-sm text-gray-600">
             <span className="font-semibold">Programs:</span> {admission.programs.join(', ')}
           </div>
         </div>
         
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           <button
-            className="flex-1 bg-white border-2 border-gray-300 hover:border-[#2d5f7f] hover:bg-gray-50 text-gray-700 hover:text-[#2d5f7f] py-2 px-4 rounded-lg transition-all duration-200 font-medium text-sm flex items-center justify-center gap-2"
+            className="bg-white border border-gray-300 hover:border-[#2d5f7f] hover:bg-gray-50 text-gray-700 hover:text-[#2d5f7f] py-1.5 px-3 rounded-lg transition-all duration-200 font-medium text-xs flex items-center justify-center gap-1.5"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
             </svg>
@@ -202,9 +202,9 @@ const AdmissionCard = ({ admission, onApply }) => {
           
           <button
             onClick={() => onApply(admission)}
-            className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-white py-2 px-4 rounded-lg transition-all duration-200 font-medium text-sm shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+            className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-white py-1.5 px-3 rounded-lg transition-all duration-200 font-medium text-xs shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
           >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z" />
             </svg>
             Apply Now
