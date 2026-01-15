@@ -191,7 +191,7 @@ const AdmissionCard = ({ admission, onApply }) => {
         
         <div className="flex gap-2">
           <button
-            className="bg-white border border-gray-300 hover:border-[#2d5f7f] hover:bg-gray-50 text-gray-700 hover:text-[#2d5f7f] py-2 px-4 rounded-lg transition-all duration-200 font-medium text-xs flex items-center justify-center gap-1.5"
+            className="w-32 bg-white border border-gray-300 hover:border-[#2d5f7f] hover:bg-gray-50 text-gray-700 hover:text-[#2d5f7f] py-2 px-4 rounded-lg transition-all duration-200 font-medium text-xs flex items-center justify-center gap-1.5"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -202,7 +202,7 @@ const AdmissionCard = ({ admission, onApply }) => {
           
           <button
             onClick={() => onApply(admission)}
-            className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-white py-2 px-4 rounded-lg transition-all duration-200 font-medium text-xs shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
+            className="w-32 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-white py-2 px-4 rounded-lg transition-all duration-200 font-medium text-xs shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
           >
             <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
               <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z" />
