@@ -95,89 +95,102 @@ const collegesData = [
 // MODIFIED: Added onApply prop to CollegeCard
 const CollegeCard = ({ college, onApply }) => {
   return (
-    <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-[#F2A900]/30">
-      <div className="relative h-48 w-full overflow-hidden">
+    <div className="group bg-white/90 backdrop-blur-md rounded-3xl border border-white/40 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-[#0B3C5D]/20 flex flex-col h-full">
+      {/* Image Section */}
+      <div className="relative h-56 w-full overflow-hidden shrink-0">
         <Image
           src={college.image}
           alt={college.name}
           fill
-          className="object-cover group-hover:scale-110 transition-transform duration-700"
+          className="object-cover group-hover:scale-105 transition-transform duration-700"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="absolute top-3 right-3 bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg">
-          #{college.ranking}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
+
+        {/* Ranking Badge */}
+        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm text-[#0B3C5D] px-3.5 py-1.5 rounded-2xl text-sm font-bold shadow-xl border border-white/50">
+          Ranked #{college.ranking}
         </div>
-        <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <span className="text-white text-sm font-medium bg-black/30 backdrop-blur-sm px-2 py-1 rounded-lg">
+
+        {/* Established Date */}
+        <div className="absolute bottom-4 left-4">
+          <span className="text-white text-xs font-semibold bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 uppercase tracking-widest">
             Est. {college.established}
           </span>
         </div>
       </div>
-      
-      <div className="p-5 sm:p-6">
-        <div className="flex items-start justify-between mb-3">
-          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300 leading-tight">
-            {college.name}
-          </h3>
-          <div className="flex items-center text-gray-500 ml-2 flex-shrink-0">
-            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-            </svg>
+
+      {/* Content Section */}
+      <div className="p-6 flex flex-col flex-grow">
+        {/* Header & Location */}
+        <div className="mb-4">
+          <div className="flex items-start justify-between min-h-[64px]">
+            <h3 className="text-2xl font-extrabold text-[#0B3C5D] group-hover:text-[#F2A900] transition-colors duration-300 leading-tight line-clamp-2">
+              {college.name}
+            </h3>
+            <div className="mt-1 text-[#0B3C5D]/40">
+              <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+              </svg>
+            </div>
+          </div>
+          <p className="text-[#0B3C5D]/60 text-sm font-bold flex items-center mt-1 uppercase tracking-wider">
+            {college.location}
+          </p>
+        </div>
+
+        {/* Description */}
+        <div className="mb-6 flex-grow">
+          <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+            {college.description}
+          </p>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          <div className="bg-[#0B3C5D]/5 rounded-2xl p-3 border border-[#0B3C5D]/5 hover:bg-white hover:border-[#F2A900]/30 transition-colors duration-300">
+            <div className="text-[10px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest mb-1">Ownership</div>
+            <div className="text-sm font-bold text-[#0B3C5D]">{college.type}</div>
+          </div>
+          <div className="bg-[#0B3C5D]/5 rounded-2xl p-3 border border-[#0B3C5D]/5 hover:bg-white hover:border-[#F2A900]/30 transition-colors duration-300">
+            <div className="text-[10px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest mb-1">Students</div>
+            <div className="text-sm font-bold text-[#0B3C5D]">{college.students}+</div>
+          </div>
+          <div className="bg-[#F2A900]/5 rounded-2xl p-3 border border-[#F2A900]/10 hover:bg-white hover:border-[#F2A900]/30 transition-colors duration-300">
+            <div className="text-[10px] font-bold text-[#F2A900] uppercase tracking-widest mb-1">Avg Tuition</div>
+            <div className="text-sm font-bold text-[#0B3C5D]">{college.tuition}</div>
+          </div>
+          <div className="bg-[#0B3C5D]/5 rounded-2xl p-3 border border-[#0B3C5D]/5 hover:bg-white hover:border-[#F2A900]/30 transition-colors duration-300">
+            <div className="text-[10px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest mb-1">Acceptance</div>
+            <div className="text-sm font-bold text-[#0B3C5D]">{college.acceptance}</div>
           </div>
         </div>
-        
-        <p className="text-gray-600 mb-1 font-medium">{college.location}</p>
-        <p className="text-sm text-gray-700 mb-4 line-clamp-2 leading-relaxed">{college.description}</p>
-        
-        <div className="grid grid-cols-2 gap-3 mb-4">
-          <div className="bg-gray-50 rounded-xl p-3">
-            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Type</div>
-            <div className="text-sm font-bold text-gray-900 mt-1">{college.type}</div>
-          </div>
-          <div className="bg-gray-50 rounded-xl p-3">
-            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Students</div>
-            <div className="text-sm font-bold text-gray-900 mt-1">{college.students}</div>
-          </div>
-          <div className="bg-gradient-to-r from-[#F2A900]/10 to-[#F2A900]/20 rounded-xl p-3 border border-[#F2A900]/30">
-            <div className="text-xs font-semibold text-[#0B3C5D] uppercase tracking-wide">Tuition</div>
-            <div className="text-sm font-bold text-[#0B3C5D] mt-1">{college.tuition}</div>
-          </div>
-          <div className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 rounded-xl p-3 border border-[#0B3C5D]/30">
-            <div className="text-xs font-semibold text-[#0B3C5D] uppercase tracking-wide">Acceptance</div>
-            <div className="text-sm font-bold text-[#0B3C5D] mt-1">{college.acceptance}</div>
-          </div>
-        </div>
-        
-        <div className="mb-5">
-          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Popular Programs</div>
-          <div className="flex flex-wrap gap-1.5">
-            {college.programs.slice(0, 3).map((program, index) => (
-              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-[#0B3C5D] px-3 py-1 rounded-full text-xs font-medium border border-[#0B3C5D]/20">
+
+        {/* Popular Programs Tags */}
+        <div className="mb-8 min-h-[50px]">
+          <div className="flex flex-wrap gap-2">
+            {college.programs.slice(0, 2).map((program, index) => (
+              <span key={index} className="bg-white text-[#0B3C5D] border border-[#0B3C5D]/10 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm">
                 {program}
               </span>
             ))}
-            {college.programs.length > 3 && (
-              <span className="text-gray-500 text-xs font-medium px-2 py-1">+{college.programs.length - 3} more</span>
+            {college.programs.length > 2 && (
+              <span className="text-[#0B3C5D]/40 text-[10px] font-bold py-1.5 px-2">+{college.programs.length - 2} more</span>
             )}
           </div>
         </div>
-        
-        {/* MODIFIED: Changed from single button to two buttons */}
-        <div className="flex gap-3">
-          <button className="flex-1 bg-white border-2 border-[#0B3C5D] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm hover:bg-[#0B3C5D]/5 transform hover:scale-[1.02] active:scale-[0.98]">
-            View Details
+
+        {/* Actions */}
+        <div className="flex gap-3 mt-auto pt-4 border-t border-gray-100">
+          <button className="flex-1 bg-white border border-[#0B3C5D]/20 text-[#0B3C5D] py-3.5 px-4 rounded-2xl transition-all duration-300 font-bold text-xs uppercase tracking-widest hover:bg-[#0B3C5D] hover:text-white shadow-sm active:scale-95">
+            Details
           </button>
-          
-          {/* ADDED: Apply Now button */}
-          <button 
+
+          <button
             onClick={() => onApply(college)}
-            className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+            className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#E59E00] text-[#0B3C5D] py-3.5 px-4 rounded-2xl transition-all duration-300 font-bold text-xs uppercase tracking-widest shadow-md hover:shadow-xl hover:translate-y-[-1px] active:scale-95 flex items-center justify-center gap-2"
           >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-            </svg>
-            Apply Now
+            Apply
           </button>
         </div>
       </div>
@@ -187,45 +200,47 @@ const CollegeCard = ({ college, onApply }) => {
 
 const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg mb-6 overflow-hidden">
-      <div className="p-4 sm:p-6">
+    <div className="bg-white/90 backdrop-blur-md rounded-3xl border border-white/40 shadow-sm mb-8 overflow-hidden">
+      <div className="p-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg sm:text-xl font-bold text-gray-900 flex items-center">
-            <svg className="w-5 h-5 mr-2 text-[#0B3C5D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
-            </svg>
-            Filters
+          <h3 className="text-xl font-extrabold text-[#0B3C5D] flex items-center tracking-tight">
+            <div className="bg-[#0B3C5D]/5 p-2 rounded-xl mr-3">
+              <svg className="w-5 h-5 text-[#0B3C5D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
+              </svg>
+            </div>
+            Refine Search
           </h3>
           <button
             onClick={toggleOpen}
-            className="sm:hidden bg-[#0B3C5D]/10 text-[#0B3C5D] p-2 rounded-xl hover:bg-[#0B3C5D]/20 transition-colors"
+            className="sm:hidden bg-[#0B3C5D]/5 text-[#0B3C5D] p-2.5 rounded-2xl hover:bg-[#0B3C5D]/10 transition-colors border border-[#0B3C5D]/10"
           >
-            <svg className={`w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            <svg className={`w-5 h-5 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
             </svg>
           </button>
         </div>
-        
-        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4 ${isOpen ? 'block' : 'hidden sm:grid'}`}>
+
+        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6 ${isOpen ? 'block' : 'hidden sm:grid'}`}>
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">University Type</label>
+            <label className="block text-[11px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest ml-1">University Type</label>
             <select
               value={filters.type}
               onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-5 py-3.5 bg-[#0B3C5D]/5 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:bg-white focus:border-transparent transition-all duration-300 font-semibold text-[#0B3C5D] appearance-none"
             >
               <option value="">All Types</option>
               <option value="Private">Private</option>
               <option value="Public">Public</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Max Tuition</label>
+            <label className="block text-[11px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest ml-1">Max Tuition</label>
             <select
               value={filters.maxTuition}
               onChange={(e) => onFilterChange({ ...filters, maxTuition: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-5 py-3.5 bg-[#0B3C5D]/5 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:bg-white focus:border-transparent transition-all duration-300 font-semibold text-[#0B3C5D] appearance-none"
             >
               <option value="">Any Price</option>
               <option value="20000">Under $20,000</option>
@@ -233,13 +248,13 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="60000">Under $60,000</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Sort By</label>
+            <label className="block text-[11px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest ml-1">Sort By</label>
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-5 py-3.5 bg-[#0B3C5D]/5 border border-transparent rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:bg-white focus:border-transparent transition-all duration-300 font-semibold text-[#0B3C5D] appearance-none"
             >
               <option value="ranking">Ranking</option>
               <option value="name">Name</option>
@@ -254,19 +269,23 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
 };
 
 const LoadingCard = () => (
-  <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg overflow-hidden animate-pulse">
-    <div className="h-48 bg-gray-200" />
-    <div className="p-6">
-      <div className="h-6 bg-gray-200 rounded-lg mb-2" />
-      <div className="h-4 bg-gray-200 rounded-lg mb-4 w-3/4" />
-      <div className="h-3 bg-gray-200 rounded-lg mb-4" />
-      <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="h-16 bg-gray-200 rounded-xl" />
-        <div className="h-16 bg-gray-200 rounded-xl" />
-        <div className="h-16 bg-gray-200 rounded-xl" />
-        <div className="h-16 bg-gray-200 rounded-xl" />
+  <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-white/20 shadow-lg overflow-hidden animate-pulse flex flex-col h-full">
+    <div className="h-56 bg-gray-200" />
+    <div className="p-6 flex flex-col flex-grow">
+      <div className="h-8 bg-gray-200 rounded-lg mb-4 w-3/4" />
+      <div className="h-4 bg-gray-200 rounded-lg mb-6 w-1/2" />
+      <div className="h-4 bg-gray-200 rounded-lg mb-4" />
+      <div className="h-4 bg-gray-200 rounded-lg mb-6 w-5/6" />
+      <div className="grid grid-cols-2 gap-3 mb-6">
+        <div className="h-16 bg-gray-100 rounded-2xl" />
+        <div className="h-16 bg-gray-100 rounded-2xl" />
+        <div className="h-16 bg-gray-100 rounded-2xl" />
+        <div className="h-16 bg-gray-100 rounded-2xl" />
       </div>
-      <div className="h-10 bg-gray-200 rounded-xl" />
+      <div className="mt-auto pt-4 flex gap-3">
+        <div className="h-12 bg-gray-200 rounded-2xl flex-1" />
+        <div className="h-12 bg-gray-200 rounded-2xl flex-1" />
+      </div>
     </div>
   </div>
 );
@@ -280,7 +299,7 @@ export default function CollegesPage() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  
+
   // ADDED: State for application modal
   const [showApplicationModal, setShowApplicationModal] = useState(false);
   const [selectedCollege, setSelectedCollege] = useState(null);
@@ -299,13 +318,13 @@ export default function CollegesPage() {
   const filteredColleges = useMemo(() => {
     let filtered = collegesData.filter(college => {
       const matchesSearch = college.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           college.location.toLowerCase().includes(searchTerm.toLowerCase());
-      
+        college.location.toLowerCase().includes(searchTerm.toLowerCase());
+
       const matchesType = !filters.type || college.type === filters.type;
-      
-      const matchesTuition = !filters.maxTuition || 
-                            parseInt(college.tuition.replace(/[$,]/g, '')) <= parseInt(filters.maxTuition);
-      
+
+      const matchesTuition = !filters.maxTuition ||
+        parseInt(college.tuition.replace(/[$,]/g, '')) <= parseInt(filters.maxTuition);
+
       return matchesSearch && matchesType && matchesTuition;
     });
 
@@ -366,44 +385,45 @@ export default function CollegesPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Modern Search Bar */}
-        <div className="mb-6">
-          <div className="relative max-w-2xl mx-auto">
+        <div className="mb-10">
+          <div className="relative max-w-3xl mx-auto">
             <input
               type="text"
-              placeholder="Search universities by name or location..."
+              placeholder="Search by college name, city or program..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-300"
+              className="w-full px-8 py-5 pl-16 pr-8 text-xl bg-white/90 backdrop-blur-md border border-white/40 rounded-3xl shadow-sm focus:outline-none focus:ring-4 focus:ring-[#F2A900]/20 focus:bg-white focus:border-[#F2A900]/30 transition-all duration-500 text-[#0B3C5D] placeholder:text-[#0B3C5D]/30"
             />
-            <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
-              <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
+              <svg className="h-6 w-6 text-[#0B3C5D]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
           </div>
         </div>
 
         {/* Filters */}
-        <FilterSection 
-          filters={filters} 
+        <FilterSection
+          filters={filters}
           onFilterChange={setFilters}
           isOpen={filtersOpen}
           toggleOpen={() => setFiltersOpen(!filtersOpen)}
         />
 
         {/* Results Count with Modern Design */}
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center mb-4 sm:mb-0">
-            <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm">
-              <span className="text-sm font-semibold text-gray-600">
-                {filteredColleges.length} of {collegesData.length} universities
-              </span>
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between px-2">
+          <div className="flex items-center space-x-3">
+            <div className="bg-[#0B3C5D] text-white px-4 py-2 rounded-2xl text-sm font-bold shadow-lg shadow-[#0B3C5D]/20">
+              {filteredColleges.length}
             </div>
+            <span className="text-sm font-bold text-[#0B3C5D]/60 uppercase tracking-widest">
+              Universities matching your criteria
+            </span>
           </div>
         </div>
 
-        {/* Colleges Grid - MODIFIED: Added onApply prop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* Colleges Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {filteredColleges.map(college => (
             <CollegeCard key={college.id} college={college} onApply={handleApplyClick} />
           ))}
@@ -411,21 +431,26 @@ export default function CollegesPage() {
 
         {/* No Results */}
         {filteredColleges.length === 0 && (
-          <div className="text-center py-16">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto border border-white/20 shadow-lg">
-              <svg className="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.467-.881-6.08-2.33M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-              </svg>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">No universities found</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your search criteria or filters to find more results.</p>
-              <button 
+          <div className="text-center py-24">
+            <div className="bg-white/90 backdrop-blur-md rounded-[40px] p-12 max-w-lg mx-auto border border-white/40 shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#F2A900] via-[#0B3C5D] to-[#F2A900]" />
+              <div className="bg-[#0B3C5D]/5 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8 border border-[#0B3C5D]/10">
+                <svg className="h-10 w-10 text-[#0B3C5D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <h3 className="text-3xl font-extrabold text-[#0B3C5D] mb-4 tracking-tight">No results found</h3>
+              <p className="text-gray-500 mb-10 text-lg leading-relaxed">
+                We couldn't find any universities that match your current filters. Try broadening your search or resetting all filters.
+              </p>
+              <button
                 onClick={() => {
                   setSearchTerm('');
                   setFilters({ type: '', maxTuition: '', sortBy: 'ranking' });
                 }}
-                className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] px-6 py-3 rounded-xl font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-300"
+                className="bg-[#0B3C5D] text-white px-10 py-4 rounded-2xl font-bold uppercase tracking-widest hover:bg-[#0B3C5D]/90 transition-all duration-300 shadow-xl shadow-[#0B3C5D]/20 hover:scale-105 active:scale-95"
               >
-                Clear All Filters
+                Reset All Filters
               </button>
             </div>
           </div>
