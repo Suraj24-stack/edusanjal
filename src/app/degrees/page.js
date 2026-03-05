@@ -12,7 +12,7 @@ const degreesData = [
     duration: "4 Years",
     field: "Technology",
     ranking: 1,
-    avgSalary: "$85,000",
+    avgSalary: "Rs 85,000",
     jobGrowth: "+22%",
     difficulty: "High",
     students: "2.1M",
@@ -30,7 +30,7 @@ const degreesData = [
     duration: "2 Years",
     field: "Business",
     ranking: 2,
-    avgSalary: "$95,000",
+    avgSalary: "Rs 95,000",
     jobGrowth: "+8%",
     difficulty: "Medium",
     students: "1.8M",
@@ -48,7 +48,7 @@ const degreesData = [
     duration: "8 Years",
     field: "Healthcare",
     ranking: 3,
-    avgSalary: "$220,000",
+    avgSalary: "Rs 220,000",
     jobGrowth: "+4%",
     difficulty: "Very High",
     students: "350K",
@@ -66,7 +66,7 @@ const degreesData = [
     duration: "4 Years",
     field: "Technology",
     ranking: 4,
-    avgSalary: "$75,000",
+    avgSalary: "Rs 75,000",
     jobGrowth: "+6%",
     difficulty: "High",
     students: "1.2M",
@@ -84,7 +84,7 @@ const degreesData = [
     duration: "4 Years",
     field: "Social Sciences",
     ranking: 5,
-    avgSalary: "$65,000",
+    avgSalary: "Rs 65,000",
     jobGrowth: "+3%",
     difficulty: "Medium",
     students: "900K",
@@ -102,7 +102,7 @@ const degreesData = [
     duration: "2 Years",
     field: "Technology",
     ranking: 6,
-    avgSalary: "$115,000",
+    avgSalary: "Rs 115,000",
     jobGrowth: "+35%",
     difficulty: "High",
     students: "180K",
@@ -120,7 +120,7 @@ const degreesData = [
     duration: "4 Years",
     field: "Healthcare",
     ranking: 7,
-    avgSalary: "$70,000",
+    avgSalary: "Rs 70,000",
     jobGrowth: "+7%",
     difficulty: "Medium-High",
     students: "650K",
@@ -138,7 +138,7 @@ const degreesData = [
     duration: "4 Years",
     field: "Business",
     ranking: 8,
-    avgSalary: "$60,000",
+    avgSalary: "Rs 60,000",
     jobGrowth: "+10%",
     difficulty: "Medium",
     students: "450K",
@@ -330,7 +330,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.level}
               onChange={(e) => onFilterChange({ ...filters, level: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white text-black font-bold border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Levels</option>
               <option value="Associate">Associate</option>
@@ -341,11 +341,11 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Field</label>
+            <label className="block text-sm font-bold text-black">Field</label>
             <select
               value={filters.field}
               onChange={(e) => onFilterChange({ ...filters, field: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white text-black font-bold border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Fields</option>
               <option value="Technology">Technology</option>
@@ -356,11 +356,11 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Difficulty</label>
+            <label className="block text-sm font-bold text-black">Difficulty</label>
             <select
               value={filters.difficulty}
               onChange={(e) => onFilterChange({ ...filters, difficulty: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white text-black font-bold border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Levels</option>
               <option value="Medium">Medium</option>
@@ -371,11 +371,11 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Sort By</label>
+            <label className="block text-sm font-bold text-black">Sort By</label>
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white text-black font-bold border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="ranking">Popularity</option>
               <option value="title">Name</option>
@@ -467,8 +467,8 @@ export default function DegreesPage() {
         case 'title':
           return a.title.localeCompare(b.title);
         case 'salary':
-          const aSalary = parseInt(a.avgSalary.replace(/[$,]/g, ''));
-          const bSalary = parseInt(b.avgSalary.replace(/[$,]/g, ''));
+          const aSalary = parseInt(a.avgSalary.replace(/[Rs,]/g, ''));
+          const bSalary = parseInt(b.avgSalary.replace(/[Rs,]/g, ''));
           return bSalary - aSalary;
         case 'jobGrowth':
           const aGrowth = parseInt(a.jobGrowth.replace(/[+%]/g, ''));
@@ -492,7 +492,7 @@ export default function DegreesPage() {
     const techDegrees = degreesData.filter(d => d.field === 'Technology').length;
     const businessDegrees = degreesData.filter(d => d.field === 'Business').length;
     const avgSalary = degreesData.reduce((acc, degree) => {
-      const salary = parseInt(degree.avgSalary.replace(/[$,]/g, ''));
+      const salary = parseInt(degree.avgSalary.replace(/[Rs,]/g, ''));
       return acc + salary;
     }, 0) / totalDegrees;
 
@@ -500,7 +500,7 @@ export default function DegreesPage() {
       totalDegrees,
       techDegrees,
       businessDegrees,
-      avgSalary: `$${(avgSalary / 1000).toFixed(0)}K`
+      avgSalary: `Rs ${(avgSalary / 1000).toFixed(0)}K`
     };
   }, []);
 
