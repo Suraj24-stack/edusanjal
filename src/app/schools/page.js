@@ -188,7 +188,7 @@ const SchoolCard = ({ school, onApply }) => {
         </div>
         <div className="absolute top-3 left-3 flex items-center space-x-2">
           <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-white/90 backdrop-blur-sm ${school.type === 'Private' ? 'text-[#0B3C5D]' :
-              school.type === 'Public' ? 'text-green-800' : 'text-purple-800'
+            school.type === 'Public' ? 'text-green-800' : 'text-purple-800'
             }`}>
             {getTypeIcon(school.type)}
             <span className="ml-1">{school.type}</span>
@@ -304,7 +304,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.type}
               onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white text-black font-bold border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Types</option>
               <option value="Private">Private</option>
@@ -314,11 +314,11 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Level</label>
+            <label className="block text-sm font-bold text-black">Level</label>
             <select
               value={filters.level}
               onChange={(e) => onFilterChange({ ...filters, level: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white text-black font-bold border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Levels</option>
               <option value="K-12">K-12</option>
@@ -328,11 +328,11 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Boarding Type</label>
+            <label className="block text-sm font-bold text-black">Boarding Type</label>
             <select
               value={filters.boardingType}
               onChange={(e) => onFilterChange({ ...filters, boardingType: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white text-black font-bold border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="">All Types</option>
               <option value="Boarding & Day">Boarding & Day</option>
@@ -342,11 +342,11 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Sort By</label>
+            <label className="block text-sm font-bold text-black">Sort By</label>
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white text-black font-bold border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
             >
               <option value="ranking">Ranking</option>
               <option value="name">Name</option>
