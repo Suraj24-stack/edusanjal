@@ -17,19 +17,19 @@ export default function ApplicationModal({ school, onClose }) {
     email: '',
     phone: '',
     address: '',
-    
+
     // Parent/Guardian Information
     parentName: '',
     parentPhone: '',
     parentEmail: '',
     parentOccupation: '',
-    
+
     // Academic Information
     previousSchool: '',
     lastGrade: '',
     lastPercentage: '',
     applyingForGrade: '',
-    
+
     // Documents
     documents: {
       photo: null,
@@ -37,7 +37,7 @@ export default function ApplicationModal({ school, onClose }) {
       previousMarksheet: null,
       citizenshipCopy: null,
     },
-    
+
     // Additional Information
     additionalInfo: '',
   });
@@ -70,7 +70,7 @@ export default function ApplicationModal({ school, onClose }) {
         }));
         return;
       }
-      
+
       setFormData(prev => ({
         ...prev,
         documents: {
@@ -78,7 +78,7 @@ export default function ApplicationModal({ school, onClose }) {
           [documentType]: file
         }
       }));
-      
+
       // Clear error
       if (errors[documentType]) {
         setErrors(prev => ({
@@ -91,7 +91,7 @@ export default function ApplicationModal({ school, onClose }) {
 
   const validateStep = (step) => {
     const newErrors = {};
-    
+
     if (step === 1) {
       if (!formData.studentName.trim()) newErrors.studentName = 'Student name is required';
       if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Date of birth is required';
@@ -101,19 +101,19 @@ export default function ApplicationModal({ school, onClose }) {
       if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
       if (!formData.address.trim()) newErrors.address = 'Address is required';
     }
-    
+
     if (step === 2) {
       if (!formData.parentName.trim()) newErrors.parentName = 'Parent/Guardian name is required';
       if (!formData.parentPhone.trim()) newErrors.parentPhone = 'Parent phone is required';
       if (!formData.parentEmail.trim()) newErrors.parentEmail = 'Parent email is required';
     }
-    
+
     if (step === 3) {
       if (!formData.previousSchool.trim()) newErrors.previousSchool = 'Previous school is required';
       if (!formData.lastGrade) newErrors.lastGrade = 'Last grade completed is required';
       if (!formData.applyingForGrade) newErrors.applyingForGrade = 'Applying for grade is required';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -130,7 +130,7 @@ export default function ApplicationModal({ school, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateStep(currentStep)) {
       return;
     }
@@ -141,18 +141,18 @@ export default function ApplicationModal({ school, onClose }) {
     try {
       // Create FormData for file upload
       const submitData = new FormData();
-      
+
       // Append all text fields
       Object.keys(formData).forEach(key => {
         if (key !== 'documents') {
           submitData.append(key, formData[key]);
         }
       });
-      
+
       // Append school information
       submitData.append('schoolId', school.id);
       submitData.append('schoolName', school.name);
-      
+
       // Append files
       Object.keys(formData.documents).forEach(key => {
         if (formData.documents[key]) {
@@ -173,7 +173,7 @@ export default function ApplicationModal({ school, onClose }) {
 
       const result = await response.json();
       setSubmitSuccess(true);
-      
+
       // Auto close after 3 seconds
       setTimeout(() => {
         onClose();
@@ -233,19 +233,17 @@ export default function ApplicationModal({ school, onClose }) {
             {[1, 2, 3, 4].map((step) => (
               <div key={step} className="flex items-center">
                 <div
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                    step <= currentStep
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${step <= currentStep
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-200 text-gray-600'
+                    }`}
                 >
                   {step}
                 </div>
                 {step < 4 && (
                   <div
-                    className={`w-16 md:w-32 h-1 ${
-                      step < currentStep ? 'bg-blue-600' : 'bg-gray-200'
-                    }`}
+                    className={`w-16 md:w-32 h-1 ${step < currentStep ? 'bg-blue-600' : 'bg-gray-200'
+                      }`}
                   />
                 )}
               </div>
@@ -265,7 +263,7 @@ export default function ApplicationModal({ school, onClose }) {
           {currentStep === 1 && (
             <div className="space-y-4">
               <h3 className="text-xl font-bold text-gray-800 mb-4">Student Information</h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -276,9 +274,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="studentName"
                     value={formData.studentName}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.studentName ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.studentName ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     placeholder="Enter full name"
                   />
                   {errors.studentName && (
@@ -295,9 +292,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="dateOfBirth"
                     value={formData.dateOfBirth}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'
+                      }`}
                   />
                   {errors.dateOfBirth && (
                     <p className="text-red-500 text-sm mt-1">{errors.dateOfBirth}</p>
@@ -312,9 +308,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="gender"
                     value={formData.gender}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.gender ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.gender ? 'border-red-500' : 'border-gray-300'
+                      }`}
                   >
                     <option value="">Select gender</option>
                     <option value="Male">Male</option>
@@ -335,9 +330,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.email ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.email ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     placeholder="student@example.com"
                   />
                   {errors.email && (
@@ -354,9 +348,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.phone ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.phone ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     placeholder="98XXXXXXXX"
                   />
                   {errors.phone && (
@@ -373,9 +366,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.address ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.address ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     placeholder="Enter full address"
                   />
                   {errors.address && (
@@ -390,7 +382,7 @@ export default function ApplicationModal({ school, onClose }) {
           {currentStep === 2 && (
             <div className="space-y-4">
               <h3 className="text-xl font-bold text-gray-800 mb-4">Parent/Guardian Information</h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -401,9 +393,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="parentName"
                     value={formData.parentName}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.parentName ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.parentName ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     placeholder="Enter parent/guardian name"
                   />
                   {errors.parentName && (
@@ -420,9 +411,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="parentPhone"
                     value={formData.parentPhone}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.parentPhone ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.parentPhone ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     placeholder="98XXXXXXXX"
                   />
                   {errors.parentPhone && (
@@ -439,9 +429,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="parentEmail"
                     value={formData.parentEmail}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.parentEmail ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.parentEmail ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     placeholder="parent@example.com"
                   />
                   {errors.parentEmail && (
@@ -458,7 +447,7 @@ export default function ApplicationModal({ school, onClose }) {
                     name="parentOccupation"
                     value={formData.parentOccupation}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
                     placeholder="Enter occupation"
                   />
                 </div>
@@ -470,7 +459,7 @@ export default function ApplicationModal({ school, onClose }) {
           {currentStep === 3 && (
             <div className="space-y-4">
               <h3 className="text-xl font-bold text-gray-800 mb-4">Academic Information</h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -481,9 +470,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="previousSchool"
                     value={formData.previousSchool}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.previousSchool ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.previousSchool ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     placeholder="Enter previous school name"
                   />
                   {errors.previousSchool && (
@@ -499,9 +487,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="lastGrade"
                     value={formData.lastGrade}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.lastGrade ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.lastGrade ? 'border-red-500' : 'border-gray-300'
+                      }`}
                   >
                     <option value="">Select grade</option>
                     <option value="Nursery">Nursery</option>
@@ -525,7 +512,7 @@ export default function ApplicationModal({ school, onClose }) {
                     name="lastPercentage"
                     value={formData.lastPercentage}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
                     placeholder="e.g., 85% or 3.5 GPA"
                   />
                 </div>
@@ -538,9 +525,8 @@ export default function ApplicationModal({ school, onClose }) {
                     name="applyingForGrade"
                     value={formData.applyingForGrade}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                      errors.applyingForGrade ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 ${errors.applyingForGrade ? 'border-red-500' : 'border-gray-300'
+                      }`}
                   >
                     <option value="">Select grade</option>
                     <option value="Nursery">Nursery</option>
@@ -562,7 +548,7 @@ export default function ApplicationModal({ school, onClose }) {
           {currentStep === 4 && (
             <div className="space-y-6">
               <h3 className="text-xl font-bold text-gray-800 mb-4">Documents Upload</h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -660,7 +646,7 @@ export default function ApplicationModal({ school, onClose }) {
                   value={formData.additionalInfo}
                   onChange={handleInputChange}
                   rows={4}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
                   placeholder="Any additional information you'd like to share..."
                 />
               </div>
@@ -687,7 +673,7 @@ export default function ApplicationModal({ school, onClose }) {
                 Previous
               </button>
             )}
-            
+
             {currentStep < 4 ? (
               <button
                 type="button"

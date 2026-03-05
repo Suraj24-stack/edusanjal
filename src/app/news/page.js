@@ -244,7 +244,7 @@ export default function NewsPage() {
                   placeholder="Search news..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent w-full lg:w-64"
+                  className="pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent w-full lg:w-64 text-gray-900"
                 />
               </div>
 

@@ -11,25 +11,25 @@ const JobApplicationModal = ({ job, onClose }) => {
     dateOfBirth: '',
     address: '',
     city: '',
-    
+
     // Professional Information
     currentCompany: '',
     currentPosition: '',
     totalExperience: '',
     expectedSalary: '',
     noticePeriod: '',
-    
+
     // Education
     highestQualification: '',
     university: '',
     graduationYear: '',
-    
+
     // Documents & Links
     resume: null,
     coverLetter: '',
     linkedIn: '',
     portfolio: '',
-    
+
     // Availability
     availableFrom: '',
     preferredWorkType: '',
@@ -156,23 +156,20 @@ const JobApplicationModal = ({ job, onClose }) => {
             {steps.map((step, index) => (
               <div key={step.number} className="flex items-center flex-1">
                 <div className="flex flex-col items-center flex-1">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 ${
-                    currentStep >= step.number
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 ${currentStep >= step.number
                       ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-white shadow-lg'
                       : 'bg-gray-200 text-gray-500'
-                  }`}>
+                    }`}>
                     {step.icon}
                   </div>
-                  <span className={`text-xs mt-1 font-medium ${
-                    currentStep >= step.number ? 'text-gray-900' : 'text-gray-400'
-                  }`}>
+                  <span className={`text-xs mt-1 font-medium ${currentStep >= step.number ? 'text-gray-900' : 'text-gray-400'
+                    }`}>
                     {step.title}
                   </span>
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`h-1 flex-1 mx-2 rounded-full transition-all duration-300 ${
-                    currentStep > step.number ? 'bg-[#F2A900]' : 'bg-gray-200'
-                  }`} />
+                  <div className={`h-1 flex-1 mx-2 rounded-full transition-all duration-300 ${currentStep > step.number ? 'bg-[#F2A900]' : 'bg-gray-200'
+                    }`} />
                 )}
               </div>
             ))}
@@ -186,7 +183,7 @@ const JobApplicationModal = ({ job, onClose }) => {
             {currentStep === 1 && (
               <div className="space-y-4 animate-in fade-in duration-300">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Personal Information</h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -198,7 +195,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.fullName}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="John Doe"
                     />
                   </div>
@@ -213,7 +210,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -228,7 +225,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.phone}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="+977 9812345678"
                     />
                   </div>
@@ -243,7 +240,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.dateOfBirth}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                     />
                   </div>
 
@@ -257,7 +254,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.city}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="Kathmandu"
                     />
                   </div>
@@ -272,7 +269,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.address}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="Street address"
                     />
                   </div>
@@ -284,7 +281,7 @@ const JobApplicationModal = ({ job, onClose }) => {
             {currentStep === 2 && (
               <div className="space-y-4 animate-in fade-in duration-300">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Professional Information</h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -295,7 +292,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       name="currentCompany"
                       value={formData.currentCompany}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="Current employer or 'Unemployed'"
                     />
                   </div>
@@ -309,7 +306,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       name="currentPosition"
                       value={formData.currentPosition}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="Your current role"
                     />
                   </div>
@@ -323,7 +320,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.totalExperience}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                     >
                       <option value="">Select experience</option>
                       <option value="0-1">0-1 years</option>
@@ -345,7 +342,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.expectedSalary}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="NPR 50,000 - 80,000"
                     />
                   </div>
@@ -359,7 +356,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.noticePeriod}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                     >
                       <option value="">Select notice period</option>
                       <option value="immediate">Immediate</option>
@@ -379,7 +376,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.highestQualification}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                     >
                       <option value="">Select qualification</option>
                       <option value="high-school">High School</option>
@@ -400,7 +397,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       name="university"
                       value={formData.university}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="Tribhuvan University"
                     />
                   </div>
@@ -416,7 +413,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       onChange={handleChange}
                       min="1980"
                       max="2030"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       placeholder="2020"
                     />
                   </div>
@@ -428,7 +425,7 @@ const JobApplicationModal = ({ job, onClose }) => {
             {currentStep === 3 && (
               <div className="space-y-4 animate-in fade-in duration-300">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Documents & Portfolio</h3>
-                
+
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -454,7 +451,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       value={formData.coverLetter}
                       onChange={handleChange}
                       rows="6"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent resize-none text-gray-900"
                       placeholder="Tell us why you're the perfect fit for this role..."
                     />
                   </div>
@@ -469,7 +466,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                         name="linkedIn"
                         value={formData.linkedIn}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                         placeholder="https://linkedin.com/in/yourprofile"
                       />
                     </div>
@@ -483,7 +480,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                         name="portfolio"
                         value={formData.portfolio}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                         placeholder="https://yourportfolio.com"
                       />
                     </div>
@@ -500,7 +497,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                         value={formData.availableFrom}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       />
                     </div>
 
@@ -512,7 +509,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                         name="preferredWorkType"
                         value={formData.preferredWorkType}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
                       >
                         <option value="">Select preference</option>
                         <option value="office">Office Only</option>
@@ -561,7 +558,7 @@ const JobApplicationModal = ({ job, onClose }) => {
             {currentStep === 4 && (
               <div className="space-y-4 animate-in fade-in duration-300">
                 <h3 className="text-lg font-bold text-gray-900 mb-4">Review Your Application</h3>
-                
+
                 <div className="bg-gray-50 rounded-xl p-6 space-y-4">
                   <div>
                     <h4 className="font-semibold text-gray-700 mb-2">Personal Information</h4>
@@ -607,11 +604,10 @@ const JobApplicationModal = ({ job, onClose }) => {
               type="button"
               onClick={prevStep}
               disabled={currentStep === 1}
-              className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 ${
-                currentStep === 1
+              className={`px-6 py-3 rounded-xl font-semibold transition-all duration-200 ${currentStep === 1
                   ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
+                }`}
             >
               ← Previous
             </button>

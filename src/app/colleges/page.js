@@ -392,7 +392,7 @@ export default function CollegesPage() {
               placeholder="Search by college name, city or program..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-8 py-5 pl-16 pr-8 text-xl bg-white/90 backdrop-blur-md border border-white/40 rounded-3xl shadow-sm focus:outline-none focus:ring-4 focus:ring-[#F2A900]/20 focus:bg-white focus:border-[#F2A900]/30 transition-all duration-500 text-[#0B3C5D] placeholder:text-[#0B3C5D]/30"
+              className="w-full px-8 py-5 pl-16 pr-8 text-xl bg-white/90 backdrop-blur-md border border-white/40 rounded-3xl shadow-sm focus:outline-none focus:ring-4 focus:ring-[#F2A900]/20 focus:bg-white focus:border-[#F2A900]/30 transition-all duration-500 text-gray-900 placeholder:text-[#0B3C5D]/30"
             />
             <div className="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none">
               <svg className="h-6 w-6 text-[#0B3C5D]/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">

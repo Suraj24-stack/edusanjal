@@ -245,8 +245,8 @@ const JobCard = ({ job, onApply }) => {
 
         {/* Days Left */}
         <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-sm font-bold shadow-lg ${daysLeft <= 7 ? 'bg-gradient-to-r from-red-600 to-pink-600 text-white' :
-            daysLeft <= 14 ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D]' :
-              'bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white'
+          daysLeft <= 14 ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D]' :
+            'bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white'
           }`}>
           {daysLeft > 0 ? `${daysLeft} days left` : 'Expired'}
         </div>
@@ -367,7 +367,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.category}
               onChange={(e) => onFilterChange({ ...filters, category: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200 text-gray-900"
             >
               <option value="">All Categories</option>
               <option value="Technology">Technology</option>
@@ -385,7 +385,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.type}
               onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200 text-gray-900"
             >
               <option value="">All Types</option>
               <option value="Full-time">Full-time</option>
@@ -400,7 +400,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.location}
               onChange={(e) => onFilterChange({ ...filters, location: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200 text-gray-900"
             >
               <option value="">All Locations</option>
               <option value="Kathmandu">Kathmandu</option>
@@ -416,7 +416,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.experience}
               onChange={(e) => onFilterChange({ ...filters, experience: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200 text-gray-900"
             >
               <option value="">All Levels</option>
               <option value="0-1">0-1 years</option>
@@ -431,7 +431,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200"
+              className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-200 text-gray-900"
             >
               <option value="recent">Most Recent</option>
               <option value="deadline">Deadline</option>
@@ -657,7 +657,7 @@ export default function VacanciesPage() {
               placeholder="Search jobs by title, company, skills, or location..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-300"
+              className="w-full px-6 py-4 pl-14 pr-6 text-lg bg-white/80 backdrop-blur-sm border border-white/20 rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent transition-all duration-300 text-gray-900"
             />
             <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
               <svg className="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
