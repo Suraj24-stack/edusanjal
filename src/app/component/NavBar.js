@@ -52,11 +52,10 @@ const NavBar = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                  isActive(item.href)
-                    ? 'bg-[#2d5f7f] text-white shadow-md'
-                    : 'text-gray-700 hover:bg-[#2d5f7f] hover:text-white hover:shadow-md'
-                }`}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${isActive(item.href)
+                  ? 'bg-[#2d5f7f] text-white shadow-md'
+                  : 'text-black font-bold hover:bg-[#2d5f7f] hover:text-white hover:shadow-md'
+                  }`}
               >
                 {item.name}
               </Link>
@@ -67,11 +66,10 @@ const NavBar = () => {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setIsMoreOpen(!isMoreOpen)}
-              className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                isMoreOpen
-                  ? 'bg-[#2d5f7f] text-white shadow-md'
-                  : 'text-gray-700 hover:bg-[#2d5f7f] hover:text-white hover:shadow-md'
-              }`}
+              className={`flex items-center gap-1 px-4 py-2 text-sm font-bold rounded-md transition-all duration-200 ${isMoreOpen
+                ? 'bg-[#2d5f7f] text-white shadow-md'
+                : 'text-black hover:bg-[#2d5f7f] hover:text-white hover:shadow-md'
+                }`}
             >
               More
               <svg
@@ -91,7 +89,7 @@ const NavBar = () => {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#2d5f7f] hover:text-white transition-colors duration-150"
+                    className="block px-4 py-2 text-sm text-black font-bold hover:bg-[#2d5f7f] hover:text-white transition-colors duration-150"
                     onClick={() => setIsMoreOpen(false)}
                   >
                     {item.name}
@@ -104,10 +102,10 @@ const NavBar = () => {
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden flex items-center justify-between h-16">
-          <span className="text-lg font-semibold text-gray-900">Menu</span>
+          <span className="text-lg font-bold text-black">Menu</span>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-md text-gray-700 hover:bg-[#2d5f7f] hover:text-white transition-colors duration-200"
+            className="p-2 rounded-md text-black hover:bg-[#2d5f7f] hover:text-white transition-colors duration-200"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? (
@@ -128,11 +126,10 @@ const NavBar = () => {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                  isActive(item.href)
-                    ? 'bg-[#2d5f7f] text-white'
-                    : 'text-gray-700 hover:bg-[#2d5f7f] hover:text-white'
-                }`}
+                className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive(item.href)
+                  ? 'bg-[#2d5f7f] text-white'
+                  : 'text-black font-bold hover:bg-[#2d5f7f] hover:text-white'
+                  }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
@@ -147,7 +144,7 @@ const NavBar = () => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-[#2d5f7f] hover:text-white transition-colors duration-200"
+                  className="block px-3 py-2 rounded-md text-sm text-black font-bold hover:bg-[#2d5f7f] hover:text-white transition-colors duration-200"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}

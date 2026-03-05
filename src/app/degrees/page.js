@@ -246,55 +246,55 @@ const DegreeCard = ({ degree }) => {
           </span>
         </div>
       </div>
-      
+
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between mb-3">
           <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300 leading-tight">
             {degree.title}
           </h3>
-          <div className="flex items-center text-gray-500 ml-2 flex-shrink-0">
+          <div className="flex items-center text-black ml-2 flex-shrink-0">
             <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
             </svg>
-            <span className="text-sm font-medium">{degree.duration}</span>
+            <span className="text-sm font-bold">{degree.duration}</span>
           </div>
         </div>
-        
-        <p className="text-sm text-gray-700 mb-4 line-clamp-2 leading-relaxed">{degree.description}</p>
-        
+
+        <p className="text-sm text-black mb-4 line-clamp-2 leading-relaxed font-medium">{degree.description}</p>
+
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-3 border border-green-100">
-            <div className="text-xs font-semibold text-green-700 uppercase tracking-wide">Avg Salary</div>
+            <div className="text-xs font-bold text-black uppercase tracking-wide">Avg Salary</div>
             <div className="text-sm font-bold text-green-800 mt-1">{degree.avgSalary}</div>
           </div>
           <div className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 rounded-xl p-3 border border-[#0B3C5D]/30">
-            <div className="text-xs font-semibold text-[#0B3C5D] uppercase tracking-wide">Job Growth</div>
+            <div className="text-xs font-bold text-black uppercase tracking-wide">Job Growth</div>
             <div className="text-sm font-bold text-[#0B3C5D] mt-1">{degree.jobGrowth}</div>
           </div>
           <div className="bg-gray-50 rounded-xl p-3">
-            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Students</div>
+            <div className="text-xs font-bold text-black uppercase tracking-wide">Students</div>
             <div className="text-sm font-bold text-gray-900 mt-1">{degree.students}</div>
           </div>
           <div className={`bg-gradient-to-r rounded-xl p-3 border ${getDifficultyColor(degree.difficulty)}`}>
-            <div className="text-xs font-semibold uppercase tracking-wide opacity-80">Difficulty</div>
-            <div className="text-sm font-bold mt-1">{degree.difficulty}</div>
+            <div className="text-xs font-bold text-black uppercase tracking-wide">Difficulty</div>
+            <div className="text-sm font-bold mt-1 uppercase">{degree.difficulty}</div>
           </div>
         </div>
-        
+
         <div className="mb-5">
-          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Top Career Paths</div>
+          <div className="text-xs font-bold text-black uppercase tracking-wide mb-2">Top Career Paths</div>
           <div className="flex flex-wrap gap-1.5">
             {degree.careers.slice(0, 3).map((career, index) => (
-              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-[#0B3C5D] px-3 py-1 rounded-full text-xs font-medium border border-[#0B3C5D]/20">
+              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-black px-3 py-1 rounded-full text-xs font-bold border border-[#0B3C5D]/20">
                 {career}
               </span>
             ))}
             {degree.careers.length > 3 && (
-              <span className="text-gray-500 text-xs font-medium px-2 py-1">+{degree.careers.length - 3} more</span>
+              <span className="text-black text-xs font-bold px-2 py-1">+{degree.careers.length - 3} more</span>
             )}
           </div>
         </div>
-        
+
         <button className="w-full bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]">
           Explore Degree
         </button>
@@ -323,10 +323,10 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             </svg>
           </button>
         </div>
-        
+
         <div className={`grid grid-cols-1 sm:grid-cols-4 gap-4 mt-4 ${isOpen ? 'block' : 'hidden sm:grid'}`}>
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Degree Level</label>
+            <label className="block text-sm font-bold text-black">Degree Level</label>
             <select
               value={filters.level}
               onChange={(e) => onFilterChange({ ...filters, level: e.target.value })}
@@ -339,7 +339,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="Doctorate">Doctorate</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Field</label>
             <select
@@ -354,7 +354,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="Social Sciences">Social Sciences</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Difficulty</label>
             <select
@@ -369,7 +369,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="Very High">Very High</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Sort By</label>
             <select
@@ -406,8 +406,8 @@ const StatsCard = ({ icon, title, value, description, color = "primary" }) => {
         </div>
         <div className="ml-4">
           <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300">{value}</h3>
-          <p className="text-sm font-semibold text-gray-600">{title}</p>
-          <p className="text-xs text-gray-500">{description}</p>
+          <p className="text-sm font-bold text-black">{title}</p>
+          <p className="text-xs text-black font-medium">{description}</p>
         </div>
       </div>
     </div>
@@ -451,14 +451,14 @@ export default function DegreesPage() {
   const filteredDegrees = useMemo(() => {
     let filtered = degreesData.filter(degree => {
       const matchesSearch = degree.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           degree.field.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           degree.careers.some(career => career.toLowerCase().includes(searchTerm.toLowerCase())) ||
-                           degree.description.toLowerCase().includes(searchTerm.toLowerCase());
-      
+        degree.field.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        degree.careers.some(career => career.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        degree.description.toLowerCase().includes(searchTerm.toLowerCase());
+
       const matchesLevel = !filters.level || degree.level === filters.level;
       const matchesField = !filters.field || degree.field === filters.field;
       const matchesDifficulty = !filters.difficulty || degree.difficulty === filters.difficulty;
-      
+
       return matchesSearch && matchesLevel && matchesField && matchesDifficulty;
     });
 
@@ -496,10 +496,10 @@ export default function DegreesPage() {
       return acc + salary;
     }, 0) / totalDegrees;
 
-    return { 
-      totalDegrees, 
-      techDegrees, 
-      businessDegrees, 
+    return {
+      totalDegrees,
+      techDegrees,
+      businessDegrees,
       avgSalary: `$${(avgSalary / 1000).toFixed(0)}K`
     };
   }, []);
@@ -545,28 +545,28 @@ export default function DegreesPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Stats Section */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z" /></svg>}
             title="Total Degrees"
             value={stats.totalDegrees}
             description="Popular programs"
             color="primary"
           />
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5z" clipRule="evenodd" /></svg>}
             title="Tech Degrees"
             value={stats.techDegrees}
             description="Technology programs"
             color="secondary"
           />
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6z" clipRule="evenodd" /></svg>}
             title="Business Degrees"
             value={stats.businessDegrees}
             description="Business programs"
             color="blue"
           />
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>}
             title="Avg Salary"
             value={stats.avgSalary}
@@ -594,8 +594,8 @@ export default function DegreesPage() {
         </div>
 
         {/* Filters */}
-        <FilterSection 
-          filters={filters} 
+        <FilterSection
+          filters={filters}
           onFilterChange={setFilters}
           isOpen={filtersOpen}
           toggleOpen={() => setFiltersOpen(!filtersOpen)}
@@ -605,7 +605,7 @@ export default function DegreesPage() {
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center mb-4 sm:mb-0">
             <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm">
-              <span className="text-sm font-semibold text-gray-600">
+              <span className="text-sm font-bold text-black">
                 {filteredDegrees.length} of {degreesData.length} degree programs
               </span>
             </div>
@@ -627,8 +627,8 @@ export default function DegreesPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
               <h3 className="text-xl font-bold text-gray-900 mb-2">No degree programs found</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your search criteria or filters to find more results.</p>
-              <button 
+              <p className="text-black mb-4 font-bold">Try adjusting your search criteria or filters to find more results.</p>
+              <button
                 onClick={() => {
                   setSearchTerm('');
                   setFilters({ level: '', field: '', difficulty: '', sortBy: 'ranking' });

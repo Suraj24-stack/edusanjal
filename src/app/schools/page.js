@@ -187,10 +187,9 @@ const SchoolCard = ({ school, onApply }) => {
           #{school.ranking}
         </div>
         <div className="absolute top-3 left-3 flex items-center space-x-2">
-          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-white/90 backdrop-blur-sm ${
-            school.type === 'Private' ? 'text-[#0B3C5D]' : 
-            school.type === 'Public' ? 'text-green-800' : 'text-purple-800'
-          }`}>
+          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-white/90 backdrop-blur-sm ${school.type === 'Private' ? 'text-[#0B3C5D]' :
+              school.type === 'Public' ? 'text-green-800' : 'text-purple-800'
+            }`}>
             {getTypeIcon(school.type)}
             <span className="ml-1">{school.type}</span>
           </span>
@@ -201,69 +200,69 @@ const SchoolCard = ({ school, onApply }) => {
           </span>
         </div>
       </div>
-      
+
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between mb-3">
           <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300 leading-tight">
             {school.name}
           </h3>
-          <div className="flex items-center text-gray-500 ml-2 flex-shrink-0">
+          <div className="flex items-center text-black ml-2 flex-shrink-0">
             <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
             </svg>
           </div>
         </div>
-        
+
         <div className="flex items-center justify-between mb-3">
-          <p className="text-gray-600 font-medium">{school.location}</p>
-          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-800">
+          <p className="text-black font-semibold">{school.location}</p>
+          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-gray-100 text-black">
             {school.level}
           </span>
         </div>
-        
-        <p className="text-sm text-gray-700 mb-4 line-clamp-2 leading-relaxed">{school.description}</p>
-        
+
+        <p className="text-sm text-black mb-4 line-clamp-2 leading-relaxed">{school.description}</p>
+
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div className="bg-gray-50 rounded-xl p-3">
-            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Students</div>
+            <div className="text-xs font-bold text-black uppercase tracking-wide">Students</div>
             <div className="text-sm font-bold text-gray-900 mt-1">{school.students}</div>
           </div>
           <div className="bg-gray-50 rounded-xl p-3">
-            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Type</div>
+            <div className="text-xs font-bold text-black uppercase tracking-wide">Type</div>
             <div className="text-sm font-bold text-gray-900 mt-1">{school.boardingType}</div>
           </div>
           <div className={`bg-gradient-to-r rounded-xl p-3 border ${getTuitionColor(school.tuition)}`}>
-            <div className="text-xs font-semibold uppercase tracking-wide opacity-80">Tuition</div>
+            <div className="text-xs font-bold uppercase tracking-wide text-black pb-1">Tuition</div>
             <div className="text-sm font-bold mt-1">{school.tuition}</div>
           </div>
           <div className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 rounded-xl p-3 border border-[#0B3C5D]/30">
-            <div className="text-xs font-semibold text-[#0B3C5D] uppercase tracking-wide">Acceptance</div>
+            <div className="text-xs font-bold text-black uppercase tracking-wide">Acceptance</div>
             <div className="text-sm font-bold text-[#0B3C5D] mt-1">{school.acceptance}</div>
           </div>
         </div>
-        
+
         <div className="mb-5">
-          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Key Programs</div>
+          <div className="text-xs font-bold text-black uppercase tracking-wide mb-2">Key Programs</div>
           <div className="flex flex-wrap gap-1.5">
             {school.programs.slice(0, 3).map((program, index) => (
-              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-[#0B3C5D] px-3 py-1 rounded-full text-xs font-medium border border-[#0B3C5D]/20">
+              <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-black px-3 py-1 rounded-full text-xs font-bold border border-[#0B3C5D]/20">
                 {program}
               </span>
             ))}
             {school.programs.length > 3 && (
-              <span className="text-gray-500 text-xs font-medium px-2 py-1">+{school.programs.length - 3} more</span>
+              <span className="text-black text-xs font-bold px-2 py-1">+{school.programs.length - 3} more</span>
             )}
           </div>
         </div>
-        
+
         {/* MODIFIED: Changed from single button to two buttons */}
         <div className="flex gap-3">
           <button className="flex-1 bg-white border-2 border-[#0B3C5D] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm hover:bg-[#0B3C5D]/5 transform hover:scale-[1.02] active:scale-[0.98]">
             View Details
           </button>
-          
+
           {/* ADDED: Apply Now button */}
-          <button 
+          <button
             onClick={() => onApply(school)}
             className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
           >
@@ -298,10 +297,10 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             </svg>
           </button>
         </div>
-        
+
         <div className={`grid grid-cols-1 sm:grid-cols-4 gap-4 mt-4 ${isOpen ? 'block' : 'hidden sm:grid'}`}>
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">School Type</label>
+            <label className="block text-sm font-bold text-black">School Type</label>
             <select
               value={filters.type}
               onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
@@ -313,7 +312,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="Public Charter">Charter</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Level</label>
             <select
@@ -327,7 +326,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="Middle School">Middle School</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Boarding Type</label>
             <select
@@ -341,7 +340,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="Boarding">Boarding Only</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Sort By</label>
             <select
@@ -378,8 +377,8 @@ const StatsCard = ({ icon, title, value, description, color = "primary" }) => {
         </div>
         <div className="ml-4">
           <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300">{value}</h3>
-          <p className="text-sm font-semibold text-gray-600">{title}</p>
-          <p className="text-xs text-gray-500">{description}</p>
+          <p className="text-sm font-bold text-black">{title}</p>
+          <p className="text-xs text-black font-medium">{description}</p>
         </div>
       </div>
     </div>
@@ -414,7 +413,7 @@ export default function SchoolsPage() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  
+
   // ADDED: State for application modal
   const [showApplicationModal, setShowApplicationModal] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState(null);
@@ -433,13 +432,13 @@ export default function SchoolsPage() {
   const filteredSchools = useMemo(() => {
     let filtered = schoolsData.filter(school => {
       const matchesSearch = school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           school.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           school.programs.some(program => program.toLowerCase().includes(searchTerm.toLowerCase()));
-      
+        school.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        school.programs.some(program => program.toLowerCase().includes(searchTerm.toLowerCase()));
+
       const matchesType = !filters.type || school.type === filters.type;
       const matchesLevel = !filters.level || school.level === filters.level;
       const matchesBoardingType = !filters.boardingType || school.boardingType === filters.boardingType;
-      
+
       return matchesSearch && matchesType && matchesLevel && matchesBoardingType;
     });
 
@@ -519,28 +518,28 @@ export default function SchoolsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Stats Section */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z" /></svg>}
             title="Total Schools"
             value={stats.totalSchools}
             description="Featured institutions"
             color="primary"
           />
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2z" clipRule="evenodd" /></svg>}
             title="Private Schools"
             value={stats.privateSchools}
             description="Independent institutions"
             color="secondary"
           />
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4z" clipRule="evenodd" /></svg>}
             title="Public Schools"
             value={stats.publicSchools}
             description="Public & charter schools"
             color="blue"
           />
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg>}
             title="Avg Acceptance"
             value={`${stats.avgAcceptance}%`}
@@ -568,8 +567,8 @@ export default function SchoolsPage() {
         </div>
 
         {/* Filters */}
-        <FilterSection 
-          filters={filters} 
+        <FilterSection
+          filters={filters}
           onFilterChange={setFilters}
           isOpen={filtersOpen}
           toggleOpen={() => setFiltersOpen(!filtersOpen)}
@@ -579,7 +578,7 @@ export default function SchoolsPage() {
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center mb-4 sm:mb-0">
             <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm">
-              <span className="text-sm font-semibold text-gray-600">
+              <span className="text-sm font-bold text-black">
                 {filteredSchools.length} of {schoolsData.length} schools
               </span>
             </div>
@@ -601,8 +600,8 @@ export default function SchoolsPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
               <h3 className="text-xl font-bold text-gray-900 mb-2">No schools found</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your search criteria or filters to find more results.</p>
-              <button 
+              <p className="text-black mb-4 font-medium">Try adjusting your search criteria or filters to find more results.</p>
+              <button
                 onClick={() => {
                   setSearchTerm('');
                   setFilters({ type: '', level: '', boardingType: '', sortBy: 'ranking' });
@@ -641,7 +640,7 @@ export default function SchoolsPage() {
                 Schools Directory
               </span>
             </div>
-            <p className="text-gray-600 font-medium">
+            <p className="text-black font-bold">
               &copy; 2024 Schools Directory. Empowering educational excellence.
             </p>
           </div>

@@ -128,20 +128,20 @@ const CollegeCard = ({ college, onApply }) => {
             <h3 className="text-2xl font-extrabold text-[#0B3C5D] group-hover:text-[#F2A900] transition-colors duration-300 leading-tight line-clamp-2">
               {college.name}
             </h3>
-            <div className="mt-1 text-[#0B3C5D]/40">
+            <div className="mt-1 text-black">
               <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
               </svg>
             </div>
           </div>
-          <p className="text-[#0B3C5D]/60 text-sm font-bold flex items-center mt-1 uppercase tracking-wider">
+          <p className="text-black text-sm font-bold flex items-center mt-1 uppercase tracking-wider">
             {college.location}
           </p>
         </div>
 
         {/* Description */}
         <div className="mb-6 flex-grow">
-          <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">
+          <p className="text-black text-sm font-medium leading-relaxed line-clamp-3">
             {college.description}
           </p>
         </div>
@@ -149,19 +149,19 @@ const CollegeCard = ({ college, onApply }) => {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 gap-3 mb-6">
           <div className="bg-[#0B3C5D]/5 rounded-2xl p-3 border border-[#0B3C5D]/5 hover:bg-white hover:border-[#F2A900]/30 transition-colors duration-300">
-            <div className="text-[10px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest mb-1">Ownership</div>
+            <div className="text-[10px] font-bold text-black uppercase tracking-widest mb-1">Ownership</div>
             <div className="text-sm font-bold text-[#0B3C5D]">{college.type}</div>
           </div>
           <div className="bg-[#0B3C5D]/5 rounded-2xl p-3 border border-[#0B3C5D]/5 hover:bg-white hover:border-[#F2A900]/30 transition-colors duration-300">
-            <div className="text-[10px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest mb-1">Students</div>
+            <div className="text-[10px] font-bold text-black uppercase tracking-widest mb-1">Students</div>
             <div className="text-sm font-bold text-[#0B3C5D]">{college.students}+</div>
           </div>
           <div className="bg-[#F2A900]/5 rounded-2xl p-3 border border-[#F2A900]/10 hover:bg-white hover:border-[#F2A900]/30 transition-colors duration-300">
-            <div className="text-[10px] font-bold text-[#F2A900] uppercase tracking-widest mb-1">Avg Tuition</div>
+            <div className="text-[10px] font-bold text-black uppercase tracking-widest mb-1">Avg Tuition</div>
             <div className="text-sm font-bold text-[#0B3C5D]">{college.tuition}</div>
           </div>
           <div className="bg-[#0B3C5D]/5 rounded-2xl p-3 border border-[#0B3C5D]/5 hover:bg-white hover:border-[#F2A900]/30 transition-colors duration-300">
-            <div className="text-[10px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest mb-1">Acceptance</div>
+            <div className="text-[10px] font-bold text-black uppercase tracking-widest mb-1">Acceptance</div>
             <div className="text-sm font-bold text-[#0B3C5D]">{college.acceptance}</div>
           </div>
         </div>
@@ -175,7 +175,7 @@ const CollegeCard = ({ college, onApply }) => {
               </span>
             ))}
             {college.programs.length > 2 && (
-              <span className="text-[#0B3C5D]/40 text-[10px] font-bold py-1.5 px-2">+{college.programs.length - 2} more</span>
+              <span className="text-black text-[10px] font-bold py-1.5 px-2">+{college.programs.length - 2} more</span>
             )}
           </div>
         </div>
@@ -223,7 +223,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
 
         <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6 ${isOpen ? 'block' : 'hidden sm:grid'}`}>
           <div className="space-y-2">
-            <label className="block text-[11px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest ml-1">University Type</label>
+            <label className="block text-[11px] font-bold text-black uppercase tracking-widest ml-1">University Type</label>
             <select
               value={filters.type}
               onChange={(e) => onFilterChange({ ...filters, type: e.target.value })}
@@ -236,7 +236,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-[11px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest ml-1">Max Tuition</label>
+            <label className="block text-[11px] font-bold text-black uppercase tracking-widest ml-1">Max Tuition</label>
             <select
               value={filters.maxTuition}
               onChange={(e) => onFilterChange({ ...filters, maxTuition: e.target.value })}
@@ -250,7 +250,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
           </div>
 
           <div className="space-y-2">
-            <label className="block text-[11px] font-bold text-[#0B3C5D]/40 uppercase tracking-widest ml-1">Sort By</label>
+            <label className="block text-[11px] font-bold text-black uppercase tracking-widest ml-1">Sort By</label>
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
@@ -416,7 +416,7 @@ export default function CollegesPage() {
             <div className="bg-[#0B3C5D] text-white px-4 py-2 rounded-2xl text-sm font-bold shadow-lg shadow-[#0B3C5D]/20">
               {filteredColleges.length}
             </div>
-            <span className="text-sm font-bold text-[#0B3C5D]/60 uppercase tracking-widest">
+            <span className="text-sm font-extrabold text-black uppercase tracking-widest">
               Universities matching your criteria
             </span>
           </div>
@@ -440,7 +440,7 @@ export default function CollegesPage() {
                 </svg>
               </div>
               <h3 className="text-3xl font-extrabold text-[#0B3C5D] mb-4 tracking-tight">No results found</h3>
-              <p className="text-gray-500 mb-10 text-lg leading-relaxed">
+              <p className="text-black mb-10 text-lg font-bold leading-relaxed">
                 We couldn't find any universities that match your current filters. Try broadening your search or resetting all filters.
               </p>
               <button

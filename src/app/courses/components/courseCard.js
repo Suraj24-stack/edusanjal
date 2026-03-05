@@ -8,7 +8,7 @@ function CourseCard({ course }) {
       <h3 className="text-[#0B3C5D] font-semibold">
         {course.title}
       </h3>
-      <p className="text-[#F2A900]">
+      <p className="text-black font-bold">
         By {course.instructor}
       </p>
     </div>

@@ -157,23 +157,23 @@ const AdmissionCard = ({ admission, onApply }) => {
       <h2 className="text-xl font-bold text-gray-900 mb-3">
         {admission.description}
       </h2>
-      
+
       <div className="space-y-2 mb-4">
-        <div className="flex items-center text-gray-600">
+        <div className="flex items-center text-black font-medium">
           <span className="text-sm">
-            <span className="font-semibold">From</span> {admission.startDate} <span className="font-semibold">Until</span> {admission.deadline}
+            <span className="font-bold">From</span> {admission.startDate} <span className="font-bold">Until</span> {admission.deadline}
           </span>
         </div>
-        
-        <div className="flex items-center text-gray-600">
-          <span className="text-sm font-medium">{admission.institution}</span>
+
+        <div className="flex items-center text-black">
+          <span className="text-sm font-bold">{admission.institution}</span>
         </div>
-        
+
         <div className="flex flex-wrap gap-2 mt-3">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
             {admission.level}
           </span>
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-50 text-gray-700 border border-gray-200">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gray-50 text-black border border-gray-200">
             {admission.affiliation}
           </span>
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-200">
@@ -184,14 +184,14 @@ const AdmissionCard = ({ admission, onApply }) => {
 
       <div className="pt-4 border-t border-gray-200">
         <div className="flex items-center justify-between mb-3">
-          <div className="text-sm text-gray-600">
-            <span className="font-semibold">Programs:</span> {admission.programs.join(', ')}
+          <div className="text-sm text-black">
+            <span className="font-bold">Programs:</span> {admission.programs.join(', ')}
           </div>
         </div>
-        
+
         <div className="flex gap-2">
           <button
-            className="w-32 bg-white border border-gray-300 hover:border-[#2d5f7f] hover:bg-gray-50 text-gray-700 hover:text-[#2d5f7f] py-2 px-4 rounded-lg transition-all duration-200 font-medium text-xs flex items-center justify-center gap-1.5"
+            className="w-32 bg-white border border-gray-300 hover:border-[#2d5f7f] hover:bg-gray-50 text-black hover:text-[#2d5f7f] py-2 px-4 rounded-lg transition-all duration-200 font-bold text-xs flex items-center justify-center gap-1.5"
           >
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -199,7 +199,7 @@ const AdmissionCard = ({ admission, onApply }) => {
             </svg>
             View Details
           </button>
-          
+
           <button
             onClick={() => onApply(admission)}
             className="w-32 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-white py-2 px-4 rounded-lg transition-all duration-200 font-medium text-xs shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
@@ -227,11 +227,11 @@ export default function AdmissionsPage() {
 
   const filteredAdmissions = useMemo(() => {
     return admissionsData.filter(admission => {
-      const matchesSearch = 
+      const matchesSearch =
         admission.institution.toLowerCase().includes(searchTerm.toLowerCase()) ||
         admission.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         admission.programs.some(p => p.toLowerCase().includes(searchTerm.toLowerCase()));
-      
+
       return matchesSearch;
     });
   }, [searchTerm]);
@@ -271,7 +271,7 @@ export default function AdmissionsPage() {
 
         {/* Results Count */}
         <div className="mb-4">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-black font-bold">
             Showing {filteredAdmissions.length} of {admissionsData.length} admissions
           </p>
         </div>
@@ -290,7 +290,7 @@ export default function AdmissionsPage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.467-.881-6.08-2.33M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
             </svg>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">No admissions found</h3>
-            <p className="text-gray-600 mb-4">Try adjusting your search</p>
+            <p className="text-black mb-4 font-bold">Try adjusting your search</p>
             <button
               onClick={() => setSearchTerm('')}
               className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-white px-6 py-2 rounded-lg font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all"

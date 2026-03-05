@@ -235,23 +235,22 @@ const JobCard = ({ job, onApply }) => {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
+
         {/* Urgent Badge */}
         {job.isUrgent && (
           <div className="absolute top-3 right-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1.5 rounded-full text-sm font-bold shadow-lg animate-pulse">
             Urgent
           </div>
         )}
-        
+
         {/* Days Left */}
-        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-sm font-bold shadow-lg ${
-          daysLeft <= 7 ? 'bg-gradient-to-r from-red-600 to-pink-600 text-white' :
-          daysLeft <= 14 ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D]' :
-          'bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white'
-        }`}>
+        <div className={`absolute top-3 left-3 px-3 py-1.5 rounded-full text-sm font-bold shadow-lg ${daysLeft <= 7 ? 'bg-gradient-to-r from-red-600 to-pink-600 text-white' :
+            daysLeft <= 14 ? 'bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D]' :
+              'bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 text-white'
+          }`}>
           {daysLeft > 0 ? `${daysLeft} days left` : 'Expired'}
         </div>
-        
+
         {/* Company Logo */}
         <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <span className="text-2xl bg-white/20 backdrop-blur-sm p-2 rounded-lg">
@@ -259,28 +258,28 @@ const JobCard = ({ job, onApply }) => {
           </span>
         </div>
       </div>
-      
+
       <div className="p-5 sm:p-6">
         <div className="flex items-start justify-between mb-3">
           <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300 leading-tight">
             {job.title}
           </h3>
-          <div className="flex items-center text-gray-500 ml-2 flex-shrink-0">
+          <div className="flex items-center text-black ml-2 flex-shrink-0">
             <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd" />
             </svg>
           </div>
         </div>
-        
+
         <div className="flex items-center justify-between mb-3">
-          <p className="text-gray-600 font-semibold">{job.company}</p>
+          <p className="text-black font-bold">{job.company}</p>
           <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold text-white ${getCategoryColor(job.category)}`}>
             {job.category}
           </span>
         </div>
-        
+
         <div className="flex items-center space-x-4 mb-4">
-          <div className="flex items-center text-sm text-gray-600">
+          <div className="flex items-center text-sm text-black font-medium">
             <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
             </svg>
@@ -290,16 +289,16 @@ const JobCard = ({ job, onApply }) => {
             {job.type}
           </div>
         </div>
-        
-        <p className="text-sm text-gray-700 mb-4 line-clamp-2 leading-relaxed">{job.description}</p>
-        
+
+        <p className="text-sm text-black mb-4 line-clamp-2 leading-relaxed font-medium">{job.description}</p>
+
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div className="bg-gray-50 rounded-xl p-3">
-            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Experience</div>
+            <div className="text-xs font-bold text-black uppercase tracking-wide">Experience</div>
             <div className="text-sm font-bold text-gray-900 mt-1">{job.experience}</div>
           </div>
           <div className="bg-gray-50 rounded-xl p-3">
-            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Applicants</div>
+            <div className="text-xs font-bold text-black uppercase tracking-wide">Applicants</div>
             <div className="text-sm font-bold text-gray-900 mt-1">{job.applicants}</div>
           </div>
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-3 border border-green-100 col-span-2">
@@ -307,9 +306,9 @@ const JobCard = ({ job, onApply }) => {
             <div className="text-sm font-bold text-green-800 mt-1">{job.salary}</div>
           </div>
         </div>
-        
+
         <div className="mb-5">
-          <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Key Skills</div>
+          <div className="text-xs font-bold text-black uppercase tracking-wide mb-2">Key Skills</div>
           <div className="flex flex-wrap gap-1.5">
             {job.skills.slice(0, 3).map((skill, index) => (
               <span key={index} className="bg-gradient-to-r from-[#0B3C5D]/10 to-[#0B3C5D]/20 text-[#0B3C5D] px-3 py-1 rounded-full text-xs font-medium border border-[#0B3C5D]/20">
@@ -317,14 +316,14 @@ const JobCard = ({ job, onApply }) => {
               </span>
             ))}
             {job.skills.length > 3 && (
-              <span className="text-gray-500 text-xs font-medium px-2 py-1">+{job.skills.length - 3} more</span>
+              <span className="text-black text-xs font-bold px-2 py-1">+{job.skills.length - 3} more</span>
             )}
           </div>
         </div>
-        
+
         {/* MODIFIED: Added onClick handler */}
         <div className="flex space-x-2">
-          <button 
+          <button
             onClick={() => onApply(job)}
             className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm shadow-lg hover:shadow-xl transform hover:scale-[1.02] active:scale-[0.98]"
           >
@@ -361,10 +360,10 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
             </svg>
           </button>
         </div>
-        
+
         <div className={`grid grid-cols-1 sm:grid-cols-5 gap-4 mt-4 ${isOpen ? 'block' : 'hidden sm:grid'}`}>
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-gray-700">Category</label>
+            <label className="block text-sm font-bold text-black">Category</label>
             <select
               value={filters.category}
               onChange={(e) => onFilterChange({ ...filters, category: e.target.value })}
@@ -380,7 +379,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="Non-Profit">Non-Profit</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Job Type</label>
             <select
@@ -395,7 +394,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="Government">Government</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Location</label>
             <select
@@ -411,7 +410,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="Dharan">Dharan</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Experience</label>
             <select
@@ -426,7 +425,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
               <option value="5+">5+ years</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700">Sort By</label>
             <select
@@ -462,8 +461,8 @@ const StatsCard = ({ icon, title, value, description, color = "primary" }) => {
         </div>
         <div className="ml-4">
           <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#0B3C5D] transition-colors duration-300">{value}</h3>
-          <p className="text-sm font-semibold text-gray-600">{title}</p>
-          <p className="text-xs text-gray-500">{description}</p>
+          <p className="text-sm font-bold text-black">{title}</p>
+          <p className="text-xs text-black font-medium">{description}</p>
         </div>
       </div>
     </div>
@@ -498,7 +497,7 @@ export default function VacanciesPage() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  
+
   // ADDED: State for application modal
   const [showApplicationModal, setShowApplicationModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -517,14 +516,14 @@ export default function VacanciesPage() {
   const filteredJobs = useMemo(() => {
     let filtered = vacanciesData.filter(job => {
       const matchesSearch = job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           job.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase())) ||
-                           job.location.toLowerCase().includes(searchTerm.toLowerCase());
-      
+        job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        job.location.toLowerCase().includes(searchTerm.toLowerCase());
+
       const matchesCategory = !filters.category || job.category === filters.category;
       const matchesType = !filters.type || job.type === filters.type;
       const matchesLocation = !filters.location || job.location.includes(filters.location);
-      
+
       let matchesExperience = true;
       if (filters.experience) {
         const jobExp = job.experience.toLowerCase();
@@ -543,7 +542,7 @@ export default function VacanciesPage() {
             break;
         }
       }
-      
+
       return matchesSearch && matchesCategory && matchesType && matchesLocation && matchesExperience;
     });
 
@@ -620,28 +619,28 @@ export default function VacanciesPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Stats Section */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2z" clipRule="evenodd" /></svg>}
             title="Total Jobs"
             value={stats.totalJobs}
             description="Available positions"
             color="primary"
           />
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg>}
             title="Urgent Hiring"
             value={stats.urgentJobs}
             description="Immediate openings"
             color="secondary"
           />
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" /></svg>}
             title="Avg Applicants"
             value={stats.avgApplicants}
             description="Per job posting"
             color="blue"
           />
-          <StatsCard 
+          <StatsCard
             icon={<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3z" clipRule="evenodd" /></svg>}
             title="Top Category"
             value={stats.mostPopular}
@@ -669,8 +668,8 @@ export default function VacanciesPage() {
         </div>
 
         {/* Filters */}
-        <FilterSection 
-          filters={filters} 
+        <FilterSection
+          filters={filters}
           onFilterChange={setFilters}
           isOpen={filtersOpen}
           toggleOpen={() => setFiltersOpen(!filtersOpen)}
@@ -680,7 +679,7 @@ export default function VacanciesPage() {
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center mb-4 sm:mb-0">
             <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm">
-              <span className="text-sm font-semibold text-gray-600">
+              <span className="text-sm font-bold text-black">
                 {filteredJobs.length} of {vacanciesData.length} job opportunities
               </span>
             </div>
@@ -702,8 +701,8 @@ export default function VacanciesPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h8z" />
               </svg>
               <h3 className="text-xl font-bold text-gray-900 mb-2">No jobs found</h3>
-              <p className="text-gray-600 mb-4">Try adjusting your search criteria or filters to find more opportunities.</p>
-              <button 
+              <p className="text-black mb-4 font-bold">Try adjusting your search criteria or filters to find more opportunities.</p>
+              <button
                 onClick={() => {
                   setSearchTerm('');
                   setFilters({ category: '', type: '', location: '', experience: '', sortBy: 'recent' });

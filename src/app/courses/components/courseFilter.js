@@ -11,16 +11,15 @@ function FilterDropdown({ options, selected, onSelect, placeholder }) {
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center justify-between gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-[#FFFFFF] hover:bg-[#F4F6F8] focus:ring-2 focus:ring-[#F2A900] focus:border-transparent min-w-[160px]"
       >
-        <span className="text-sm text-gray-700">
+        <span className="text-sm text-black font-bold">
           {selected || placeholder}
         </span>
         <ChevronDown
-          className={`h-4 w-4 text-[#0B3C5D] transition-transform ${
-            isOpen ? 'rotate-180' : ''
-          }`}
+          className={`h-4 w-4 text-[#0B3C5D] transition-transform ${isOpen ? 'rotate-180' : ''
+            }`}
         />
       </button>
-      
+
       {isOpen && (
         <div className="absolute top-full left-0 mt-1 w-full bg-[#FFFFFF] border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
           {options.map((option) => (
@@ -30,7 +29,7 @@ function FilterDropdown({ options, selected, onSelect, placeholder }) {
                 onSelect(option);
                 setIsOpen(false);
               }}
-              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#F4F6F8] hover:text-[#0B3C5D] first:rounded-t-lg last:rounded-b-lg"
+              className="w-full text-left px-4 py-2 text-sm text-black font-medium hover:bg-[#F4F6F8] hover:text-[#0B3C5D] first:rounded-t-lg last:rounded-b-lg"
             >
               {option}
             </button>
@@ -55,7 +54,7 @@ export default function CourseFilters() {
     <div className="bg-[#FFFFFF]/80 backdrop-blur-sm shadow-lg border-b sticky top-0 z-40">
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          
+
           {/* Mobile Filter Toggle */}
           <button
             onClick={() => setIsFilterOpen(!isFilterOpen)}
@@ -64,9 +63,8 @@ export default function CourseFilters() {
             <Filter className="h-4 w-4" />
             Filters
             <ChevronDown
-              className={`h-4 w-4 transition-transform ${
-                isFilterOpen ? 'rotate-180' : ''
-              }`}
+              className={`h-4 w-4 transition-transform ${isFilterOpen ? 'rotate-180' : ''
+                }`}
             />
           </button>
 

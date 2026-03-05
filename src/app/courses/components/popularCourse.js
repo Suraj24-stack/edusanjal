@@ -51,11 +51,11 @@ export default function PopularCourses() {
         <h2 className="text-3xl md:text-4xl font-bold text-[#0B3C5D]">
           🔥 Popular Courses
         </h2>
-        <button className="text-[#F2A900] hover:text-[#D9A100] font-medium hover:underline">
+        <button className="text-black hover:text-[#D9A100] font-bold hover:underline">
           View All
         </button>
       </div>
-      
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
         {popularCourses.map(course => (
           <CourseCard key={course.id} course={course} />
