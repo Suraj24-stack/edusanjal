@@ -97,7 +97,7 @@ const CollegeCard = ({ college, onApply }) => {
   return (
     <div className="group bg-white/90 backdrop-blur-md rounded-3xl border border-white/40 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-[#0B3C5D]/20 flex flex-col h-full">
       {/* Image Section */}
-      <div className="relative h-56 w-full overflow-hidden shrink-0">
+      <div className="relative h-44 w-full overflow-hidden shrink-0">
         <Image
           src={college.image}
           alt={college.name}
@@ -108,14 +108,14 @@ const CollegeCard = ({ college, onApply }) => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
 
         {/* Ranking Badge */}
-        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm text-[#0B3C5D] px-3.5 py-1.5 rounded-2xl text-sm font-bold shadow-xl border border-white/50">
+        <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-[#0B3C5D] px-3 py-1 rounded-xl text-[10px] font-bold shadow-xl border border-white/50">
           Ranked #{college.ranking}
         </div>
 
         {/* Established Date */}
-        <div className="absolute bottom-4 left-4">
-          <span className="text-white text-xs font-semibold bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 uppercase tracking-widest">
-            Est. {college.established}
+        <div className="absolute bottom-3 left-3">
+          <span className="text-white text-[10px] font-semibold bg-black/40 backdrop-blur-md px-2 py-1 rounded-lg border border-white/10 uppercase tracking-widest">
+            {college.established}
           </span>
         </div>
       </div>
@@ -270,7 +270,7 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
 
 const LoadingCard = () => (
   <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-white/20 shadow-lg overflow-hidden animate-pulse flex flex-col h-full">
-    <div className="h-56 bg-gray-200" />
+    <div className="h-44 bg-gray-200" />
     <div className="p-6 flex flex-col flex-grow">
       <div className="h-8 bg-gray-200 rounded-lg mb-4 w-3/4" />
       <div className="h-4 bg-gray-200 rounded-lg mb-6 w-1/2" />
