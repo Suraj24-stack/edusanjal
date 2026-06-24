@@ -5,7 +5,7 @@ import Header from './Header';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
-const AUTH_ROUTES = ['/signin'];
+const AUTH_ROUTES = ['/signin', '/signup'];
 
 export default function AppShell({ children }) {
   const pathname = usePathname();

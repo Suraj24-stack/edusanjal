@@ -4,6 +4,7 @@ const headerPath = 'src/app/component/Header.js';
 const appShellPath = 'src/app/component/AppShell.js';
 const layoutPath = 'src/app/layout.js';
 const signinPath = 'src/app/signin/page.js';
+const signupPath = 'src/app/signup/page.js';
 const globalsPath = 'src/app/globals.css';
 
 const failures = [];
@@ -12,15 +13,41 @@ if (!fs.existsSync(signinPath)) {
   failures.push(`${signinPath} does not exist`);
 }
 
+if (!fs.existsSync(signupPath)) {
+  failures.push(`${signupPath} does not exist`);
+}
+
 const header = fs.existsSync(headerPath) ? fs.readFileSync(headerPath, 'utf8') : '';
 const appShell = fs.existsSync(appShellPath) ? fs.readFileSync(appShellPath, 'utf8') : '';
 const layout = fs.existsSync(layoutPath) ? fs.readFileSync(layoutPath, 'utf8') : '';
 const signin = fs.existsSync(signinPath) ? fs.readFileSync(signinPath, 'utf8') : '';
+const signup = fs.existsSync(signupPath) ? fs.readFileSync(signupPath, 'utf8') : '';
 const globals = fs.existsSync(globalsPath) ? fs.readFileSync(globalsPath, 'utf8') : '';
 
 const signinLinks = header.match(/href="\/signin"/g) || [];
-if (signinLinks.length < 3) {
-  failures.push(`expected at least 3 /signin links in Header.js, found ${signinLinks.length}`);
+if (signinLinks.length < 2) {
+  failures.push(`expected at least 2 /signin links in Header.js, found ${signinLinks.length}`);
+}
+
+const signupLinks = header.match(/href="\/signup"/g) || [];
+if (signupLinks.length < 2) {
+  failures.push(`expected at least 2 /signup links in Header.js, found ${signupLinks.length}`);
+}
+
+if (!header.includes('isProfileOpen')) {
+  failures.push('Header.js should manage a profile dropdown with isProfileOpen state');
+}
+
+if (!header.includes('profileRef')) {
+  failures.push('Header.js should use profileRef so profile dropdown closes on outside click');
+}
+
+if (!header.includes('Sign up') || !header.includes('Create account')) {
+  failures.push('profile menu should expose both Sign in and Sign up actions');
+}
+
+if (header.includes('href="/signin" \n                className="px-4 py-2 text-gray-700')) {
+  failures.push('desktop Sign in must not remain as a standalone top-navbar link');
 }
 
 if (header.includes('<button className="flex items-center space-x-2 p-2 text-gray-600')) {
@@ -48,8 +75,8 @@ if (!fs.existsSync(appShellPath)) {
   failures.push(`${appShellPath} does not exist`);
 }
 
-if (!appShell.includes("const AUTH_ROUTES = ['/signin']")) {
-  failures.push('AppShell.js must define /signin as an auth route');
+if (!appShell.includes("'/signin'") || !appShell.includes("'/signup'")) {
+  failures.push('AppShell.js must define /signin and /signup as auth routes');
 }
 
 if (!appShell.includes('usePathname')) {
@@ -86,6 +113,18 @@ if (!signin.includes('Back to home') || !signin.includes('href="/"')) {
 
 if (!signin.includes('lg:grid-cols-[minmax(0,1fr)_440px]')) {
   failures.push('signin page should use the approved two-column auth layout on large screens');
+}
+
+if (!signup.includes('Create your EduLink account')) {
+  failures.push('signup page should include a clear create-account heading');
+}
+
+if (!signup.includes('autoComplete="name"') || !signup.includes('autoComplete="new-password"')) {
+  failures.push('signup page should include name and new-password fields');
+}
+
+if (!signup.includes('href="/signin"')) {
+  failures.push('signup page should link back to the signin page');
 }
 
 if (failures.length > 0) {

@@ -21,7 +21,9 @@ import {
   ChevronRight,
   ChevronDown,
   Mic,
-  Camera
+  Camera,
+  LogIn,
+  UserPlus
 } from 'lucide-react';
 
 const Header = () => {
@@ -33,9 +35,11 @@ const Header = () => {
   const [recentSearches, setRecentSearches] = useState([]);
   const [isListening, setIsListening] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   
   const searchRef = useRef(null);
   const filterRef = useRef(null);
+  const profileRef = useRef(null);
 
   const searchCategories = [
     { id: 'all', name: 'All', icon: Search, color: 'bg-gray-500' },
@@ -169,6 +173,9 @@ const Header = () => {
       }
       if (filterRef.current && !filterRef.current.contains(event.target)) {
         setIsFilterOpen(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
       }
     };
 
@@ -412,17 +419,50 @@ const Header = () => {
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
               </button>
 
-              <Link href="/signin" className="flex items-center space-x-2 p-2 text-gray-600 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                <User className="w-5 h-5" />
-                <span className="hidden lg:block text-sm font-medium">Profile</span>
-              </Link>
+              <div className="relative" ref={profileRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsProfileOpen(!isProfileOpen)}
+                  className={`flex items-center space-x-2 rounded-lg p-2 transition-colors duration-200 ${
+                    isProfileOpen
+                      ? 'bg-gray-100 text-[#0B3C5D]'
+                      : 'text-gray-600 hover:bg-gray-100 hover:text-[#0B3C5D]'
+                  }`}
+                  aria-expanded={isProfileOpen}
+                  aria-haspopup="menu"
+                >
+                  <User className="w-5 h-5" />
+                  <span className="hidden lg:block text-sm font-medium">Profile</span>
+                  <ChevronDown className={`hidden h-4 w-4 transition-transform lg:block ${isProfileOpen ? 'rotate-180' : ''}`} />
+                </button>
 
-              <Link 
-                href="/signin" 
-                className="px-4 py-2 text-gray-700 hover:text-[#0B3C5D] font-medium rounded-lg hover:bg-gray-50 transition-all duration-200"
-              >
-                Sign in
-              </Link>
+                {isProfileOpen && (
+                  <div className="absolute right-0 top-full z-50 mt-3 w-56 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
+                    <div className="border-b border-gray-100 px-4 py-3">
+                      <p className="text-sm font-bold text-gray-900">EduLink Profile</p>
+                      <p className="mt-1 text-xs text-gray-500">Access your account pages</p>
+                    </div>
+                    <div className="p-2">
+                      <Link
+                        href="/signin"
+                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-[#F2A900]/10 hover:text-[#0B3C5D]"
+                        onClick={() => setIsProfileOpen(false)}
+                      >
+                        <LogIn className="h-4 w-4" />
+                        Sign in
+                      </Link>
+                      <Link
+                        href="/signup"
+                        className="mt-1 flex items-center gap-3 rounded-lg bg-[#F2A900] px-3 py-2.5 text-sm font-bold text-[#0B3C5D] transition hover:bg-[#D9A100]"
+                        onClick={() => setIsProfileOpen(false)}
+                      >
+                        <UserPlus className="h-4 w-4" />
+                        Create account
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Mobile Actions */}
