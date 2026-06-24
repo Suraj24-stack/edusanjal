@@ -94,7 +94,7 @@ export default function CourseFilters() {
 
           {/* Sort Options */}
           <div className={`${isFilterOpen ? 'block' : 'hidden'} lg:block`}>
-            <select className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#F2A900] focus:border-transparent bg-[#FFFFFF]">
+            <select className="w-full min-w-[220px] appearance-none px-4 py-2 border border-gray-300 rounded-lg bg-[#FFFFFF] text-black font-bold shadow-sm hover:bg-[#F4F6F8] focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent">
               <option>Sort by: Popularity</option>
               <option>Sort by: Rating</option>
               <option>Sort by: Price (Low to High)</option>

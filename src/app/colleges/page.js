@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import ApplicationModal from '../component/ApplicationModal'; // ADDED: Import ApplicationModal
 
@@ -268,28 +268,6 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
   );
 };
 
-const LoadingCard = () => (
-  <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-white/20 shadow-lg overflow-hidden animate-pulse flex flex-col h-full">
-    <div className="h-44 bg-gray-200" />
-    <div className="p-6 flex flex-col flex-grow">
-      <div className="h-8 bg-gray-200 rounded-lg mb-4 w-3/4" />
-      <div className="h-4 bg-gray-200 rounded-lg mb-6 w-1/2" />
-      <div className="h-4 bg-gray-200 rounded-lg mb-4" />
-      <div className="h-4 bg-gray-200 rounded-lg mb-6 w-5/6" />
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        <div className="h-16 bg-gray-100 rounded-2xl" />
-        <div className="h-16 bg-gray-100 rounded-2xl" />
-        <div className="h-16 bg-gray-100 rounded-2xl" />
-        <div className="h-16 bg-gray-100 rounded-2xl" />
-      </div>
-      <div className="mt-auto pt-4 flex gap-3">
-        <div className="h-12 bg-gray-200 rounded-2xl flex-1" />
-        <div className="h-12 bg-gray-200 rounded-2xl flex-1" />
-      </div>
-    </div>
-  </div>
-);
-
 export default function CollegesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
@@ -297,17 +275,11 @@ export default function CollegesPage() {
     maxTuition: '',
     sortBy: 'ranking'
   });
-  const [isLoading, setIsLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   // ADDED: State for application modal
   const [showApplicationModal, setShowApplicationModal] = useState(false);
   const [selectedCollege, setSelectedCollege] = useState(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   // ADDED: Handler for Apply Now button
   const handleApplyClick = (college) => {
@@ -344,28 +316,6 @@ export default function CollegesPage() {
 
     return filtered;
   }, [searchTerm, filters]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
-        <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="py-8 sm:py-12">
-              <div className="h-8 bg-white/20 rounded-lg mb-4 w-3/4 animate-pulse" />
-              <div className="h-4 bg-white/20 rounded-lg w-1/2 animate-pulse" />
-            </div>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <LoadingCard key={i} />
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
@@ -441,7 +391,7 @@ export default function CollegesPage() {
               </div>
               <h3 className="text-3xl font-extrabold text-[#0B3C5D] mb-4 tracking-tight">No results found</h3>
               <p className="text-black mb-10 text-lg font-bold leading-relaxed">
-                We couldn't find any universities that match your current filters. Try broadening your search or resetting all filters.
+                We could not find any universities that match your current filters. Try broadening your search or resetting all filters.
               </p>
               <button
                 onClick={() => {
