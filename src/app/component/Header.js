@@ -412,10 +412,10 @@ const Header = () => {
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
               </button>
 
-              <button className="flex items-center space-x-2 p-2 text-gray-600 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-colors duration-200">
+              <Link href="/signin" className="flex items-center space-x-2 p-2 text-gray-600 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-colors duration-200">
                 <User className="w-5 h-5" />
                 <span className="hidden lg:block text-sm font-medium">Profile</span>
-              </button>
+              </Link>
 
               <Link 
                 href="/signin" 
@@ -517,10 +517,10 @@ const Header = () => {
 
             {/* Mobile User Actions */}
             <div className="space-y-4 mb-6 pt-6 border-t border-gray-200">
-              <button className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200">
+              <Link href="/signin" className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
                 <User className="w-5 h-5" />
                 <span className="font-medium">My Profile</span>
-              </button>
+              </Link>
               
               <button className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200">
                 <Bell className="w-5 h-5" />
