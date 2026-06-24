@@ -186,7 +186,7 @@ const Header = () => {
   return (
     <>
       {/* Main Header - Always Sticky */}
-      <header className="bg-white shadow-md sticky top-0 z-50 border-b border-gray-200">
+      <header className="bg-white shadow-md sticky top-0 z-[70] border-b border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -437,7 +437,7 @@ const Header = () => {
                 </button>
 
                 {isProfileOpen && (
-                  <div className="absolute right-0 top-full z-50 mt-3 w-56 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
+                  <div className="absolute right-0 top-full z-[80] mt-3 w-56 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
                     <div className="border-b border-gray-100 px-4 py-3">
                       <p className="text-sm font-bold text-gray-900">EduLink Profile</p>
                       <p className="mt-1 text-xs text-gray-500">Access your account pages</p>

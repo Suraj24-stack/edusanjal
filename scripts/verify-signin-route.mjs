@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 
 const headerPath = 'src/app/component/Header.js';
+const navBarPath = 'src/app/component/NavBar.js';
 const appShellPath = 'src/app/component/AppShell.js';
 const layoutPath = 'src/app/layout.js';
 const signinPath = 'src/app/signin/page.js';
@@ -18,6 +19,7 @@ if (!fs.existsSync(signupPath)) {
 }
 
 const header = fs.existsSync(headerPath) ? fs.readFileSync(headerPath, 'utf8') : '';
+const navBar = fs.existsSync(navBarPath) ? fs.readFileSync(navBarPath, 'utf8') : '';
 const appShell = fs.existsSync(appShellPath) ? fs.readFileSync(appShellPath, 'utf8') : '';
 const layout = fs.existsSync(layoutPath) ? fs.readFileSync(layoutPath, 'utf8') : '';
 const signin = fs.existsSync(signinPath) ? fs.readFileSync(signinPath, 'utf8') : '';
@@ -61,6 +63,18 @@ const myProfileOpeningTag = myProfileIndex >= 0
 
 if (!myProfileOpeningTag.includes('<Link href="/signin"')) {
   failures.push('mobile My Profile action is still a button instead of a /signin link');
+}
+
+if (!header.includes('sticky top-0 z-[70]')) {
+  failures.push('Header.js should stack above NavBar so the Profile dropdown is not hidden behind the More nav row');
+}
+
+if (!header.includes('absolute right-0 top-full z-[80]')) {
+  failures.push('Profile dropdown should have a higher z-index than the header and navbar layers');
+}
+
+if (!navBar.includes('sticky top-0 z-40')) {
+  failures.push('NavBar.js should sit below Header.js in the stacking order');
 }
 
 if (failures.length > 0) {
