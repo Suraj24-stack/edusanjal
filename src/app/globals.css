@@ -41,4 +41,166 @@
   .container-custom {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
+
+  .auth-page {
+    @apply relative isolate min-h-screen overflow-hidden bg-[#0B3C5D] text-white;
+  }
+
+  .auth-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(circle at top left, rgba(242, 169, 0, 0.26), transparent 34%),
+      radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.14), transparent 30%);
+  }
+
+  .auth-shell {
+    @apply relative mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8;
+  }
+
+  .auth-header {
+    @apply flex items-center justify-between gap-4;
+  }
+
+  .auth-brand {
+    @apply flex items-center gap-3 text-white;
+  }
+
+  .auth-brand-mark {
+    @apply h-10 w-10 rotate-12 rounded bg-[#F2A900] p-1 shadow-lg shadow-black/10;
+  }
+
+  .auth-brand-mark-inner {
+    @apply flex h-full w-full -rotate-12 items-center justify-center rounded bg-white;
+  }
+
+  .auth-brand-letter {
+    @apply text-base font-black text-[#0B3C5D];
+  }
+
+  .auth-brand-name {
+    @apply text-2xl font-bold tracking-tight;
+  }
+
+  .auth-back-link {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/15;
+  }
+
+  .auth-layout {
+    @apply grid flex-1 items-center gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_440px] lg:py-14;
+  }
+
+  .auth-copy {
+    @apply max-w-3xl;
+  }
+
+  .auth-eyebrow {
+    @apply mb-6 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white shadow-sm backdrop-blur;
+  }
+
+  .auth-eyebrow-icon {
+    @apply h-4 w-4 text-[#F2A900];
+  }
+
+  .auth-title {
+    @apply max-w-2xl text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl;
+  }
+
+  .auth-description {
+    @apply mt-5 max-w-2xl text-base leading-8 text-white/80 sm:text-lg;
+  }
+
+  .auth-highlight-grid {
+    @apply mt-8 grid max-w-2xl gap-3 sm:grid-cols-3;
+  }
+
+  .auth-highlight-card {
+    @apply rounded-xl border border-white/15 bg-white/10 p-4 text-sm font-semibold text-white backdrop-blur;
+  }
+
+  .auth-highlight-icon {
+    @apply mb-3 h-5 w-5 text-[#F2A900];
+  }
+
+  .auth-trust-grid {
+    @apply mt-8 grid max-w-3xl gap-4 lg:grid-cols-3;
+  }
+
+  .auth-trust-card {
+    @apply rounded-xl border border-white/10 bg-black/10 p-5 backdrop-blur;
+  }
+
+  .auth-trust-icon {
+    @apply h-6 w-6 text-[#F2A900];
+  }
+
+  .auth-trust-title {
+    @apply mt-4 text-base font-bold;
+  }
+
+  .auth-trust-text {
+    @apply mt-2 text-sm leading-6 text-white/70;
+  }
+
+  .auth-card {
+    @apply rounded-2xl border border-white/15 bg-white p-6 text-gray-900 shadow-2xl shadow-black/25 sm:p-8;
+  }
+
+  .auth-card-icon {
+    @apply mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0B3C5D]/10 text-[#0B3C5D];
+  }
+
+  .auth-card-title {
+    @apply text-2xl font-black tracking-tight text-gray-950;
+  }
+
+  .auth-card-text {
+    @apply mt-2 text-sm leading-6 text-gray-600;
+  }
+
+  .auth-form {
+    @apply space-y-5;
+  }
+
+  .auth-field-label {
+    @apply block text-sm font-bold text-gray-800;
+  }
+
+  .auth-input-wrap {
+    @apply relative mt-2;
+  }
+
+  .auth-input-icon {
+    @apply pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400;
+  }
+
+  .auth-input {
+    @apply w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 pl-12 text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-[#F2A900] focus:bg-white focus:ring-4 focus:ring-[#F2A900]/20;
+  }
+
+  .auth-form-row {
+    @apply flex flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between;
+  }
+
+  .auth-checkbox-label {
+    @apply inline-flex items-center gap-2 font-medium text-gray-600;
+  }
+
+  .auth-checkbox {
+    @apply h-4 w-4 rounded border-gray-300 text-[#0B3C5D] focus:ring-[#F2A900];
+  }
+
+  .auth-link {
+    @apply font-bold text-[#0B3C5D] transition hover:text-[#D9A100];
+  }
+
+  .auth-submit {
+    @apply w-full rounded-xl bg-gradient-to-r from-[#F2A900] to-[#D9A100] px-4 py-3.5 font-black text-[#0B3C5D] shadow-lg shadow-[#F2A900]/20 transition hover:from-[#D9A100] hover:to-[#C09000] focus:outline-none focus:ring-4 focus:ring-[#F2A900]/30 active:scale-[0.99];
+  }
+
+  .auth-switch-text {
+    @apply mt-6 text-center text-sm text-gray-600;
+  }
 }

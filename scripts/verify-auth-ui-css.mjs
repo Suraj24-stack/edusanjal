@@ -32,12 +32,35 @@ for (const directive of ['@tailwind base;', '@tailwind components;', '@tailwind 
   }
 }
 
-const requiredAuthClasses = [
+const requiredGlobalAuthTokens = [
+  '.auth-page',
+  '.auth-shell',
+  '.auth-layout',
+  '.auth-card',
+  '.auth-input',
+  '.auth-submit',
   'min-h-screen overflow-hidden bg-[#0B3C5D] text-white',
-  'bg-[radial-gradient(circle_at_top_left,rgba(242,169,0,0.26),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.14),transparent_30%)]',
+  'radial-gradient(circle at top left, rgba(242, 169, 0, 0.26), transparent 34%)',
   'lg:grid-cols-[minmax(0,1fr)_440px]',
   'rounded-2xl border border-white/15 bg-white',
   'focus:ring-[#F2A900]/20',
+];
+
+for (const token of requiredGlobalAuthTokens) {
+  if (!globals.includes(token)) {
+    failures.push(`globals.css is missing auth UI token: ${token}`);
+  }
+}
+
+const requiredPageClasses = [
+  'auth-page',
+  'auth-shell',
+  'auth-header',
+  'auth-layout',
+  'auth-card',
+  'auth-form',
+  'auth-input',
+  'auth-submit',
 ];
 
 for (const [pageName, source] of [['signin', signin], ['signup', signup]]) {
@@ -53,9 +76,9 @@ for (const [pageName, source] of [['signin', signin], ['signup', signup]]) {
     failures.push(`${pageName} page should expose data-auth-form on the auth form`);
   }
 
-  for (const className of requiredAuthClasses) {
+  for (const className of requiredPageClasses) {
     if (!source.includes(className)) {
-      failures.push(`${pageName} page is missing required auth layout class: ${className}`);
+      failures.push(`${pageName} page is missing required auth class: ${className}`);
     }
   }
 }

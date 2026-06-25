@@ -125,8 +125,8 @@ if (!signin.includes('Back to home') || !signin.includes('href="/"')) {
   failures.push('signin page should include a clear back-to-home link for the standalone auth layout');
 }
 
-if (!signin.includes('lg:grid-cols-[minmax(0,1fr)_440px]')) {
-  failures.push('signin page should use the approved two-column auth layout on large screens');
+if (!signin.includes('auth-layout') || !globals.includes('lg:grid-cols-[minmax(0,1fr)_440px]')) {
+  failures.push('signin page should use the shared two-column auth layout on large screens');
 }
 
 if (!signup.includes('Create your EduLink account')) {
