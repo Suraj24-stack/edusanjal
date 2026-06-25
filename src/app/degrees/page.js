@@ -219,7 +219,10 @@ const DegreeCard = ({ degree }) => {
 
   return (
     <div className="group bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden hover:-translate-y-2 hover:border-[#F2A900]/30">
-      <div className="relative h-48 w-full overflow-hidden">
+      <div
+        className="relative h-48 w-full overflow-hidden"
+        style={{ position: 'relative', height: '12rem', width: '100%', overflow: 'hidden' }}
+      >
         <Image
           src={degree.image}
           alt={degree.title}
