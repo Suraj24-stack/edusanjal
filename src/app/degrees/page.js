@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 
 // Sample degrees data
@@ -414,24 +414,6 @@ const StatsCard = ({ icon, title, value, description, color = "primary" }) => {
   );
 };
 
-const LoadingCard = () => (
-  <div className="bg-white/80 backdrop-blur-sm rounded-2xl border border-white/20 shadow-lg overflow-hidden animate-pulse">
-    <div className="h-48 bg-gray-200" />
-    <div className="p-6">
-      <div className="h-6 bg-gray-200 rounded-lg mb-2" />
-      <div className="h-4 bg-gray-200 rounded-lg mb-4 w-3/4" />
-      <div className="h-3 bg-gray-200 rounded-lg mb-4" />
-      <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="h-16 bg-gray-200 rounded-xl" />
-        <div className="h-16 bg-gray-200 rounded-xl" />
-        <div className="h-16 bg-gray-200 rounded-xl" />
-        <div className="h-16 bg-gray-200 rounded-xl" />
-      </div>
-      <div className="h-10 bg-gray-200 rounded-xl" />
-    </div>
-  </div>
-);
-
 export default function DegreesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
@@ -440,13 +422,7 @@ export default function DegreesPage() {
     difficulty: '',
     sortBy: 'ranking'
   });
-  const [isLoading, setIsLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   const filteredDegrees = useMemo(() => {
     let filtered = degreesData.filter(degree => {
@@ -503,28 +479,6 @@ export default function DegreesPage() {
       avgSalary: `Rs ${(avgSalary / 1000).toFixed(0)}K`
     };
   }, []);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
-        <div className="bg-gradient-to-r from-[#0B3C5D] to-[#0B3C5D]/90 shadow-xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="py-8 sm:py-12">
-              <div className="h-8 bg-white/20 rounded-lg mb-4 w-3/4 animate-pulse" />
-              <div className="h-4 bg-white/20 rounded-lg w-1/2 animate-pulse" />
-            </div>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <LoadingCard key={i} />
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
