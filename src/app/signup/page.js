@@ -42,7 +42,7 @@ const trustItems = [
 
 export default function SignUpPage() {
   return (
-    <section className="min-h-screen overflow-hidden bg-[#0B3C5D] text-white">
+    <section data-auth-page="signup" className="relative isolate min-h-screen overflow-hidden bg-[#0B3C5D] text-white">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(242,169,0,0.26),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.14),transparent_30%)]" />
 
       <div className="relative mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
@@ -104,7 +104,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/15 bg-white p-6 text-gray-900 shadow-2xl shadow-black/25 sm:p-8">
+          <div data-auth-card className="rounded-2xl border border-white/15 bg-white p-6 text-gray-900 shadow-2xl shadow-black/25 sm:p-8">
             <div className="mb-8">
               <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0B3C5D]/10 text-[#0B3C5D]">
                 <User className="h-7 w-7" />
@@ -113,7 +113,7 @@ export default function SignUpPage() {
               <p className="mt-2 text-sm leading-6 text-gray-600">Start with your basic details and create a secure password.</p>
             </div>
 
-            <form className="space-y-5">
+            <form data-auth-form className="space-y-5">
               <div>
                 <label htmlFor="name" className="block text-sm font-bold text-gray-800">
                   Full name

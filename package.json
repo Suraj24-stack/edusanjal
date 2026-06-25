@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "verify:auth-ui": "node scripts/verify-auth-ui-css.mjs"
   },
   "dependencies": {
     "framer-motion": "^11.3.28",
