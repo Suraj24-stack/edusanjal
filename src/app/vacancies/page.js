@@ -1,8 +1,12 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import JobApplicationModal from '../component/JobApplicationModal'; // ADDED: Import Job Application Modal
+
+const JobApplicationModal = dynamic(() => import('../component/JobApplicationModal'), {
+  ssr: false,
+});
 
 // Sample vacancies data for Nepal
 const vacanciesData = [

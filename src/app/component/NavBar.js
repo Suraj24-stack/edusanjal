@@ -2,13 +2,14 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const NavBar = () => {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
   const pathname = usePathname();
+  const router = useRouter();
 
   const navItems = [
     { name: 'Courses', href: '/courses' },
@@ -40,7 +41,22 @@ const NavBar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const prefetchVacancies = () => {
+    router.prefetch('/vacancies');
+  };
+
+  useEffect(() => {
+    prefetchVacancies();
+  }, [router]);
+
   const isActive = (href) => pathname === href;
+  const navigateToVacancies = (event, closeMobileMenu = false) => {
+    event.preventDefault();
+    if (closeMobileMenu) {
+      setIsMobileMenuOpen(false);
+    }
+    window.location.href = event.currentTarget.href;
+  };
 
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
@@ -48,18 +64,33 @@ const NavBar = () => {
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center justify-between h-16">
           <div className="flex items-center space-x-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${isActive(item.href)
-                  ? 'bg-[#2d5f7f] text-white shadow-md'
-                  : 'text-black font-bold hover:bg-[#2d5f7f] hover:text-white hover:shadow-md'
-                  }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const className = `px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${isActive(item.href)
+                ? 'bg-[#2d5f7f] text-white shadow-md'
+                : 'text-black font-bold hover:bg-[#2d5f7f] hover:text-white hover:shadow-md'
+                }`;
+
+              if (item.href === '/vacancies') {
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={navigateToVacancies}
+                    onMouseEnter={prefetchVacancies}
+                    onFocus={prefetchVacancies}
+                    className={className}
+                  >
+                    {item.name}
+                  </a>
+                );
+              }
+
+              return (
+                <Link key={item.name} href={item.href} className={className}>
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
 
           {/* More Dropdown */}
@@ -122,19 +153,38 @@ const NavBar = () => {
       {isMobileMenuOpen && (
         <div className="lg:hidden border-t border-gray-200 bg-white">
           <div className="px-4 py-3 space-y-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive(item.href)
-                  ? 'bg-[#2d5f7f] text-white'
-                  : 'text-black font-bold hover:bg-[#2d5f7f] hover:text-white'
-                  }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const className = `block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive(item.href)
+                ? 'bg-[#2d5f7f] text-white'
+                : 'text-black font-bold hover:bg-[#2d5f7f] hover:text-white'
+                }`;
+
+              if (item.href === '/vacancies') {
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(event) => navigateToVacancies(event, true)}
+                    onMouseEnter={prefetchVacancies}
+                    onFocus={prefetchVacancies}
+                    className={className}
+                  >
+                    {item.name}
+                  </a>
+                );
+              }
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={className}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
 
             <div className="pt-3 mt-3 border-t border-gray-200">
               <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase">
