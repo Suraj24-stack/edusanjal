@@ -94,7 +94,7 @@ export default function NewsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-[#2d5f7f] shadow-lg sticky top-0 z-50">
+      <div className="bg-[#2d5f7f] shadow-lg relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
             <div>
