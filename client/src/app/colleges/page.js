@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: "Best Colleges & Universities in Nepal 2026 - EduLink",
     description: "Compare and find the top colleges and universities in Nepal for 2026. View academic ranking, tuition fees, and programs.",
-    url: "https://edusanjal.surajkhadka7.com.np/colleges",
+    url: "https://edulink.surajkhadka7.com.np/colleges",
     type: "website"
   }
 };
@@ -23,9 +23,9 @@ export default function Page() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://edusanjal.surajkhadka7.com.np/colleges/#webpage",
+    "@id": "https://edulink.surajkhadka7.com.np/colleges/#webpage",
     "name": "Top Colleges in Nepal 2026",
-    "url": "https://edusanjal.surajkhadka7.com.np/colleges",
+    "url": "https://edulink.surajkhadka7.com.np/colleges",
     "description": "Comprehensive list of the best colleges and universities in Nepal, including rankings and tuition details.",
     "mainEntity": {
       "@type": "ItemList",
@@ -37,7 +37,7 @@ export default function Page() {
           "@type": "CollegeOrUniversity",
           "name": college.name,
           "description": college.description,
-          "url": `https://edusanjal.surajkhadka7.com.np/schools/${college.id}`,
+          "url": `https://edulink.surajkhadka7.com.np/schools/${college.id}`,
           "image": college.image,
           "address": {
             "@type": "PostalAddress",

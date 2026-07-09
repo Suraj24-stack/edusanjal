@@ -27,6 +27,6 @@ export default function robots() {
         allow: '/',
       }
     ],
-    sitemap: 'https://edusanjal.surajkhadka7.com.np/sitemap.xml',
+    sitemap: 'https://edulink.surajkhadka7.com.np/sitemap.xml',
   };
 }

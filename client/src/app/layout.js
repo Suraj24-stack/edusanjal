@@ -2,7 +2,7 @@ import "./globals.css";
 import AppShell from "./component/AppShell";
 
 export const metadata = {
-  metadataBase: new URL('https://edusanjal.surajkhadka7.com.np'),
+  metadataBase: new URL('https://edulink.surajkhadka7.com.np'),
   title: {
     default: "EduLink - Discover Colleges, Courses, Admissions & Vacancies in Nepal",
     template: "%s | EduLink"
@@ -21,7 +21,7 @@ export const metadata = {
   openGraph: {
     title: "EduLink - Discover Colleges, Courses, Admissions & Vacancies in Nepal",
     description: "Find the best colleges, schools, universities, +2 colleges, admissions open, courses, fee structures, vacancies, notices, news, and scholarships in Nepal.",
-    url: "https://edusanjal.surajkhadka7.com.np",
+    url: "https://edulink.surajkhadka7.com.np",
     siteName: "EduLink",
     locale: "en_NP",
     type: "website",
@@ -36,9 +36,9 @@ export const metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
-  "@id": "https://edusanjal.surajkhadka7.com.np/#organization",
+  "@id": "https://edulink.surajkhadka7.com.np/#organization",
   "name": "EduLink",
-  "url": "https://edusanjal.surajkhadka7.com.np",
+  "url": "https://edulink.surajkhadka7.com.np",
   "logo": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=200&h=200&fit=crop",
   "description": "The premier educational discovery and admission portal in Nepal, helping students find schools, colleges, courses, degrees, news, exam notices, results, and career opportunities.",
   "address": {

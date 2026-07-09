@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: "Latest Educational News & Notices in Nepal - EduLink",
     description: "Stay updated with the latest educational news, exam notices, result announcements, and academic updates in Nepal.",
-    url: "https://edusanjal.surajkhadka7.com.np/news",
+    url: "https://edulink.surajkhadka7.com.np/news",
     type: "website"
   }
 };
@@ -23,9 +23,9 @@ export default function Page() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://edusanjal.surajkhadka7.com.np/news/#webpage",
+    "@id": "https://edulink.surajkhadka7.com.np/news/#webpage",
     "name": "Latest Educational News & Notices in Nepal",
-    "url": "https://edusanjal.surajkhadka7.com.np/news",
+    "url": "https://edulink.surajkhadka7.com.np/news",
     "description": "Latest educational articles, news, and official notices in Nepal.",
     "mainEntity": {
       "@type": "ItemList",

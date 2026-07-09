@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: "Best Schools & K-12 Academies in Nepal - EduLink",
     description: "Compare and find the top schools and secondary academies in Nepal. View academic ranking, tuition structure, boarding options, and programs.",
-    url: "https://edusanjal.surajkhadka7.com.np/schools",
+    url: "https://edulink.surajkhadka7.com.np/schools",
     type: "website"
   }
 };
@@ -23,9 +23,9 @@ export default function Page() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://edusanjal.surajkhadka7.com.np/schools/#webpage",
+    "@id": "https://edulink.surajkhadka7.com.np/schools/#webpage",
     "name": "Top Schools and Secondary Academies in Nepal",
-    "url": "https://edusanjal.surajkhadka7.com.np/schools",
+    "url": "https://edulink.surajkhadka7.com.np/schools",
     "description": "Comprehensive list of the best secondary schools and K-12 academies in Nepal.",
     "mainEntity": {
       "@type": "ItemList",
@@ -37,7 +37,7 @@ export default function Page() {
           "@type": "School",
           "name": school.name,
           "description": school.description,
-          "url": `https://edusanjal.surajkhadka7.com.np/schools/${school.id}`,
+          "url": `https://edulink.surajkhadka7.com.np/schools/${school.id}`,
           "image": school.image,
           "address": {
             "@type": "PostalAddress",

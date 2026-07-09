@@ -1,7 +1,7 @@
 import { schoolsData } from './data/schoolsData';
 
 export default async function sitemap() {
-  const baseUrl = 'https://edusanjal.surajkhadka7.com.np';
+  const baseUrl = 'https://edulink.surajkhadka7.com.np';
 
   const routes = [
     '',

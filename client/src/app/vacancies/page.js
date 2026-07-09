@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: "Latest Jobs & Vacancies in Nepal 2026 - EduLink",
     description: "Find the latest jobs and career vacancies in Nepal for 2026. Explore job openings in IT, banking, teaching, engineering, and nursing.",
-    url: "https://edusanjal.surajkhadka7.com.np/vacancies",
+    url: "https://edulink.surajkhadka7.com.np/vacancies",
     type: "website"
   }
 };
@@ -21,9 +21,9 @@ export default function Page() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://edusanjal.surajkhadka7.com.np/vacancies/#webpage",
+    "@id": "https://edulink.surajkhadka7.com.np/vacancies/#webpage",
     "name": "Latest Jobs & Vacancies in Nepal 2026",
-    "url": "https://edusanjal.surajkhadka7.com.np/vacancies",
+    "url": "https://edulink.surajkhadka7.com.np/vacancies",
     "description": "Comprehensive list of the latest job vacancies in Nepal across technology, banking, education, and healthcare sectors.",
     "mainEntity": {
       "@type": "ItemList",

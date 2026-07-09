@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: "College Admissions Open in Nepal 2026 - EduLink",
     description: "Explore the latest college admissions open in Nepal for 2026. View admission deadlines, requirements, entrance exam info, and fee structures.",
-    url: "https://edusanjal.surajkhadka7.com.np/admissions",
+    url: "https://edulink.surajkhadka7.com.np/admissions",
     type: "website"
   }
 };
@@ -21,9 +21,9 @@ export default function Page() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://edusanjal.surajkhadka7.com.np/admissions/#webpage",
+    "@id": "https://edulink.surajkhadka7.com.np/admissions/#webpage",
     "name": "College Admissions Open in Nepal 2026",
-    "url": "https://edusanjal.surajkhadka7.com.np/admissions",
+    "url": "https://edulink.surajkhadka7.com.np/admissions",
     "description": "Latest admissions open in top colleges and universities across Nepal.",
     "mainEntity": {
       "@type": "ItemList",
@@ -52,7 +52,7 @@ export default function Page() {
           "organizer": {
             "@type": "EducationalOrganization",
             "name": admission.institution,
-            "url": `https://edusanjal.surajkhadka7.com.np/schools/${admission.schoolId}`
+            "url": `https://edulink.surajkhadka7.com.np/schools/${admission.schoolId}`
           }
         }
       }))

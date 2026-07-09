@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
 
   const title = `${school.name} - Admission, Courses, Fees & Rankings | EduLink`;
   const description = `Get details about ${school.name} located in ${school.location}. Established in ${school.established}, explore programs, average tuition (${school.tuition}), acceptance rate, and student directory on EduLink.`;
-  const canonicalUrl = `https://edusanjal.surajkhadka7.com.np/schools/${schoolId}`;
+  const canonicalUrl = `https://edulink.surajkhadka7.com.np/schools/${schoolId}`;
 
   return {
     title,
@@ -72,11 +72,11 @@ export default function Page({ params }) {
   const institutionSchema = {
     "@context": "https://schema.org",
     "@type": schoolType,
-    "@id": `https://edusanjal.surajkhadka7.com.np/schools/${school.id}#institution`,
+    "@id": `https://edulink.surajkhadka7.com.np/schools/${school.id}#institution`,
     "name": school.name,
     "description": school.description,
     "image": school.image,
-    "url": `https://edusanjal.surajkhadka7.com.np/schools/${school.id}`,
+    "url": `https://edulink.surajkhadka7.com.np/schools/${school.id}`,
     "establishedDate": school.established.toString(),
     "address": {
       "@type": "PostalAddress",
@@ -112,19 +112,19 @@ export default function Page({ params }) {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://edusanjal.surajkhadka7.com.np"
+        "item": "https://edulink.surajkhadka7.com.np"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": parentLabel,
-        "item": `https://edusanjal.surajkhadka7.com.np/${parentRoute}`
+        "item": `https://edulink.surajkhadka7.com.np/${parentRoute}`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": school.name,
-        "item": `https://edusanjal.surajkhadka7.com.np/schools/${school.id}`
+        "item": `https://edulink.surajkhadka7.com.np/schools/${school.id}`
       }
     ]
   };

@@ -11,7 +11,7 @@ export const metadata = {
   openGraph: {
     title: "Popular Degree Programs in Nepal - EduLink",
     description: "Explore the most popular degree programs in Nepal, including Computer Science, Business Administration, Medicine, and Engineering.",
-    url: "https://edusanjal.surajkhadka7.com.np/degrees",
+    url: "https://edulink.surajkhadka7.com.np/degrees",
     type: "website"
   }
 };
@@ -21,9 +21,9 @@ export default function Page() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "@id": "https://edusanjal.surajkhadka7.com.np/degrees/#webpage",
+    "@id": "https://edulink.surajkhadka7.com.np/degrees/#webpage",
     "name": "Popular Degree Programs in Nepal",
-    "url": "https://edusanjal.surajkhadka7.com.np/degrees",
+    "url": "https://edulink.surajkhadka7.com.np/degrees",
     "description": "Comprehensive list of popular degree programs in Nepal, including career paths and salary details.",
     "mainEntity": {
       "@type": "ItemList",
