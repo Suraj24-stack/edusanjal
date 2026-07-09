@@ -1,4 +1,5 @@
 import { schoolsData } from './data/schoolsData';
+import { featuredBlogs, recentBlogs } from './data/blogsData';
 
 export default async function sitemap() {
   const baseUrl = 'https://edulink.surajkhadka7.com.np';
@@ -12,6 +13,7 @@ export default async function sitemap() {
     '/degrees',
     '/news',
     '/vacancies',
+    '/blogs',
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
@@ -26,5 +28,12 @@ export default async function sitemap() {
     priority: 0.7,
   }));
 
-  return [...routes, ...schoolUrls];
+  const blogUrls = [...featuredBlogs, ...recentBlogs].map((blog) => ({
+    url: `${baseUrl}/blogs/${blog.id}`,
+    lastModified: new Date().toISOString().split('T')[0],
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }));
+
+  return [...routes, ...schoolUrls, ...blogUrls];
 }
