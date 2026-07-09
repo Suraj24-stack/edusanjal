@@ -131,7 +131,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2025 surazk.tech All rights reserved.
+            © 2026 surajkhadka7.com.np All rights reserved.
           </p>
         </div>
       </div>
