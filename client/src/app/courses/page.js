@@ -8,10 +8,10 @@ export const metadata = {
   description: 'Explore thousands of courses across various disciplines in Nepal. Find the perfect course that matches your career goals.',
 };
 
-function CoursesPage() {
+function CoursesPage({ showBanner = true }) {
   return (
     <div className="min-h-screen bg-[#F4F6F8]">
-      <CourseBanner />
+      {showBanner && <CourseBanner />}
       <CourseFilters />
       <PopularCourses />
       <CourseGrid />

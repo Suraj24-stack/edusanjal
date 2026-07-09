@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // Temporary test component
-function CourseCard({ course }) {
+export default function CourseCard({ course }) {
   return (
     <div className="bg-[#FFFFFF] p-4 rounded-lg shadow">
       <h3 className="text-[#0B3C5D] font-semibold">
@@ -13,8 +13,4 @@ function CourseCard({ course }) {
       </p>
     </div>
   );
-}
-
-export default function PopularCourses() {
-  // rest of your component code...
 }

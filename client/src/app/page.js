@@ -14,15 +14,15 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section - Main banner with search */}
       <HeroSection />
-      
+
       {/* Featured Opportunities - Highlighted colleges and programs */}
       <FeaturedBanners />
-      
+
       {/* Admission Fair - Upcoming events and participating colleges */}
       <AdmissionFair />
-      
+
       {/* Course Listings - Browse available courses */}
-      <Courses />
+      <Courses showBanner={false} />
     </div>
   );
 }

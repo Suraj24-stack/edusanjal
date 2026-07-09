@@ -2,19 +2,19 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { 
-  Menu, 
-  X, 
-  Bell, 
-  User, 
-  Search, 
-  Filter, 
-  Clock, 
-  TrendingUp, 
-  MapPin, 
-  Star, 
-  BookOpen, 
-  Building2, 
+import {
+  Menu,
+  X,
+  Bell,
+  User,
+  Search,
+  Filter,
+  Clock,
+  TrendingUp,
+  MapPin,
+  Star,
+  BookOpen,
+  Building2,
   GraduationCap,
   Briefcase,
   Calendar,
@@ -36,7 +36,7 @@ const Header = () => {
   const [isListening, setIsListening] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  
+
   const searchRef = useRef(null);
   const filterRef = useRef(null);
   const profileRef = useRef(null);
@@ -109,13 +109,13 @@ const Header = () => {
     if (searchQuery.trim()) {
       const newRecent = [searchQuery, ...recentSearches.filter(s => s !== searchQuery)].slice(0, 5);
       setRecentSearches(newRecent);
-      
+
       try {
         localStorage.setItem('recentSearches', JSON.stringify(newRecent));
       } catch (error) {
         console.warn('Could not save to localStorage:', error);
       }
-      
+
       setIsSearchOpen(false);
       setIsMobileSearchOpen(false);
       console.log('Searching for:', searchQuery, 'in category:', selectedCategory);
@@ -202,9 +202,8 @@ const Header = () => {
             {/* Desktop Search Bar */}
             <div className="hidden md:flex flex-1 max-w-3xl mx-8" ref={searchRef}>
               <div className="relative w-full">
-                <div className={`flex items-center bg-white rounded-xl border-2 transition-all duration-300 ${
-                  isSearchOpen ? 'border-[#F2A900] shadow-xl' : 'border-gray-200 shadow-md hover:border-gray-300'
-                }`}>
+                <div className={`flex items-center bg-white rounded-xl border-2 transition-all duration-300 ${isSearchOpen ? 'border-[#F2A900] shadow-xl' : 'border-gray-200 shadow-md hover:border-gray-300'
+                  }`}>
                   {/* Category Selector */}
                   <div className="relative">
                     <button
@@ -233,11 +232,10 @@ const Header = () => {
                                     setSelectedCategory(category.id);
                                     setIsFilterOpen(false);
                                   }}
-                                  className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-all duration-200 ${
-                                    selectedCategory === category.id 
-                                      ? 'bg-[#F2A900]/10 text-[#0B3C5D]' 
-                                      : 'hover:bg-gray-50 text-gray-700'
-                                  }`}
+                                  className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-all duration-200 ${selectedCategory === category.id
+                                    ? 'bg-[#F2A900]/10 text-[#0B3C5D]'
+                                    : 'hover:bg-gray-50 text-gray-700'
+                                    }`}
                                 >
                                   <div className={`w-8 h-8 ${category.color} rounded-lg flex items-center justify-center`}>
                                     <IconComponent className="w-4 h-4 text-white" />
@@ -266,7 +264,7 @@ const Header = () => {
                       placeholder="Search colleges, courses, schools, jobs..."
                       className="w-full px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none bg-transparent"
                     />
-                    
+
                     {searchQuery && (
                       <button
                         onClick={clearSearch}
@@ -281,11 +279,10 @@ const Header = () => {
                   <div className="flex items-center space-x-2 px-4">
                     <button
                       onClick={startVoiceSearch}
-                      className={`p-2 rounded-lg transition-all duration-200 ${
-                        isListening 
-                          ? 'bg-red-100 text-red-600 animate-pulse' 
-                          : 'text-gray-400 hover:text-[#0B3C5D] hover:bg-gray-100'
-                      }`}
+                      className={`p-2 rounded-lg transition-all duration-200 ${isListening
+                        ? 'bg-red-100 text-red-600 animate-pulse'
+                        : 'text-gray-400 hover:text-[#0B3C5D] hover:bg-gray-100'
+                        }`}
                     >
                       <Mic className="w-4 h-4" />
                     </button>
@@ -372,38 +369,38 @@ const Header = () => {
                         </h3>
                         <div className="space-y-3">
                           {mockResults
-                            .filter(result => 
+                            .filter(result =>
                               selectedCategory === 'all' || result.category === selectedCategory
                             )
                             .map((result) => (
-                            <Link
-                              key={result.id}
-                              href={`/${result.category}/${result.id}`}
-                              className="flex items-center space-x-4 p-3 hover:bg-gray-50 rounded-lg transition-all duration-200 group"
-                            >
-                              <div className="text-2xl">{result.image}</div>
-                              <div className="flex-1">
-                                <h4 className="font-semibold text-gray-900 group-hover:text-[#0B3C5D]">
-                                  {result.title}
-                                </h4>
-                                <p className="text-sm text-gray-600">{result.subtitle}</p>
-                                <div className="flex items-center space-x-4 mt-1">
-                                  <div className="flex items-center space-x-1">
-                                    <MapPin className="w-3 h-3 text-gray-400" />
-                                    <span className="text-xs text-gray-500">{result.location}</span>
-                                  </div>
-                                  <div className="flex items-center space-x-1">
-                                    <Star className="w-3 h-3 text-[#F2A900] fill-current" />
-                                    <span className="text-xs text-gray-500">{result.rating}</span>
+                              <Link
+                                key={result.id}
+                                href={`/${result.category}/${result.id}`}
+                                className="flex items-center space-x-4 p-3 hover:bg-gray-50 rounded-lg transition-all duration-200 group"
+                              >
+                                <div className="text-2xl">{result.image}</div>
+                                <div className="flex-1">
+                                  <h4 className="font-semibold text-gray-900 group-hover:text-[#0B3C5D]">
+                                    {result.title}
+                                  </h4>
+                                  <p className="text-sm text-gray-600">{result.subtitle}</p>
+                                  <div className="flex items-center space-x-4 mt-1">
+                                    <div className="flex items-center space-x-1">
+                                      <MapPin className="w-3 h-3 text-gray-400" />
+                                      <span className="text-xs text-gray-500">{result.location}</span>
+                                    </div>
+                                    <div className="flex items-center space-x-1">
+                                      <Star className="w-3 h-3 text-[#F2A900] fill-current" />
+                                      <span className="text-xs text-gray-500">{result.rating}</span>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div className="text-right">
-                                <p className="font-semibold text-[#0B3C5D] text-sm">{result.price}</p>
-                                <ChevronRight className="w-4 h-4 text-gray-400 ml-auto mt-1" />
-                              </div>
-                            </Link>
-                          ))}
+                                <div className="text-right">
+                                  <p className="font-semibold text-[#0B3C5D] text-sm">{result.price}</p>
+                                  <ChevronRight className="w-4 h-4 text-gray-400 ml-auto mt-1" />
+                                </div>
+                              </Link>
+                            ))}
                         </div>
                       </div>
                     )}
@@ -423,11 +420,10 @@ const Header = () => {
                 <button
                   type="button"
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className={`flex items-center space-x-2 rounded-lg p-2 transition-colors duration-200 ${
-                    isProfileOpen
-                      ? 'bg-gray-100 text-[#0B3C5D]'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-[#0B3C5D]'
-                  }`}
+                  className={`flex items-center space-x-2 rounded-lg p-2 transition-colors duration-200 ${isProfileOpen
+                    ? 'bg-gray-100 text-[#0B3C5D]'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-[#0B3C5D]'
+                    }`}
                   aria-expanded={isProfileOpen}
                   aria-haspopup="menu"
                 >
@@ -467,13 +463,13 @@ const Header = () => {
 
             {/* Mobile Actions */}
             <div className="md:hidden flex items-center space-x-2">
-              <button 
+              <button
                 onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
                 className="p-2 text-gray-600 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-colors duration-200"
               >
                 <Search className="w-5 h-5" />
               </button>
-              
+
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="p-2 text-gray-600 hover:text-[#0B3C5D] rounded-lg hover:bg-gray-100 transition-colors duration-200"
@@ -561,7 +557,7 @@ const Header = () => {
                 <User className="w-5 h-5" />
                 <span className="font-medium">My Profile</span>
               </Link>
-              
+
               <button className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200">
                 <Bell className="w-5 h-5" />
                 <span className="font-medium">Notifications</span>
@@ -571,16 +567,16 @@ const Header = () => {
 
             {/* Mobile Auth Buttons */}
             <div className="space-y-3">
-              <Link 
-                href="/signin" 
-                className="block w-full py-3 text-center text-gray-700 hover:text-[#0B3C5D] font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200" 
+              <Link
+                href="/signin"
+                className="block w-full py-3 text-center text-gray-700 hover:text-[#0B3C5D] font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Sign in
               </Link>
-              <Link 
-                href="/signup" 
-                className="block w-full py-3 text-center bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] font-medium rounded-lg hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-200 shadow-md" 
+              <Link
+                href="/signup"
+                className="block w-full py-3 text-center bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] font-medium rounded-lg hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-200 shadow-md"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Sign up
