@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import ApplicationModal from '../component/ApplicationModal';
+import { MapPin, Calendar, DollarSign, BookOpen, School, Eye, ArrowRight } from 'lucide-react';
 
 // Sample admissions data
 const admissionsData = [
@@ -152,61 +153,107 @@ const admissionsData = [
 ];
 
 const AdmissionCard = ({ admission, onApply }) => {
+  const getTypeBadgeStyle = (type) => {
+    switch (type) {
+      case 'Private':
+        return 'bg-amber-50 text-amber-700 border-amber-200';
+      case 'Public':
+        return 'bg-blue-50 text-blue-700 border-blue-200';
+      case 'Government':
+        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      default:
+        return 'bg-gray-50 text-gray-700 border-gray-200';
+    }
+  };
+
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg transition-shadow duration-200">
-      <h2 className="text-xl font-bold text-gray-900 mb-3">
-        {admission.description}
-      </h2>
-
-      <div className="space-y-2 mb-4">
-        <div className="flex items-center text-black font-medium">
-          <span className="text-sm">
-            <span className="font-bold">From</span> {admission.startDate} <span className="font-bold">Until</span> {admission.deadline}
-          </span>
+    <div className="group bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+      {/* College Image Header */}
+      <div className="relative w-full h-48 overflow-hidden bg-gray-100">
+        <img
+          src={admission.image || "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop"}
+          alt={admission.institution}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+        {/* Abstract overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60"></div>
+        
+        {/* Floating Badges */}
+        <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-sm shadow-sm text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md text-gray-800">
+          {admission.level}
         </div>
 
-        <div className="flex items-center text-black">
-          <span className="text-sm font-bold">{admission.institution}</span>
-        </div>
-
-        <div className="flex flex-wrap gap-2 mt-3">
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
-            {admission.level}
-          </span>
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-gray-50 text-black border border-gray-200">
-            {admission.affiliation}
-          </span>
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-200">
-            {admission.type}
-          </span>
+        <div className={`absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border backdrop-blur-sm shadow-sm ${getTypeBadgeStyle(admission.type)}`}>
+          {admission.type}
         </div>
       </div>
 
-      <div className="pt-4 border-t border-gray-200">
-        <div className="flex items-center justify-between mb-3">
-          <div className="text-sm text-black">
-            <span className="font-bold">Programs:</span> {admission.programs.join(', ')}
+      {/* Card Body */}
+      <div className="p-5 flex-1 flex flex-col justify-between">
+        <div>
+          {/* Institution & Location */}
+          <div className="flex items-center justify-between gap-2">
+            <h3 className="text-[#0B3C5D] font-bold text-lg md:text-xl leading-snug group-hover:text-[#F2A900] transition-colors duration-200 line-clamp-1">
+              {admission.institution}
+            </h3>
+          </div>
+          <div className="flex items-center gap-1 text-gray-500 font-semibold text-xs mt-1">
+            <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+            <span>{admission.location}</span>
+          </div>
+
+          {/* Description Title */}
+          <p className="text-sm font-semibold text-gray-700 mt-3 line-clamp-2 min-h-[2.5rem] leading-snug">
+            {admission.description}
+          </p>
+
+          {/* Details Grid */}
+          <div className="grid grid-cols-2 gap-y-2 gap-x-4 my-4 pt-3 border-t border-gray-100 text-xs text-gray-600 font-semibold">
+            <div className="flex items-center gap-1.5">
+              <Calendar className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+              <span className="truncate">Until {admission.deadline}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <BookOpen className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+              <span className="truncate">{admission.affiliation}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <DollarSign className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+              <span className="truncate">Tuition: {admission.tuition}</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-gray-500 font-medium">
+              <School className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+              <span>Estd. {admission.established}</span>
+            </div>
+          </div>
+
+          {/* Programs Offered */}
+          <div className="mb-4">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-gray-400 block mb-1.5">Programs Offered</span>
+            <div className="flex flex-wrap gap-1">
+              {admission.programs.map((program, idx) => (
+                <span key={idx} className="bg-gray-50 text-gray-700 text-[11px] px-2 py-0.5 rounded border border-gray-100 font-medium">
+                  {program}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="flex gap-2">
+        {/* Footer Actions */}
+        <div className="border-t border-gray-100 pt-4 flex gap-2">
           <button
-            className="w-32 bg-white border border-gray-300 hover:border-[#2d5f7f] hover:bg-gray-50 text-black hover:text-[#2d5f7f] py-2 px-4 rounded-lg transition-all duration-200 font-bold text-xs flex items-center justify-center gap-1.5"
+            className="flex-1 bg-white border border-gray-200 hover:border-[#0B3C5D] hover:bg-gray-50 text-gray-700 hover:text-[#0B3C5D] py-2.5 px-3 rounded-xl transition-all duration-200 font-bold text-xs flex items-center justify-center gap-1.5"
           >
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
+            <Eye className="w-3.5 h-3.5" />
             View Details
           </button>
 
           <button
             onClick={() => onApply(admission)}
-            className="w-32 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-white py-2 px-4 rounded-lg transition-all duration-200 font-medium text-xs shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
+            className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-white py-2.5 px-3 rounded-xl transition-all duration-200 font-bold text-xs shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 active:scale-[0.98]"
           >
-            <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.84L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z" />
-            </svg>
+            <ArrowRight className="w-3.5 h-3.5" />
             Apply Now
           </button>
         </div>
@@ -277,7 +324,7 @@ export default function AdmissionsPage() {
         </div>
 
         {/* Admissions List */}
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {filteredAdmissions.map((admission) => (
             <AdmissionCard key={admission.id} admission={admission} onApply={handleApplyClick} />
           ))}
