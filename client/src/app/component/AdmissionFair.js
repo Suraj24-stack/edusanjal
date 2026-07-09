@@ -6,7 +6,7 @@ const { MapPin, Calendar, Users, Award, ExternalLink } = require('lucide-react')
 const AdmissionFair = () => {
   const fairColleges = [
     {
-      id: 1,
+      id: 19,
       name: 'Academia International College',
       location: 'Gwarko Chowk, Lalitpur',
       programs: ['BSc CSIT', 'BBS'],
@@ -17,7 +17,7 @@ const AdmissionFair = () => {
       established: '2010'
     },
     {
-      id: 2,
+      id: 20,
       name: 'Softwarica College of IT and E-commerce',
       location: 'Dillibazar, Kathmandu',
       programs: ['BIT', 'BSCS', 'BBA-BI'],
@@ -28,7 +28,7 @@ const AdmissionFair = () => {
       established: '2012'
     },
     {
-      id: 3,
+      id: 21,
       name: 'Uniglobe College',
       location: 'New Baneshwor, Kathmandu | PU',
       programs: ['BCSIT', 'BBA', 'BBA(Finance)', 'MBA', 'MBA(Finance)'],
@@ -166,13 +166,13 @@ const AdmissionFair = () => {
                 {/* Actions */}
                 <div className="flex space-x-3">
                   <Link
-                    href={`/colleges/${college.id}`}
+                    href={`/schools/${college.id}`}
                     className="flex-1 bg-gradient-to-r from-[#F2A900] to-[#D9A100] hover:from-[#D9A100] hover:to-[#C09000] text-[#0B3C5D] font-semibold text-center text-sm py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
                   >
                     Apply
                   </Link>
                   <Link
-                    href={`/colleges/${college.id}/info`}
+                    href={`/schools/${college.id}`}
                     className="flex-1 bg-white hover:bg-gray-50 text-[#0B3C5D] font-semibold text-center text-sm py-2 rounded-lg border-2 border-[#0B3C5D] transition-all duration-200 hover:scale-105"
                   >
                     Learn More
