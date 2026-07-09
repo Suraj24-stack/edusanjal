@@ -1,156 +1,10 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import Link from 'next/link';
 import ApplicationModal from '../component/ApplicationModal';
 import { MapPin, Calendar, DollarSign, BookOpen, School, Eye, ArrowRight } from 'lucide-react';
-
-// Sample admissions data
-const admissionsData = [
-  {
-    id: 1,
-    institution: "St. Xavier's College",
-    level: "Bachelors",
-    affiliation: "Tribhuvan University",
-    programs: ["BBA", "BBS", "BIT"],
-    deadline: "June 15, 2026",
-    startDate: "January 01, 2025",
-    description: "Admissions Open for Foundation Level, Application Level, Advisory Level",
-    location: "Maitighar, Kathmandu",
-    type: "Private",
-    acceptanceRate: "15%",
-    students: "1,200",
-    tuition: "$5,000",
-    requirements: ["SLC/SEE", "Entrance Exam", "Interview"],
-    image: "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop",
-    established: 1951
-  },
-  {
-    id: 2,
-    institution: "Kathmandu Model College",
-    level: "Plus Two or Diploma",
-    affiliation: "NEB",
-    programs: ["Science", "Management", "Humanities"],
-    deadline: "May 30, 2026",
-    startDate: "April 21, 2025",
-    description: "Admissions Open for +2 Science, Management and Humanities",
-    location: "Bagbazar, Kathmandu",
-    type: "Private",
-    acceptanceRate: "25%",
-    students: "850",
-    tuition: "$3,500",
-    requirements: ["SLC/SEE Certificate", "Character Certificate"],
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9d1?w=400&h=300&fit=crop",
-    established: 1990
-  },
-  {
-    id: 3,
-    institution: "Trinity International College",
-    level: "Bachelors",
-    affiliation: "Tribhuvan University",
-    programs: ["BBS", "BHM", "BSW"],
-    deadline: "July 15, 2026",
-    startDate: "December 25, 2025",
-    description: "Admission Open for Bachelors Programs",
-    location: "Dillibazar, Kathmandu",
-    type: "Private",
-    acceptanceRate: "20%",
-    students: "1,500",
-    tuition: "$4,500",
-    requirements: ["Higher Secondary Certificate", "Entrance Test"],
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
-    established: 1995
-  },
-  {
-    id: 4,
-    institution: "Islington College",
-    level: "Bachelors",
-    affiliation: "London Metropolitan University",
-    programs: ["Computing", "Business", "Networking"],
-    deadline: "August 30, 2026",
-    startDate: "March 15, 2025",
-    description: "Admissions Open for UK Degree Programs",
-    location: "Kamalpokhari, Kathmandu",
-    type: "Private",
-    acceptanceRate: "30%",
-    students: "2,000",
-    tuition: "$8,000",
-    requirements: ["10+2 or Equivalent", "IELTS/PTE", "Interview"],
-    image: "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&h=300&fit=crop",
-    established: 2000
-  },
-  {
-    id: 5,
-    institution: "Padma Kanya Campus",
-    level: "Bachelors",
-    affiliation: "Tribhuvan University",
-    programs: ["BA", "BSc", "BED"],
-    deadline: "June 30, 2026",
-    startDate: "February 10, 2025",
-    description: "Admissions Open for Various Bachelor Programs",
-    location: "Bagbazar, Kathmandu",
-    type: "Public",
-    acceptanceRate: "40%",
-    students: "3,500",
-    tuition: "$500",
-    requirements: ["10+2 Certificate", "Entrance Examination"],
-    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop",
-    established: 1951
-  },
-  {
-    id: 6,
-    institution: "Budhanilkantha School",
-    level: "Short-Term-Training",
-    affiliation: "Government of Nepal",
-    programs: ["Skill Development", "Vocational Training"],
-    deadline: "Rolling",
-    startDate: "January 05, 2025",
-    description: "Admission Open for Skill Development Programs",
-    location: "Budhanilkantha, Kathmandu",
-    type: "Government",
-    acceptanceRate: "100%",
-    students: "500",
-    tuition: "Free",
-    requirements: ["SLC or Equivalent"],
-    image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=400&h=300&fit=crop",
-    established: 1972
-  },
-  {
-    id: 7,
-    institution: "ACCA Nepal",
-    level: "Chartered Accountancy (CA)",
-    affiliation: "ACCA",
-    programs: ["ACCA Foundation", "ACCA Professional"],
-    deadline: "September 30, 2026",
-    startDate: "January 20, 2025",
-    description: "Admissions Open for ACCA Programs",
-    location: "Putalisadak, Kathmandu",
-    type: "Private",
-    acceptanceRate: "50%",
-    students: "800",
-    tuition: "$6,000",
-    requirements: ["10+2 or Equivalent", "Registration with ACCA"],
-    image: "https://images.unsplash.com/photo-1551269901-5c5e14c25df7?w=400&h=300&fit=crop",
-    established: 2005
-  },
-  {
-    id: 8,
-    institution: "Little Angels School",
-    level: "Pre-Diploma",
-    affiliation: "Government of Nepal",
-    programs: ["Montessori", "Nursery", "KG"],
-    deadline: "April 30, 2026",
-    startDate: "March 01, 2025",
-    description: "Admission Open for Play Group",
-    location: "Hattiban, Lalitpur",
-    type: "Private",
-    acceptanceRate: "60%",
-    students: "2,500",
-    tuition: "$2,000",
-    requirements: ["Age Requirement", "Parent Interview"],
-    image: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400&h=300&fit=crop",
-    established: 1990
-  }
-];
+import { admissionsData } from '../data/schoolsData';
 
 const AdmissionCard = ({ admission, onApply }) => {
   const getTypeBadgeStyle = (type) => {
@@ -242,12 +96,13 @@ const AdmissionCard = ({ admission, onApply }) => {
 
         {/* Footer Actions */}
         <div className="border-t border-gray-100 pt-4 flex gap-2">
-          <button
+          <Link
+            href={`/schools/${admission.schoolId}`}
             className="flex-1 bg-white border border-gray-200 hover:border-[#0B3C5D] hover:bg-gray-50 text-gray-700 hover:text-[#0B3C5D] py-2.5 px-3 rounded-xl transition-all duration-200 font-bold text-xs flex items-center justify-center gap-1.5"
           >
             <Eye className="w-3.5 h-3.5" />
             View Details
-          </button>
+          </Link>
 
           <button
             onClick={() => onApply(admission)}

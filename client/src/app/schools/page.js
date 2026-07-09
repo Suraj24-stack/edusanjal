@@ -2,139 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import ApplicationModal from '../component/ApplicationModal'; // ADDED: Import ApplicationModal
-
-// Sample schools data
-const schoolsData = [
-  {
-    id: 1,
-    name: "St. Xavier's College",
-    location: "Maitighar",
-    type: "Private",
-    level: "High School",
-    ranking: 1,
-    tuition: "$57,000",
-    acceptance: "15%",
-    students: "1,100",
-    image: "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop",
-    description: "Elite preparatory school known for academic excellence and innovative teaching methods.",
-    established: 1781,
-    programs: ["Advanced Placement", "International Baccalaureate", "STEM", "Arts", "Athletics"],
-    boardingType: "Boarding & Day"
-  },
-  {
-    id: 2,
-    name: "Kathmandu Model Secondary School (KMSS)",
-    location: "Bagbazar",
-    type: "Private",
-    level: "High School",
-    ranking: 2,
-    tuition: "Free",
-    acceptance: "3%",
-    students: "3,300",
-    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop",
-    description: "Specialized high school focusing on science, technology, engineering, and mathematics.",
-    established: 1904,
-    programs: ["STEM", "Computer Science", "Engineering", "Research", "Mathematics"],
-    boardingType: "Day School"
-  },
-  {
-    id: 3,
-    name: "Global College of Management (GCM),",
-    location: "Mid-Baneshwor",
-    type: "Private",
-    level: "High School",
-    ranking: 3,
-    tuition: "Free",
-    acceptance: "18%",
-    students: "1,800",
-    image: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=400&h=300&fit=crop",
-    description: "Magnet school specializing in science, technology, engineering, and mathematics education.",
-    established: 1985,
-    programs: ["STEM", "Research Labs", "Computer Science", "Biotechnology", "Astronomy"],
-    boardingType: "Day School"
-  },
-  {
-    id: 4,
-    name: "Trinity International College",
-    location: "Dillibazar",
-    type: "Private",
-    level: "K-12",
-    ranking: 4,
-    tuition: "$52,000",
-    acceptance: "20%",
-    students: "2,100",
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
-    description: "Independent school providing comprehensive K-12 education with strong academic programs.",
-    established: 1893,
-    programs: ["Advanced Placement", "STEM", "Arts", "World Languages", "Athletics"],
-    boardingType: "Day School"
-  },
-  {
-    id: 5,
-    name: "Ace Institute of Management",
-    location: "Bibhuti Janak Marg",
-    type: "Private",
-    level: "High School",
-    ranking: 5,
-    tuition: "Free*",
-    acceptance: "8%",
-    students: "540",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-    description: "Jesuit preparatory school offering free tuition through endowment support.",
-    established: 1914,
-    programs: ["Classical Studies", "Advanced Placement", "Service Learning", "Arts", "Athletics"],
-    boardingType: "Day School"
-  },
-  {
-    id: 6,
-    name: "Kathmandu Model College",
-    location: "Bagabazar, Kathmandu",
-    type: "Private",
-    level: "High School",
-    ranking: 6,
-    tuition: "$65,000",
-    acceptance: "17%",
-    students: "870",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9d1?w=400&h=300&fit=crop",
-    description: "Elite boarding school with rigorous academics and diverse extracurricular opportunities.",
-    established: 1890,
-    programs: ["Advanced Placement", "Arts Concentration", "Environmental Studies", "Global Studies", "Athletics"],
-    boardingType: "Boarding & Day"
-  },
-  {
-    id: 7,
-    name: "Uniglobe",
-    location: "Kathmandu",
-    type: "Public Charter",
-    level: "K-12",
-    ranking: 7,
-    tuition: "Free",
-    acceptance: "Lottery",
-    students: "1,400",
-    image: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?w=400&h=300&fit=crop",
-    description: "Charter school known for rigorous international curriculum and high academic standards.",
-    established: 1998,
-    programs: ["International Curriculum", "Advanced Placement", "STEM", "World Languages", "Liberal Arts"],
-    boardingType: "Day School"
-  },
-  {
-    id: 8,
-    name: "GoldenGate International College",
-    location: "Mid-Baneshwor",
-    type: "Private",
-    level: "K-12",
-    ranking: 8,
-    tuition: "$38,000",
-    acceptance: "22%",
-    students: "840",
-    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&h=300&fit=crop",
-    description: "Progressive independent school emphasizing intellectual curiosity and global citizenship.",
-    established: 1919,
-    programs: ["Liberal Arts", "STEM", "Computer Science", "Arts", "Community Service"],
-    boardingType: "Day School"
-  }
-];
+import { schoolsData } from '../data/schoolsData';
 
 // MODIFIED: Added onApply prop to SchoolCard
 const SchoolCard = ({ school, onApply }) => {
@@ -257,9 +127,12 @@ const SchoolCard = ({ school, onApply }) => {
 
         {/* MODIFIED: Changed from single button to two buttons */}
         <div className="flex gap-3">
-          <button className="flex-1 bg-white border-2 border-[#0B3C5D] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm hover:bg-[#0B3C5D]/5 transform hover:scale-[1.02] active:scale-[0.98]">
+          <Link
+            href={`/schools/${school.id}`}
+            className="flex-1 text-center bg-white border-2 border-[#0B3C5D] text-[#0B3C5D] py-3 px-4 rounded-xl transition-all duration-300 font-semibold text-sm hover:bg-[#0B3C5D]/5 transform hover:scale-[1.02] active:scale-[0.98]"
+          >
             View Details
-          </button>
+          </Link>
 
           {/* ADDED: Apply Now button */}
           <button
@@ -407,6 +280,7 @@ export default function SchoolsPage() {
 
   const filteredSchools = useMemo(() => {
     let filtered = schoolsData.filter(school => {
+      if (!school.showInSchoolList) return false;
       const matchesSearch = school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         school.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
         school.programs.some(program => program.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -442,13 +316,14 @@ export default function SchoolsPage() {
   }, [searchTerm, filters]);
 
   const stats = useMemo(() => {
-    const totalSchools = schoolsData.length;
-    const privateSchools = schoolsData.filter(s => s.type === 'Private').length;
-    const publicSchools = schoolsData.filter(s => s.type === 'Public' || s.type === 'Public Charter').length;
-    const avgAcceptance = schoolsData.reduce((acc, school) => {
+    const listSchools = schoolsData.filter(s => s.showInSchoolList);
+    const totalSchools = listSchools.length;
+    const privateSchools = listSchools.filter(s => s.type === 'Private').length;
+    const publicSchools = listSchools.filter(s => s.type === 'Public' || s.type === 'Public Charter').length;
+    const avgAcceptance = listSchools.reduce((acc, school) => {
       const acceptance = school.acceptance === "Lottery" ? 50 : parseFloat(school.acceptance);
       return acc + acceptance;
-    }, 0) / totalSchools;
+    }, 0) / (totalSchools || 1);
 
     return { totalSchools, privateSchools, publicSchools, avgAcceptance: avgAcceptance.toFixed(1) };
   }, []);
@@ -533,7 +408,7 @@ export default function SchoolsPage() {
           <div className="flex items-center mb-4 sm:mb-0">
             <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm">
               <span className="text-sm font-bold text-black">
-                {filteredSchools.length} of {schoolsData.length} schools
+                {filteredSchools.length} of {schoolsData.filter(s => s.showInSchoolList).length} schools
               </span>
             </div>
           </div>

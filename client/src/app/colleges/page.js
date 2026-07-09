@@ -2,95 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import ApplicationModal from '../component/ApplicationModal'; // ADDED: Import ApplicationModal
-
-// Sample colleges data
-const collegesData = [
-  {
-    id: 1,
-    name: "Islington College",
-    location: "Kathmandu, Nepal",
-    type: "Private",
-    ranking: 1,
-    tuition: "$54,880",
-    acceptance: "3.4%",
-    students: "23,000",
-    image: "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=400&h=300&fit=crop",
-    description: "Prestigious Ivy League university known for excellence in education and research.",
-    established: 1636,
-    programs: ["Business", "Medicine", "Law", "Engineering", "Liberal Arts"]
-  },
-  {
-    id: 2,
-    name: "The British College",
-    location: "Thapathali,Kathmandu",
-    type: "Private",
-    ranking: 2,
-    tuition: "$56,169",
-    acceptance: "4.3%",
-    students: "17,000",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
-    description: "Leading research university in the heart of Silicon Valley.",
-    established: 1885,
-    programs: ["Computer Science", "Engineering", "Business", "Medicine", "Liberal Arts"]
-  },
-  {
-    id: 3,
-    name: "Kathford College",
-    location: "Kathmandu, Nepal",
-    type: "Private",
-    ranking: 3,
-    tuition: "$53,790",
-    acceptance: "6.7%",
-    students: "11,000",
-    image: "https://images.unsplash.com/photo-1551269901-5c5e14c25df7?w=400&h=300&fit=crop",
-    description: "World-renowned institute of technology and scientific research.",
-    established: 1861,
-    programs: ["Engineering", "Computer Science", "Physics", "Mathematics", "Economics"]
-  },
-  {
-    id: 4,
-    name: "Padmashree International College",
-    location: "Tinkune, Kathmandu",
-    type: "Public",
-    ranking: 4,
-    tuition: "$14,226",
-    acceptance: "17.5%",
-    students: "45,000",
-    image: "https://images.unsplash.com/photo-1481026469463-66327c86e544?w=400&h=300&fit=crop",
-    description: "Top public research university with diverse academic programs.",
-    established: 1868,
-    programs: ["Engineering", "Business", "Liberal Arts", "Sciences", "Law"]
-  },
-  {
-    id: 5,
-    name: "Kathmandu Medical College",
-    location: "Kathmandu",
-    type: "Private",
-    ranking: 5,
-    tuition: "$59,950",
-    acceptance: "5.9%",
-    students: "13,000",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9d1?w=400&h=300&fit=crop",
-    description: "Historic Ivy League university with strong liberal arts tradition.",
-    established: 1701,
-    programs: ["Liberal Arts", "Law", "Medicine", "Business", "Drama"]
-  },
-  {
-    id: 6,
-    name: "KIST Medical College",
-    location: "Lalitpur, Imanol",
-    type: "Private",
-    ranking: 6,
-    tuition: "$56,010",
-    acceptance: "5.8%",
-    students: "5,400",
-    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&h=300&fit=crop",
-    description: "Elite private university known for undergraduate education excellence.",
-    established: 1746,
-    programs: ["Liberal Arts", "Engineering", "Public Policy", "Economics", "Physics"]
-  }
-];
+import { schoolsData } from '../data/schoolsData';
 
 // MODIFIED: Added onApply prop to CollegeCard
 const CollegeCard = ({ college, onApply }) => {
@@ -182,9 +96,9 @@ const CollegeCard = ({ college, onApply }) => {
 
         {/* Actions */}
         <div className="flex gap-3 mt-auto pt-4 border-t border-gray-100">
-          <button className="flex-1 bg-white border border-[#0B3C5D]/20 text-[#0B3C5D] py-3.5 px-4 rounded-2xl transition-all duration-300 font-bold text-xs uppercase tracking-widest hover:bg-[#0B3C5D] hover:text-white shadow-sm active:scale-95">
+          <Link href={`/schools/${college.id}`} className="flex-1 text-center bg-white border border-[#0B3C5D]/20 text-[#0B3C5D] py-3.5 px-4 rounded-2xl transition-all duration-300 font-bold text-xs uppercase tracking-widest hover:bg-[#0B3C5D] hover:text-white shadow-sm active:scale-95 flex items-center justify-center">
             Details
-          </button>
+          </Link>
 
           <button
             onClick={() => onApply(college)}
@@ -288,7 +202,8 @@ export default function CollegesPage() {
   };
 
   const filteredColleges = useMemo(() => {
-    let filtered = collegesData.filter(college => {
+    let filtered = schoolsData.filter(college => {
+      if (!college.showInCollegeList) return false;
       const matchesSearch = college.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         college.location.toLowerCase().includes(searchTerm.toLowerCase());
 
