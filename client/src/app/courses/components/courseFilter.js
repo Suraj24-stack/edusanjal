@@ -51,7 +51,7 @@ export default function CourseFilters() {
   const prices = ['All Prices', 'Free', 'Under Rs. 5,000', 'Rs. 5,000 - Rs. 10,000', 'Above Rs. 10,000'];
 
   return (
-    <div className="bg-[#FFFFFF]/80 backdrop-blur-sm shadow-lg border-b sticky top-0 z-40">
+    <div className="bg-[#FFFFFF]/80 backdrop-blur-sm shadow-lg border-b sticky top-16 z-40 transition-all duration-300">
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 

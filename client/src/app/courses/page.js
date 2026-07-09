@@ -13,8 +13,10 @@ function CoursesPage({ showBanner = true }) {
     <div className="min-h-screen bg-[#F4F6F8]">
       {showBanner && <CourseBanner />}
       <CourseFilters />
-      <PopularCourses />
-      <CourseGrid />
+      <div className="container mx-auto px-4 py-12 max-w-7xl space-y-16">
+        <PopularCourses />
+        <CourseGrid />
+      </div>
     </div>
   );
 }
