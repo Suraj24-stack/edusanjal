@@ -8,7 +8,7 @@ import {
   ArrowLeft, 
   MapPin, 
   Calendar, 
-  DollarSign, 
+  Banknote, 
   BookOpen, 
   Users, 
   Award, 
@@ -60,7 +60,7 @@ export default function SchoolDetailPage() {
 
   const getTuitionColor = (tuition) => {
     if (tuition === "Free" || tuition === "Free*") return "from-green-50 to-emerald-50 border-green-200 text-green-800";
-    const amount = parseInt(tuition.replace(/[$,*]/g, ''));
+    const amount = parseInt(tuition.replace(/[^0-9]/g, '')) || 0;
     if (amount > 50000) return "from-red-50 to-pink-50 border-red-200 text-red-800";
     if (amount > 30000) return "from-[#F2A900]/10 to-[#F2A900]/20 border-[#F2A900]/30 text-[#0B3C5D]";
     return "from-[#0B3C5D]/10 to-[#0B3C5D]/20 border-[#0B3C5D]/30 text-[#0B3C5D]";
@@ -165,7 +165,7 @@ export default function SchoolDetailPage() {
                 <span className="text-lg font-black text-gray-900 mt-1">{school.acceptance || "N/A"}</span>
               </div>
               <div className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:shadow-md transition-all duration-300 text-center flex flex-col items-center justify-center">
-                <DollarSign className="w-6 h-6 text-[#0B3C5D] mb-2" />
+                <Banknote className="w-6 h-6 text-[#0B3C5D] mb-2" />
                 <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">Tuition Fee</span>
                 <span className="text-lg font-black text-gray-900 mt-1">{school.tuition}</span>
               </div>
@@ -234,7 +234,7 @@ export default function SchoolDetailPage() {
 
                     <div className="flex items-center justify-between pb-3.5 border-b border-white/10">
                       <span className="text-white/60 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                        <DollarSign className="w-4 h-4 text-[#F2A900]" /> Tuition (Estimated)
+                        <Banknote className="w-4 h-4 text-[#F2A900]" /> Tuition (Estimated)
                       </span>
                       <span className="text-sm font-bold">{activeAdmission.tuition}/year</span>
                     </div>

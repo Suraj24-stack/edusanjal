@@ -10,7 +10,7 @@ import { schoolsData } from '../data/schoolsData';
 const SchoolCard = ({ school, onApply }) => {
   const getTuitionColor = (tuition) => {
     if (tuition === "Free" || tuition === "Free*") return "from-green-50 to-emerald-50 border-green-100 text-green-800";
-    const amount = parseInt(tuition.replace(/[$,*]/g, ''));
+    const amount = parseInt(tuition.replace(/[^0-9]/g, '')) || 0;
     if (amount > 50000) return "from-red-50 to-pink-50 border-red-100 text-red-800";
     if (amount > 30000) return "from-[#F2A900]/10 to-[#F2A900]/20 border-[#F2A900]/30 text-[#0B3C5D]";
     return "from-[#0B3C5D]/10 to-[#0B3C5D]/20 border-[#0B3C5D]/30 text-[#0B3C5D]";
@@ -297,8 +297,8 @@ export default function SchoolsPage() {
         case 'name':
           return a.name.localeCompare(b.name);
         case 'tuition':
-          const aTuition = a.tuition === "Free" || a.tuition === "Free*" ? 0 : parseInt(a.tuition.replace(/[$,]/g, ''));
-          const bTuition = b.tuition === "Free" || b.tuition === "Free*" ? 0 : parseInt(b.tuition.replace(/[$,]/g, ''));
+          const aTuition = a.tuition === "Free" || a.tuition === "Free*" ? 0 : parseInt(a.tuition.replace(/[^0-9]/g, ''));
+          const bTuition = b.tuition === "Free" || b.tuition === "Free*" ? 0 : parseInt(b.tuition.replace(/[^0-9]/g, ''));
           return aTuition - bTuition;
         case 'acceptance':
           const aAcceptance = a.acceptance === "Lottery" ? 100 : parseFloat(a.acceptance);

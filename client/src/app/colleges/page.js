@@ -210,7 +210,7 @@ export default function CollegesPage() {
       const matchesType = !filters.type || college.type === filters.type;
 
       const matchesTuition = !filters.maxTuition ||
-        parseInt(college.tuition.replace(/[$,]/g, '')) <= parseInt(filters.maxTuition);
+        parseInt(college.tuition.replace(/[^0-9]/g, '')) <= parseInt(filters.maxTuition);
 
       return matchesSearch && matchesType && matchesTuition;
     });
@@ -220,7 +220,7 @@ export default function CollegesPage() {
         case 'name':
           return a.name.localeCompare(b.name);
         case 'tuition':
-          return parseInt(a.tuition.replace(/[$,]/g, '')) - parseInt(b.tuition.replace(/[$,]/g, ''));
+          return parseInt(a.tuition.replace(/[^0-9]/g, '')) - parseInt(b.tuition.replace(/[^0-9]/g, ''));
         case 'acceptance':
           return parseFloat(a.acceptance) - parseFloat(b.acceptance);
         case 'ranking':

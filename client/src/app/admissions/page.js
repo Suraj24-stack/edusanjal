@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import ApplicationModal from '../component/ApplicationModal';
-import { MapPin, Calendar, DollarSign, BookOpen, School, Eye, ArrowRight } from 'lucide-react';
+import { MapPin, Calendar, Banknote, BookOpen, School, Eye, ArrowRight } from 'lucide-react';
 import { admissionsData } from '../data/schoolsData';
 
 const AdmissionCard = ({ admission, onApply }) => {
@@ -72,7 +72,7 @@ const AdmissionCard = ({ admission, onApply }) => {
               <span className="truncate">{admission.affiliation}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <DollarSign className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+              <Banknote className="h-3.5 w-3.5 text-gray-400 shrink-0" />
               <span className="truncate">Tuition: {admission.tuition}</span>
             </div>
             <div className="flex items-center gap-1.5 text-gray-500 font-medium">

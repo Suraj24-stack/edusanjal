@@ -70,7 +70,7 @@ const Header = () => {
       location: 'Kathmandu',
       rating: 4.8,
       reviews: 234,
-      price: 'NPR 50,000/year',
+      price: 'RS 50,000/year',
       image: '🖥️'
     },
     {
@@ -81,7 +81,7 @@ const Header = () => {
       location: 'Kirtipur',
       rating: 4.6,
       reviews: 1250,
-      price: 'NPR 25,000/year',
+      price: 'RS 25,000/year',
       image: '🏛️'
     },
     {
@@ -92,7 +92,7 @@ const Header = () => {
       location: 'Lalitpur',
       rating: 4.9,
       reviews: 89,
-      price: 'NPR 80,000/month',
+      price: 'RS 80,000/month',
       image: '💼'
     }
   ];

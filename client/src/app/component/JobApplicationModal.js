@@ -343,7 +343,7 @@ const JobApplicationModal = ({ job, onClose }) => {
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F2A900] focus:border-transparent text-gray-900"
-                      placeholder="NPR 50,000 - 80,000"
+                      placeholder="RS 50,000 - 80,000"
                     />
                   </div>
 
