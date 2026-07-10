@@ -59,7 +59,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-60 shadow-sm">
+    <nav className="bg-white border-b border-gray-200 sticky top-16 z-[60] shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center justify-between h-16">
@@ -115,7 +115,7 @@ const NavBar = () => {
 
             {/* Dropdown Menu */}
             {isMoreOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1">
+              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg py-1 z-50">
                 {moreItems.map((item) => (
                   <Link
                     key={item.name}
