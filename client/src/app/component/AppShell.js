@@ -10,17 +10,19 @@ const AUTH_ROUTES = ['/signin', '/signup'];
 export default function AppShell({ children }) {
   const pathname = usePathname();
   const isAuthRoute = AUTH_ROUTES.some((route) => pathname === route || pathname.startsWith(`${route}/`));
+  const isAdminRoute = pathname === '/admin' || pathname.startsWith('/admin/');
+  const hideDefaultShell = isAuthRoute || isAdminRoute;
 
   return (
     <>
-      {!isAuthRoute && <Header />}
-      {!isAuthRoute && <NavBar />}
+      {!hideDefaultShell && <Header />}
+      {!hideDefaultShell && <NavBar />}
 
       <main className="min-h-screen">
         {children}
       </main>
 
-      {!isAuthRoute && <Footer />}
+      {!hideDefaultShell && <Footer />}
     </>
   );
 }
