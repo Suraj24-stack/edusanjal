@@ -13,6 +13,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.padmashreecollege.edu.np',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   webpack: (config) => {
