@@ -1,9 +1,7 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
-
-import { degreesData } from '../data/degreesData';
 
 const DegreeCard = ({ degree }) => {
   const getDifficultyColor = (difficulty) => {
@@ -280,13 +278,35 @@ export default function DegreesPage() {
     sortBy: 'ranking'
   });
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [degrees, setDegrees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/courses')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setDegrees(data.courses);
+        } else {
+          setError(data.message || 'Failed to load degrees');
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching degrees:', err);
+        setError('Failed to fetch degree programs');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   const filteredDegrees = useMemo(() => {
-    let filtered = degreesData.filter(degree => {
+    let filtered = degrees.filter(degree => {
       const matchesSearch = degree.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         degree.field.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        degree.careers.some(career => career.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        degree.description.toLowerCase().includes(searchTerm.toLowerCase());
+        (degree.careers && degree.careers.some(career => career.toLowerCase().includes(searchTerm.toLowerCase()))) ||
+        (degree.description && degree.description.toLowerCase().includes(searchTerm.toLowerCase()));
 
       const matchesLevel = !filters.level || degree.level === filters.level;
       const matchesField = !filters.field || degree.field === filters.field;
@@ -300,34 +320,43 @@ export default function DegreesPage() {
         case 'title':
           return a.title.localeCompare(b.title);
         case 'salary':
-          const aSalary = parseInt(a.avgSalary.replace(/[Rs,]/g, ''));
-          const bSalary = parseInt(b.avgSalary.replace(/[Rs,]/g, ''));
+          const aSalary = a.avgSalary ? parseInt(a.avgSalary.replace(/[Rs,]/g, '')) : 0;
+          const bSalary = b.avgSalary ? parseInt(b.avgSalary.replace(/[Rs,]/g, '')) : 0;
           return bSalary - aSalary;
         case 'jobGrowth':
-          const aGrowth = parseInt(a.jobGrowth.replace(/[+%]/g, ''));
-          const bGrowth = parseInt(b.jobGrowth.replace(/[+%]/g, ''));
+          const aGrowth = a.jobGrowth ? parseInt(a.jobGrowth.replace(/[+%]/g, '')) : 0;
+          const bGrowth = b.jobGrowth ? parseInt(b.jobGrowth.replace(/[+%]/g, '')) : 0;
           return bGrowth - aGrowth;
         case 'duration':
-          const aDuration = parseInt(a.duration.replace(/[^\d]/g, ''));
-          const bDuration = parseInt(b.duration.replace(/[^\d]/g, ''));
+          const aDuration = a.duration ? parseInt(a.duration.replace(/[^\d]/g, '')) : 0;
+          const bDuration = b.duration ? parseInt(b.duration.replace(/[^\d]/g, '')) : 0;
           return aDuration - bDuration;
         case 'ranking':
         default:
-          return a.ranking - b.ranking;
+          return (a.ranking || 999) - (b.ranking || 999);
       }
     });
 
     return filtered;
-  }, [searchTerm, filters]);
+  }, [searchTerm, filters, degrees]);
 
   const stats = useMemo(() => {
-    const totalDegrees = degreesData.length;
-    const techDegrees = degreesData.filter(d => d.field === 'Technology').length;
-    const businessDegrees = degreesData.filter(d => d.field === 'Business').length;
-    const avgSalary = degreesData.reduce((acc, degree) => {
-      const salary = parseInt(degree.avgSalary.replace(/[Rs,]/g, ''));
+    const totalDegrees = degrees.length;
+    if (totalDegrees === 0) {
+      return {
+        totalDegrees: 0,
+        techDegrees: 0,
+        businessDegrees: 0,
+        avgSalary: 'Rs 0K'
+      };
+    }
+    const techDegrees = degrees.filter(d => d.field === 'Technology').length;
+    const businessDegrees = degrees.filter(d => d.field === 'Business').length;
+    const salaryDegrees = degrees.filter(d => d.avgSalary);
+    const avgSalary = salaryDegrees.length > 0 ? (salaryDegrees.reduce((acc, degree) => {
+      const salary = parseInt(degree.avgSalary.replace(/[Rs,]/g, '')) || 0;
       return acc + salary;
-    }, 0) / totalDegrees;
+    }, 0) / salaryDegrees.length) : 0;
 
     return {
       totalDegrees,
@@ -335,7 +364,7 @@ export default function DegreesPage() {
       businessDegrees,
       avgSalary: `Rs ${(avgSalary / 1000).toFixed(0)}K`
     };
-  }, []);
+  }, [degrees]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
@@ -417,39 +446,54 @@ export default function DegreesPage() {
           <div className="flex items-center mb-4 sm:mb-0">
             <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm">
               <span className="text-sm font-bold text-black">
-                {filteredDegrees.length} of {degreesData.length} degree programs
+                {filteredDegrees.length} of {degrees.length} degree programs
               </span>
             </div>
           </div>
         </div>
 
-        {/* Degrees Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {filteredDegrees.map(degree => (
-            <DegreeCard key={degree.id} degree={degree} />
-          ))}
-        </div>
-
-        {/* No Results */}
-        {filteredDegrees.length === 0 && (
+        {/* Degrees Grid / Loading / Error */}
+        {loading ? (
           <div className="text-center py-16">
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto border border-white/20 shadow-lg">
-              <svg className="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">No degree programs found</h3>
-              <p className="text-black mb-4 font-bold">Try adjusting your search criteria or filters to find more results.</p>
-              <button
-                onClick={() => {
-                  setSearchTerm('');
-                  setFilters({ level: '', field: '', difficulty: '', sortBy: 'ranking' });
-                }}
-                className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] px-6 py-3 rounded-xl font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-300"
-              >
-                Clear All Filters
-              </button>
+            <p className="text-gray-500 font-bold text-lg">Loading degree programs...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-16">
+            <div className="bg-red-50 text-red-700 rounded-2xl p-8 max-w-md mx-auto border border-red-100 shadow-lg">
+              <p className="font-bold">{error}</p>
             </div>
           </div>
+        ) : (
+          <>
+            {/* Degrees Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {filteredDegrees.map(degree => (
+                <DegreeCard key={degree.id} degree={degree} />
+              ))}
+            </div>
+
+            {/* No Results */}
+            {filteredDegrees.length === 0 && (
+              <div className="text-center py-16">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 max-w-md mx-auto border border-white/20 shadow-lg">
+                  <svg className="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">No degree programs found</h3>
+                  <p className="text-black mb-4 font-bold">Try adjusting your search criteria or filters to find more results.</p>
+                  <button
+                    onClick={() => {
+                      setSearchTerm('');
+                      setFilters({ level: '', field: '', difficulty: '', sortBy: 'ranking' });
+                    }}
+                    className="bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] px-6 py-3 rounded-xl font-semibold hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-300"
+                  >
+                    Clear All Filters
+                  </button>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

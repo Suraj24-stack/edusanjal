@@ -1,6 +1,7 @@
 import mysql from 'mysql2/promise';
 import bcrypt from 'bcryptjs';
 import { schoolsData } from '../src/app/data/schoolsData.js';
+import { degreesData } from '../src/app/data/degreesData.js';
 
 // Setup connection details using environment variables or fallback to defaults
 const connectionConfig = {
@@ -79,6 +80,66 @@ async function seed() {
       console.log(`Seeded ${schoolsData.length} colleges successfully!`);
     } else {
       console.log('Colleges table already seeded.');
+    }
+
+    // Create courses table with details
+    await connection.query(`
+      CREATE TABLE IF NOT EXISTS courses (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        level VARCHAR(100) NOT NULL,
+        duration VARCHAR(100) NOT NULL,
+        field VARCHAR(100) NOT NULL,
+        ranking INT DEFAULT NULL,
+        avgSalary VARCHAR(100) DEFAULT NULL,
+        jobGrowth VARCHAR(50) DEFAULT NULL,
+        difficulty VARCHAR(100) DEFAULT NULL,
+        students VARCHAR(50) DEFAULT NULL,
+        image TEXT DEFAULT NULL,
+        description TEXT DEFAULT NULL,
+        established VARCHAR(100) DEFAULT NULL,
+        careers JSON DEFAULT NULL,
+        requirements JSON DEFAULT NULL,
+        universities JSON DEFAULT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+      )
+    `);
+    console.log('Ensured courses table exists');
+
+    // Check if courses table has any data
+    const [courseRows] = await connection.query('SELECT COUNT(*) as count FROM courses');
+    if (courseRows[0].count === 0) {
+      console.log('Seeding initial courses data...');
+      for (const degree of degreesData) {
+        await connection.query(
+          `INSERT INTO courses (
+            id, title, level, duration, field, ranking, avgSalary, jobGrowth, difficulty,
+            students, image, description, established, careers, requirements, universities
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
+            degree.id,
+            degree.title,
+            degree.level,
+            degree.duration,
+            degree.field,
+            degree.ranking,
+            degree.avgSalary,
+            degree.jobGrowth,
+            degree.difficulty,
+            degree.students,
+            degree.image,
+            degree.description,
+            degree.established,
+            JSON.stringify(degree.careers || []),
+            JSON.stringify(degree.requirements || []),
+            JSON.stringify(degree.universities || [])
+          ]
+        );
+      }
+      console.log(`Seeded ${degreesData.length} courses successfully!`);
+    } else {
+      console.log('Courses table already seeded.');
     }
 
     // 3. Create users table with role if not exists

@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { 
-  getCourses, 
-  saveCourses, 
   logActivity 
 } from '../dataStore';
 import { 
@@ -41,11 +39,32 @@ export default function AdminCourses() {
     universities: ''
   });
 
-  // Load data
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch courses from DB
+  const fetchCourses = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch('/api/courses');
+      const data = await res.json();
+      if (data.success) {
+        setCourses(data.courses);
+        setFilteredCourses(data.courses);
+        setError(null);
+      } else {
+        setError(data.message || 'Failed to load courses');
+      }
+    } catch (err) {
+      setError('An error occurred while fetching courses');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const list = getCourses();
-    setCourses(list);
-    setFilteredCourses(list);
+    fetchCourses();
   }, []);
 
   // Filter courses
@@ -110,12 +129,23 @@ export default function AdminCourses() {
     setModalOpen(true);
   };
 
-  const handleDeleteCourse = (id, title) => {
+  const handleDeleteCourse = async (id, title) => {
     if (window.confirm(`Are you sure you want to delete course ${title}?`)) {
-      const updated = courses.filter(c => c.id !== id);
-      setCourses(updated);
-      saveCourses(updated);
-      logActivity(`Deleted course program "${title}".`, 'course');
+      try {
+        const res = await fetch(`/api/courses/${id}`, {
+          method: 'DELETE',
+        });
+        const data = await res.json();
+        if (data.success) {
+          logActivity(`Deleted course program "${title}".`, 'course');
+          fetchCourses();
+        } else {
+          alert(data.message || 'Failed to delete course');
+        }
+      } catch (err) {
+        console.error('Error deleting course:', err);
+        alert('An error occurred while deleting the course');
+      }
     }
   };
 
@@ -127,7 +157,7 @@ export default function AdminCourses() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.title.trim()) return;
@@ -145,24 +175,44 @@ export default function AdminCourses() {
       image: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=400&h=300&fit=crop"
     };
 
-    let updatedList = [];
-    if (isEditMode) {
-      updatedList = courses.map(c => 
-        c.id === currentCourseId ? { ...c, ...courseData } : c
-      );
-      logActivity(`Updated course program "${formData.title}".`, 'course');
-    } else {
-      const newCourse = {
-        id: Date.now(),
-        ...courseData
-      };
-      updatedList = [newCourse, ...courses];
-      logActivity(`Added new course program "${formData.title}".`, 'course');
+    try {
+      if (isEditMode) {
+        const res = await fetch(`/api/courses/${currentCourseId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(courseData),
+        });
+        const data = await res.json();
+        if (data.success) {
+          logActivity(`Updated course program "${formData.title}".`, 'course');
+          fetchCourses();
+          setModalOpen(false);
+        } else {
+          alert(data.message || 'Failed to update course');
+        }
+      } else {
+        const res = await fetch('/api/courses', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(courseData),
+        });
+        const data = await res.json();
+        if (data.success) {
+          logActivity(`Added new course program "${formData.title}".`, 'course');
+          fetchCourses();
+          setModalOpen(false);
+        } else {
+          alert(data.message || 'Failed to create course');
+        }
+      }
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      alert('An error occurred while saving the course');
     }
-
-    setCourses(updatedList);
-    saveCourses(updatedList);
-    setModalOpen(false);
   };
 
   return (
@@ -244,7 +294,19 @@ export default function AdminCourses() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50 text-slate-700">
-              {filteredCourses.length === 0 ? (
+              {loading ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-10 text-slate-400 font-semibold text-sm">
+                    Loading courses...
+                  </td>
+                </tr>
+              ) : error ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-10 text-red-500 font-semibold text-sm">
+                    {error}
+                  </td>
+                </tr>
+              ) : filteredCourses.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center py-10 text-slate-400 font-semibold text-sm">
                     No degree programs match your search parameters.

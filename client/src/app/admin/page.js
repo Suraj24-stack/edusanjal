@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
-  getCourses, 
   getVacancies, 
   getBlogs, 
   getApplications, 
@@ -33,17 +32,19 @@ export default function AdminOverview() {
 
   useEffect(() => {
     // Fetch stats from local dataStore
-    const coursesCount = getCourses().length;
     const vacanciesCount = getVacancies().length;
     const blogsCount = getBlogs().length;
     const apps = getApplications();
     const appsCount = apps.length;
 
-    // Load colleges dynamically
-    fetch('/api/colleges')
-      .then(res => res.json())
-      .then(data => {
-        const collegesCount = data.success && data.colleges ? data.colleges.length : 0;
+    // Load colleges and courses dynamically from APIs
+    Promise.all([
+      fetch('/api/colleges').then(res => res.json()).catch(() => ({ success: false })),
+      fetch('/api/courses').then(res => res.json()).catch(() => ({ success: false }))
+    ])
+      .then(([collegesRes, coursesRes]) => {
+        const collegesCount = collegesRes.success && collegesRes.colleges ? collegesRes.colleges.length : 0;
+        const coursesCount = coursesRes.success && coursesRes.courses ? coursesRes.courses.length : 0;
         setStats({
           colleges: collegesCount,
           courses: coursesCount,
@@ -53,10 +54,10 @@ export default function AdminOverview() {
         });
       })
       .catch(err => {
-        console.error('Error fetching dynamic colleges count:', err);
+        console.error('Error fetching dynamic counts:', err);
         setStats({
           colleges: 0,
-          courses: coursesCount,
+          courses: 0,
           vacancies: vacanciesCount,
           applications: appsCount,
           blogs: blogsCount

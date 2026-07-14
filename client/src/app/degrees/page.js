@@ -1,4 +1,5 @@
 import DegreesClient from './DegreesClient';
+import { CourseModel } from '../../../../server/models/courseModel';
 import { degreesData } from '../data/degreesData';
 
 export const metadata = {
@@ -16,7 +17,15 @@ export const metadata = {
   }
 };
 
-export default function Page() {
+export default async function Page() {
+  let courses = [];
+  try {
+    courses = await CourseModel.getAll();
+  } catch (error) {
+    console.error('Failed to load courses on the server, falling back to static degreesData:', error);
+    courses = degreesData;
+  }
+
   // Generate JSON-LD Schema on the server
   const schema = {
     "@context": "https://schema.org",
@@ -27,8 +36,8 @@ export default function Page() {
     "description": "Comprehensive list of popular degree programs in Nepal, including career paths and salary details.",
     "mainEntity": {
       "@type": "ItemList",
-      "numberOfItems": degreesData.length,
-      "itemListElement": degreesData.map((degree, idx) => ({
+      "numberOfItems": courses.length,
+      "itemListElement": courses.map((degree, idx) => ({
         "@type": "ListItem",
         "position": idx + 1,
         "item": {
@@ -42,7 +51,7 @@ export default function Page() {
           "educationalCredentialAwarded": degree.level,
           "hasCourseInstance": {
             "@type": "CourseInstance",
-            "duration": degree.duration.replace("Years", "P4Y").replace("Year", "P1Y"), // Convert to ISO duration format or approximate
+            "duration": degree.duration ? degree.duration.replace("Years", "P4Y").replace("Year", "P1Y") : "P4Y", // Convert to ISO duration format or approximate
             "courseMode": "Full-time"
           }
         }
@@ -60,3 +69,4 @@ export default function Page() {
     </>
   );
 }
+
