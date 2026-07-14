@@ -17,10 +17,12 @@ import {
   GraduationCap
 } from 'lucide-react';
 import { initializeDB } from './dataStore';
+import { useAuth } from '../context/AuthContext';
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { user, logout } = useAuth();
 
   // Initialize DB data once when layout is mounted
   useEffect(() => {
@@ -137,19 +139,23 @@ export default function AdminLayout({ children }) {
         <div className="p-4 border-t border-white/10">
           <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-md">
             <div className="w-10 h-10 rounded-xl bg-[#F2A900]/25 flex items-center justify-center text-[#F2A900] font-black shadow-inner">
-              AD
+              {user?.name ? user.name.slice(0, 2).toUpperCase() : 'AD'}
             </div>
             <div className="overflow-hidden">
-              <span className="block text-sm font-bold text-white truncate">Administrator</span>
-              <span className="block text-xs font-semibold text-slate-400 truncate">admin@edulink.com</span>
+              <span className="block text-sm font-bold text-white truncate">{user?.name || 'Administrator'}</span>
+              <span className="block text-xs font-semibold text-slate-400 truncate">{user?.email || 'admin@edulink.com'}</span>
             </div>
           </div>
-          <Link 
-            href="/" 
+          <button 
+            type="button"
+            onClick={async () => {
+              await logout();
+              window.location.href = '/signin';
+            }}
             className="mt-3 flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl text-xs font-bold border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all duration-300"
           >
-            Exit to Client Site
-          </Link>
+            Sign out
+          </button>
         </div>
       </aside>
 
@@ -201,8 +207,8 @@ export default function AdminLayout({ children }) {
                 <User className="w-5 h-5 text-slate-500" />
               </div>
               <div className="hidden xl:block text-left">
-                <span className="block text-xs font-bold text-slate-800 leading-tight">Suraj Khadka</span>
-                <span className="block text-[10px] font-semibold text-slate-400">Super Admin</span>
+                <span className="block text-xs font-bold text-slate-800 leading-tight">{user?.name || 'Administrator'}</span>
+                <span className="block text-[10px] font-semibold text-slate-400">{user?.role === 'admin' ? 'Super Admin' : 'Admin'}</span>
               </div>
             </div>
           </div>

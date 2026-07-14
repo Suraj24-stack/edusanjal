@@ -47,7 +47,11 @@ export default function SignInPage() {
     try {
       const result = await login(email, password);
       if (result.success) {
-        router.push('/');
+        if (result.user?.role === 'admin' || result.user?.email === 'admin@edulink.com') {
+          router.push('/admin');
+        } else {
+          router.push('/');
+        }
       } else {
         setFormError(result.message || 'Invalid email or password');
       }
