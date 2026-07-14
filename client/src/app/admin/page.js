@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { 
-  getColleges, 
   getCourses, 
   getVacancies, 
   getBlogs, 
@@ -34,20 +33,35 @@ export default function AdminOverview() {
 
   useEffect(() => {
     // Fetch stats from local dataStore
-    const collegesCount = getColleges().length;
     const coursesCount = getCourses().length;
     const vacanciesCount = getVacancies().length;
     const blogsCount = getBlogs().length;
     const apps = getApplications();
     const appsCount = apps.length;
 
-    setStats({
-      colleges: collegesCount,
-      courses: coursesCount,
-      vacancies: vacanciesCount,
-      applications: appsCount,
-      blogs: blogsCount
-    });
+    // Load colleges dynamically
+    fetch('/api/colleges')
+      .then(res => res.json())
+      .then(data => {
+        const collegesCount = data.success && data.colleges ? data.colleges.length : 0;
+        setStats({
+          colleges: collegesCount,
+          courses: coursesCount,
+          vacancies: vacanciesCount,
+          applications: appsCount,
+          blogs: blogsCount
+        });
+      })
+      .catch(err => {
+        console.error('Error fetching dynamic colleges count:', err);
+        setStats({
+          colleges: 0,
+          courses: coursesCount,
+          vacancies: vacanciesCount,
+          applications: appsCount,
+          blogs: blogsCount
+        });
+      });
 
     setApplications(apps.slice(0, 3)); // show top 3 recent applications
     setActivities(getActivities().slice(0, 5)); // show recent 5 activities

@@ -24,13 +24,13 @@ import {
 import { schoolsData, admissionsData } from '../../data/schoolsData';
 import ApplicationModal from '../../component/ApplicationModal';
 
-export default function SchoolDetailPage() {
+export default function SchoolDetailPage({ initialSchool = null }) {
   const params = useParams();
   const router = useRouter();
   const [showApplicationModal, setShowApplicationModal] = useState(false);
 
-  const schoolId = parseInt(params.id);
-  const school = schoolsData.find((s) => s.id === schoolId);
+  const schoolId = parseInt(params.id, 10);
+  const school = initialSchool || schoolsData.find((s) => s.id === schoolId);
 
   // Find if there is an active admission for this school
   const activeAdmission = admissionsData.find((a) => a.schoolId === schoolId);

@@ -1,5 +1,7 @@
 import CollegesClient from './CollegesClient';
-import { schoolsData } from '../data/schoolsData';
+import { CollegeModel } from '../../../../server/models/collegeModel';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: "Best Colleges in Nepal 2026 - Engineering, Medical, Management & IT Colleges",
@@ -16,8 +18,15 @@ export const metadata = {
   }
 };
 
-export default function Page() {
-  const colleges = schoolsData.filter(school => school.showInCollegeList);
+export default async function Page() {
+  let colleges = [];
+  try {
+    colleges = await CollegeModel.getAll();
+  } catch (error) {
+    console.error('Failed to fetch colleges for dynamic server page:', error);
+  }
+
+  const displayColleges = colleges.filter(school => school.showInCollegeList);
 
   // Generate JSON-LD Schema on the server
   const schema = {
@@ -29,8 +38,8 @@ export default function Page() {
     "description": "Comprehensive list of the best colleges and universities in Nepal, including rankings and tuition details.",
     "mainEntity": {
       "@type": "ItemList",
-      "numberOfItems": colleges.length,
-      "itemListElement": colleges.map((college, idx) => ({
+      "numberOfItems": displayColleges.length,
+      "itemListElement": displayColleges.map((college, idx) => ({
         "@type": "ListItem",
         "position": idx + 1,
         "item": {
@@ -61,7 +70,7 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <CollegesClient />
+      <CollegesClient initialColleges={displayColleges} />
     </>
   );
 }

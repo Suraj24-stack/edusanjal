@@ -1,10 +1,18 @@
 import SchoolDetailClient from './SchoolDetailClient';
-import { schoolsData, admissionsData } from '../../data/schoolsData';
+import { CollegeModel } from '../../../../../server/models/collegeModel';
+import { admissionsData } from '../../data/schoolsData';
+
+export const dynamic = 'force-dynamic';
 
 // Dynamically generate metadata for each school/college page
 export async function generateMetadata({ params }) {
-  const schoolId = parseInt(params.id);
-  const school = schoolsData.find((s) => s.id === schoolId);
+  const schoolId = parseInt(params.id, 10);
+  let school = null;
+  try {
+    school = await CollegeModel.getById(schoolId);
+  } catch (error) {
+    console.error('Error generating metadata for school:', error);
+  }
 
   if (!school) {
     return {
@@ -55,10 +63,14 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function Page({ params }) {
-  const schoolId = parseInt(params.id);
-  const school = schoolsData.find((s) => s.id === schoolId);
-  const activeAdmission = admissionsData.find((a) => a.schoolId === schoolId);
+export default async function Page({ params }) {
+  const schoolId = parseInt(params.id, 10);
+  let school = null;
+  try {
+    school = await CollegeModel.getById(schoolId);
+  } catch (error) {
+    console.error('Error loading school page:', error);
+  }
 
   if (!school) {
     return <SchoolDetailClient />;
@@ -139,7 +151,7 @@ export default function Page({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <SchoolDetailClient />
+      <SchoolDetailClient initialSchool={school} />
     </>
   );
 }

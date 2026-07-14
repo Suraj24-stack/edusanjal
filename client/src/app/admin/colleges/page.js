@@ -3,8 +3,6 @@
 import { useState, useEffect, useTransition, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { 
-  getColleges, 
-  saveColleges, 
   logActivity 
 } from '../dataStore';
 import { 
@@ -25,6 +23,8 @@ function AdminCollegesContent() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('All');
   const [filterLevel, setFilterLevel] = useState('All');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Modal states
   const [modalOpen, setModalOpen] = useState(false);
@@ -50,10 +50,27 @@ function AdminCollegesContent() {
   });
 
   // Load data
+  const loadColleges = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch('/api/colleges');
+      const data = await res.json();
+      if (data.success) {
+        setColleges(data.colleges);
+        setFilteredColleges(data.colleges);
+      } else {
+        setError(data.message || 'Failed to fetch institutions');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('An error occurred while loading data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const list = getColleges();
-    setColleges(list);
-    setFilteredColleges(list);
+    loadColleges();
 
     // If query contains ?add=true, trigger add modal
     if (searchParams.get('add') === 'true') {
@@ -128,12 +145,23 @@ function AdminCollegesContent() {
     setModalOpen(true);
   };
 
-  const handleDeleteCollege = (id, name) => {
+  const handleDeleteCollege = async (id, name) => {
     if (window.confirm(`Are you sure you want to delete ${name}?`)) {
-      const updated = colleges.filter(c => c.id !== id);
-      setColleges(updated);
-      saveColleges(updated);
-      logActivity(`Deleted institution "${name}".`, 'college');
+      try {
+        const res = await fetch(`/api/colleges/${id}`, {
+          method: 'DELETE',
+        });
+        const data = await res.json();
+        if (data.success) {
+          setColleges(prev => prev.filter(c => c.id !== id));
+          logActivity(`Deleted institution "${name}".`, 'college');
+        } else {
+          alert(`Error deleting institution: ${data.message}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('An error occurred while deleting the institution');
+      }
     }
   };
 
@@ -145,7 +173,7 @@ function AdminCollegesContent() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.name.trim()) return;
@@ -157,30 +185,55 @@ function AdminCollegesContent() {
 
     const collegeData = {
       ...formData,
-      established: parseInt(formData.established) || 2000,
-      ranking: parseInt(formData.ranking) || 10,
+      established: parseInt(formData.established, 10) || 2000,
+      ranking: parseInt(formData.ranking, 10) || 10,
       programs: programArray,
       image: formData.image || "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop"
     };
 
-    let updatedList = [];
-    if (isEditMode) {
-      updatedList = colleges.map(c => 
-        c.id === currentCollegeId ? { ...c, ...collegeData } : c
-      );
-      logActivity(`Updated details for institution "${formData.name}".`, 'college');
-    } else {
-      const newCollege = {
-        id: Date.now(),
-        ...collegeData
-      };
-      updatedList = [newCollege, ...colleges];
-      logActivity(`Added new institution "${formData.name}".`, 'college');
+    try {
+      if (isEditMode) {
+        const res = await fetch(`/api/colleges/${currentCollegeId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(collegeData),
+        });
+        const data = await res.json();
+        if (data.success) {
+          setColleges(prev => prev.map(c => c.id === currentCollegeId ? { ...c, ...collegeData } : c));
+          logActivity(`Updated details for institution "${formData.name}".`, 'college');
+        } else {
+          alert(`Error updating: ${data.message}`);
+          return;
+        }
+      } else {
+        const res = await fetch('/api/colleges', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(collegeData),
+        });
+        const data = await res.json();
+        if (data.success) {
+          const newCollege = {
+            id: data.id,
+            ...collegeData
+          };
+          setColleges(prev => [newCollege, ...prev]);
+          logActivity(`Added new institution "${formData.name}".`, 'college');
+        } else {
+          alert(`Error creating: ${data.message}`);
+          return;
+        }
+      }
+      setModalOpen(false);
+    } catch (err) {
+      console.error(err);
+      alert('An error occurred while saving the institution');
     }
-
-    setColleges(updatedList);
-    saveColleges(updatedList);
-    setModalOpen(false);
   };
 
   return (
@@ -261,7 +314,19 @@ function AdminCollegesContent() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50 text-slate-700">
-              {filteredColleges.length === 0 ? (
+              {loading ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-10 text-slate-400 font-semibold text-sm animate-pulse">
+                    Loading institutions data...
+                  </td>
+                </tr>
+              ) : error ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-10 text-red-500 font-semibold text-sm">
+                    {error}
+                  </td>
+                </tr>
+              ) : filteredColleges.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center py-10 text-slate-400 font-semibold text-sm">
                     No institutions match your search parameters.

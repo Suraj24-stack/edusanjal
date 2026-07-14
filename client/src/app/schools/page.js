@@ -1,5 +1,7 @@
 import SchoolsClient from './SchoolsClient';
-import { schoolsData } from '../data/schoolsData';
+import { CollegeModel } from '../../../../server/models/collegeModel';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: "Best Schools and Secondary Academies in Nepal - Rankings & Fees",
@@ -16,8 +18,15 @@ export const metadata = {
   }
 };
 
-export default function Page() {
-  const schools = schoolsData.filter(school => school.showInSchoolList);
+export default async function Page() {
+  let colleges = [];
+  try {
+    colleges = await CollegeModel.getAll();
+  } catch (error) {
+    console.error('Failed to fetch schools for dynamic server page:', error);
+  }
+
+  const schools = colleges.filter(school => school.showInSchoolList);
 
   // Generate JSON-LD Schema on the server
   const schema = {
@@ -61,7 +70,7 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <SchoolsClient />
+      <SchoolsClient initialSchools={schools} />
     </>
   );
 }

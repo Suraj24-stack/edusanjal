@@ -182,7 +182,9 @@ const FilterSection = ({ filters, onFilterChange, isOpen, toggleOpen }) => {
   );
 };
 
-export default function CollegesPage() {
+export default function CollegesPage({ initialColleges = [] }) {
+  const collegesList = initialColleges.length > 0 ? initialColleges : schoolsData.filter(c => c.showInCollegeList);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     type: '',
@@ -202,15 +204,21 @@ export default function CollegesPage() {
   };
 
   const filteredColleges = useMemo(() => {
-    let filtered = schoolsData.filter(college => {
-      if (!college.showInCollegeList) return false;
+    let filtered = collegesList.filter(college => {
       const matchesSearch = college.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         college.location.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchesType = !filters.type || college.type === filters.type;
 
-      const matchesTuition = !filters.maxTuition ||
-        parseInt(college.tuition.replace(/[^0-9]/g, '')) <= parseInt(filters.maxTuition);
+      let matchesTuition = true;
+      if (filters.maxTuition) {
+        if (college.tuition === 'Free' || college.tuition === 'Free*') {
+          matchesTuition = true;
+        } else {
+          const cost = parseInt(college.tuition.replace(/[^0-9]/g, '')) || 0;
+          matchesTuition = cost <= parseInt(filters.maxTuition);
+        }
+      }
 
       return matchesSearch && matchesType && matchesTuition;
     });

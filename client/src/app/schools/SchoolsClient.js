@@ -258,7 +258,9 @@ const StatsCard = ({ icon, title, value, description, color = "primary" }) => {
   );
 };
 
-export default function SchoolsPage() {
+export default function SchoolsPage({ initialSchools = [] }) {
+  const schoolsList = initialSchools.length > 0 ? initialSchools : schoolsData.filter(s => s.showInSchoolList);
+
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     type: '',
@@ -279,8 +281,7 @@ export default function SchoolsPage() {
   };
 
   const filteredSchools = useMemo(() => {
-    let filtered = schoolsData.filter(school => {
-      if (!school.showInSchoolList) return false;
+    let filtered = schoolsList.filter(school => {
       const matchesSearch = school.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         school.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
         school.programs.some(program => program.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -313,20 +314,19 @@ export default function SchoolsPage() {
     });
 
     return filtered;
-  }, [searchTerm, filters]);
+  }, [searchTerm, filters, schoolsList]);
 
   const stats = useMemo(() => {
-    const listSchools = schoolsData.filter(s => s.showInSchoolList);
-    const totalSchools = listSchools.length;
-    const privateSchools = listSchools.filter(s => s.type === 'Private').length;
-    const publicSchools = listSchools.filter(s => s.type === 'Public' || s.type === 'Public Charter').length;
-    const avgAcceptance = listSchools.reduce((acc, school) => {
+    const totalSchools = schoolsList.length;
+    const privateSchools = schoolsList.filter(s => s.type === 'Private').length;
+    const publicSchools = schoolsList.filter(s => s.type === 'Public' || s.type === 'Public Charter').length;
+    const avgAcceptance = schoolsList.reduce((acc, school) => {
       const acceptance = school.acceptance === "Lottery" ? 50 : parseFloat(school.acceptance);
       return acc + acceptance;
     }, 0) / (totalSchools || 1);
 
     return { totalSchools, privateSchools, publicSchools, avgAcceptance: avgAcceptance.toFixed(1) };
-  }, []);
+  }, [schoolsList]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0B3C5D]/5 via-white to-[#F2A900]/5">
@@ -408,7 +408,7 @@ export default function SchoolsPage() {
           <div className="flex items-center mb-4 sm:mb-0">
             <div className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20 shadow-sm">
               <span className="text-sm font-bold text-black">
-                {filteredSchools.length} of {schoolsData.filter(s => s.showInSchoolList).length} schools
+                {filteredSchools.length} of {schoolsList.length} schools
               </span>
             </div>
           </div>
