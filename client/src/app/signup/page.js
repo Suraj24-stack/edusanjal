@@ -89,10 +89,6 @@ export default function SignUpPage() {
 
   return (
     <section data-auth-page="signup" className="auth-page">
-      <head>
-        <title>Sign up | EduLink</title>
-        <meta name="description" content="Create an EduLink account to save colleges, courses, and admission updates." />
-      </head>
       <div className="auth-shell">
         <header className="auth-header">
           <Link href="/" className="auth-brand">

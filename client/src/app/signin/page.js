@@ -64,10 +64,6 @@ export default function SignInPage() {
 
   return (
     <section data-auth-page="signin" className="auth-page">
-      <head>
-        <title>Sign in | EduLink</title>
-        <meta name="description" content="Sign in to your EduLink account to manage your education profile." />
-      </head>
       <div className="auth-shell">
         <header className="auth-header">
           <Link href="/" className="auth-brand">
