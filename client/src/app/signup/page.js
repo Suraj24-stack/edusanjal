@@ -1,4 +1,9 @@
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../context/AuthContext';
 import {
   ArrowLeft,
   Bell,
@@ -10,11 +15,6 @@ import {
   User,
   UserPlus,
 } from 'lucide-react';
-
-export const metadata = {
-  title: 'Sign up | EduLink',
-  description: 'Create an EduLink account to save colleges, courses, and admission updates.',
-};
 
 const profileBenefits = [
   'Shortlist colleges and courses',
@@ -41,8 +41,58 @@ const trustItems = [
 ];
 
 export default function SignUpPage() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [formError, setFormError] = useState(null);
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
+
+  const { register } = useAuth();
+  const router = useRouter();
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    setFormLoading(true);
+    setFormError(null);
+
+    // Client-side validations
+    if (password !== confirmPassword) {
+      setFormError('Passwords do not match');
+      setFormLoading(false);
+      return;
+    }
+
+    if (password.length < 6) {
+      setFormError('Password must be at least 6 characters');
+      setFormLoading(false);
+      return;
+    }
+
+    try {
+      const result = await register(name, email, password);
+      if (result.success) {
+        setFormSuccess(true);
+        setTimeout(() => {
+          router.push('/signin');
+        }, 1500);
+      } else {
+        setFormError(result.message || 'Registration failed');
+        setFormLoading(false);
+      }
+    } catch (err) {
+      setFormError('An error occurred during registration');
+      setFormLoading(false);
+    }
+  };
+
   return (
     <section data-auth-page="signup" className="auth-page">
+      <head>
+        <title>Sign up | EduLink</title>
+        <meta name="description" content="Create an EduLink account to save colleges, courses, and admission updates." />
+      </head>
       <div className="auth-shell">
         <header className="auth-header">
           <Link href="/" className="auth-brand">
@@ -111,7 +161,21 @@ export default function SignUpPage() {
               <p className="auth-card-text">Start with your basic details and create a secure password.</p>
             </div>
 
-            <form data-auth-form className="auth-form">
+            {formError && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 animate-ping"></span>
+                <span>{formError}</span>
+              </div>
+            )}
+
+            {formSuccess && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl text-sm font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></span>
+                <span>Account created! Redirecting to sign in...</span>
+              </div>
+            )}
+
+            <form data-auth-form className="auth-form" onSubmit={handleSignUp}>
               <div>
                 <label htmlFor="name" className="auth-field-label">
                   Full name
@@ -125,6 +189,9 @@ export default function SignUpPage() {
                     autoComplete="name"
                     placeholder="Your full name"
                     className="auth-input"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -142,6 +209,9 @@ export default function SignUpPage() {
                     autoComplete="email"
                     placeholder="you@example.com"
                     className="auth-input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -159,6 +229,9 @@ export default function SignUpPage() {
                     autoComplete="new-password"
                     placeholder="Create a password"
                     className="auth-input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -176,15 +249,19 @@ export default function SignUpPage() {
                     autoComplete="new-password"
                     placeholder="Repeat your password"
                     className="auth-input"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
                   />
                 </div>
               </div>
 
               <button
-                type="button"
-                className="auth-submit"
+                type="submit"
+                disabled={formLoading || formSuccess}
+                className="auth-submit disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign up
+                {formLoading ? 'Creating account...' : 'Sign up'}
               </button>
             </form>
 

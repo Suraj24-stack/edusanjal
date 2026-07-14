@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { useAuth } from '../context/AuthContext';
 import {
   Menu,
   X,
@@ -36,6 +37,8 @@ const Header = () => {
   const [isListening, setIsListening] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  const { user, logout } = useAuth();
 
   const searchRef = useRef(null);
   const filterRef = useRef(null);
@@ -434,28 +437,61 @@ const Header = () => {
 
                 {isProfileOpen && (
                   <div className="absolute right-0 top-full z-[80] mt-3 w-56 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-xl">
-                    <div className="border-b border-gray-100 px-4 py-3">
-                      <p className="text-sm font-bold text-gray-900">EduLink Profile</p>
-                      <p className="mt-1 text-xs text-gray-500">Access your account pages</p>
-                    </div>
-                    <div className="p-2">
-                      <Link
-                        href="/signin"
-                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-[#F2A900]/10 hover:text-[#0B3C5D]"
-                        onClick={() => setIsProfileOpen(false)}
-                      >
-                        <LogIn className="h-4 w-4" />
-                        Sign in
-                      </Link>
-                      <Link
-                        href="/signup"
-                        className="mt-1 flex items-center gap-3 rounded-lg bg-[#F2A900] px-3 py-2.5 text-sm font-bold text-[#0B3C5D] transition hover:bg-[#D9A100]"
-                        onClick={() => setIsProfileOpen(false)}
-                      >
-                        <UserPlus className="h-4 w-4" />
-                        Create account
-                      </Link>
-                    </div>
+                    {user ? (
+                      <>
+                        <div className="border-b border-gray-100 px-4 py-3 bg-gray-50">
+                          <p className="text-xs text-gray-500">Signed in as</p>
+                          <p className="text-sm font-bold text-gray-900 truncate">{user.name}</p>
+                          <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                        </div>
+                        <div className="p-2">
+                          <Link
+                            href="/dashboard"
+                            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-[#F2A900]/10 hover:text-[#0B3C5D]"
+                            onClick={() => setIsProfileOpen(false)}
+                          >
+                            <User className="h-4 w-4" />
+                            My Profile
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              logout();
+                              setIsProfileOpen(false);
+                            }}
+                            className="w-full mt-1 flex items-center gap-3 rounded-lg bg-red-50 px-3 py-2.5 text-sm font-bold text-red-600 transition hover:bg-red-100 text-left"
+                          >
+                            <LogIn className="h-4 w-4" />
+                            Sign out
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="border-b border-gray-100 px-4 py-3">
+                          <p className="text-sm font-bold text-gray-900">EduLink Profile</p>
+                          <p className="mt-1 text-xs text-gray-500">Access your account pages</p>
+                        </div>
+                        <div className="p-2">
+                          <Link
+                            href="/signin"
+                            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-gray-700 transition hover:bg-[#F2A900]/10 hover:text-[#0B3C5D]"
+                            onClick={() => setIsProfileOpen(false)}
+                          >
+                            <LogIn className="h-4 w-4" />
+                            Sign in
+                          </Link>
+                          <Link
+                            href="/signup"
+                            className="mt-1 flex items-center gap-3 rounded-lg bg-[#F2A900] px-3 py-2.5 text-sm font-bold text-[#0B3C5D] transition hover:bg-[#D9A100]"
+                            onClick={() => setIsProfileOpen(false)}
+                          >
+                            <UserPlus className="h-4 w-4" />
+                            Create account
+                          </Link>
+                        </div>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
@@ -553,10 +589,25 @@ const Header = () => {
 
             {/* Mobile User Actions */}
             <div className="space-y-4 mb-6 pt-6 border-t border-gray-200">
-              <Link href="/signin" className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
-                <User className="w-5 h-5" />
-                <span className="font-medium">My Profile</span>
-              </Link>
+              {user ? (
+                <div className="px-3 py-2 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500">Signed in as</p>
+                  <p className="text-sm font-bold text-gray-900 truncate">{user.name}</p>
+                  <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                </div>
+              ) : (
+                <Link href="/signin" className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+                  <User className="w-5 h-5" />
+                  <span className="font-medium">My Profile</span>
+                </Link>
+              )}
+
+              {user && (
+                <Link href="/dashboard" className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200" onClick={() => setIsMenuOpen(false)}>
+                  <User className="w-5 h-5" />
+                  <span className="font-medium">My Profile</span>
+                </Link>
+              )}
 
               <button className="flex items-center space-x-3 w-full p-3 text-gray-700 hover:text-[#0B3C5D] hover:bg-gray-50 rounded-lg transition-all duration-200">
                 <Bell className="w-5 h-5" />
@@ -567,20 +618,34 @@ const Header = () => {
 
             {/* Mobile Auth Buttons */}
             <div className="space-y-3">
-              <Link
-                href="/signin"
-                className="block w-full py-3 text-center text-gray-700 hover:text-[#0B3C5D] font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sign in
-              </Link>
-              <Link
-                href="/signup"
-                className="block w-full py-3 text-center bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] font-medium rounded-lg hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-200 shadow-md"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sign up
-              </Link>
+              {user ? (
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="block w-full py-3 text-center bg-red-50 text-red-600 font-medium rounded-lg hover:bg-red-100 transition-all duration-200"
+                >
+                  Sign out
+                </button>
+              ) : (
+                <>
+                  <Link
+                    href="/signin"
+                    className="block w-full py-3 text-center text-gray-700 hover:text-[#0B3C5D] font-medium border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign in
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="block w-full py-3 text-center bg-gradient-to-r from-[#F2A900] to-[#D9A100] text-[#0B3C5D] font-medium rounded-lg hover:from-[#D9A100] hover:to-[#C09000] transition-all duration-200 shadow-md"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import { ArrowLeft, Bell, BookOpen, CheckCircle2, Lock, Mail, ShieldCheck, User } from 'lucide-react';
+'use client';
 
-export const metadata = {
-  title: 'Sign in | EduLink',
-  description: 'Sign in to your EduLink account to manage your education profile.',
-};
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../context/AuthContext';
+import { ArrowLeft, Bell, BookOpen, CheckCircle2, Lock, Mail, ShieldCheck, User } from 'lucide-react';
 
 const profileHighlights = [
   'Saved colleges and programs',
@@ -31,8 +31,39 @@ const trustItems = [
 ];
 
 export default function SignInPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [formError, setFormError] = useState(null);
+  const [formLoading, setFormLoading] = useState(false);
+
+  const { login } = useAuth();
+  const router = useRouter();
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    setFormLoading(true);
+    setFormError(null);
+
+    try {
+      const result = await login(email, password);
+      if (result.success) {
+        router.push('/');
+      } else {
+        setFormError(result.message || 'Invalid email or password');
+      }
+    } catch (err) {
+      setFormError('An error occurred during sign in');
+    } finally {
+      setFormLoading(false);
+    }
+  };
+
   return (
     <section data-auth-page="signin" className="auth-page">
+      <head>
+        <title>Sign in | EduLink</title>
+        <meta name="description" content="Sign in to your EduLink account to manage your education profile." />
+      </head>
       <div className="auth-shell">
         <header className="auth-header">
           <Link href="/" className="auth-brand">
@@ -101,7 +132,14 @@ export default function SignInPage() {
               <p className="auth-card-text">Use your email and password to access your profile.</p>
             </div>
 
-            <form data-auth-form className="auth-form">
+            {formError && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm font-semibold flex items-center gap-2">
+                <span className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0 animate-ping"></span>
+                <span>{formError}</span>
+              </div>
+            )}
+
+            <form data-auth-form className="auth-form" onSubmit={handleSignIn}>
               <div>
                 <label htmlFor="email" className="auth-field-label">
                   Email address
@@ -115,6 +153,9 @@ export default function SignInPage() {
                     autoComplete="email"
                     placeholder="you@example.com"
                     className="auth-input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -132,6 +173,9 @@ export default function SignInPage() {
                     autoComplete="current-password"
                     placeholder="Enter your password"
                     className="auth-input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </div>
               </div>
@@ -147,10 +191,11 @@ export default function SignInPage() {
               </div>
 
               <button
-                type="button"
-                className="auth-submit"
+                type="submit"
+                disabled={formLoading}
+                className="auth-submit disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Sign in
+                {formLoading ? 'Signing in...' : 'Sign in'}
               </button>
             </form>
 

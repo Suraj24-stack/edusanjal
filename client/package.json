@@ -10,8 +10,11 @@
     "verify:auth-ui": "node scripts/verify-auth-ui-css.mjs"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "framer-motion": "^11.3.28",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.263.1",
+    "mysql2": "^3.22.6",
     "next": "^14.2.35",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",

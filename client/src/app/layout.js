@@ -1,5 +1,6 @@
 import "./globals.css";
 import AppShell from "./component/AppShell";
+import { AuthProvider } from "./context/AuthContext";
 
 export const metadata = {
   metadataBase: new URL('https://edulink.surajkhadka7.com.np'),
@@ -65,9 +66,11 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <AppShell>
-          {children}
-        </AppShell>
+        <AuthProvider>
+          <AppShell>
+            {children}
+          </AppShell>
+        </AuthProvider>
       </body>
     </html>
   );

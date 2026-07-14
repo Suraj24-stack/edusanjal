@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const path = require('path');
+
 const nextConfig = {
   experimental: {
     optimizePackageImports: ['framer-motion'],
@@ -12,6 +14,10 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+  },
+  webpack: (config) => {
+    config.resolve.modules.push(path.resolve(__dirname, 'node_modules'));
+    return config;
   },
 }
 
