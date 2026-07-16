@@ -57,7 +57,7 @@ export const BlogModel = {
       `INSERT INTO blogs (
         title, excerpt, content, date, category, image, readTime, tags, 
         views, likes, comments, author, authorImage, is_featured, is_recent, is_new
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         data.title,
         data.excerpt || null,
