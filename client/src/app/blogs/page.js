@@ -1,4 +1,5 @@
 import BlogsPage from './BlogsClient';
+import { BlogModel } from '../../../../server/models/blogModel';
 import { featuredBlogs, recentBlogs } from '../data/blogsData';
 
 export const metadata = {
@@ -16,8 +17,14 @@ export const metadata = {
   }
 };
 
-export default function Page() {
-  const allBlogs = [...featuredBlogs, ...recentBlogs];
+export default async function Page() {
+  let allBlogs = [];
+  try {
+    allBlogs = await BlogModel.getAll();
+  } catch (error) {
+    console.error('Failed to load blogs on server, falling back to static data:', error);
+    allBlogs = [...featuredBlogs, ...recentBlogs];
+  }
 
   // Generate JSON-LD Schema on the server
   const schema = {

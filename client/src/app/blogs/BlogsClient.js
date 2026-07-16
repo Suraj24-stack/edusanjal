@@ -20,14 +20,38 @@ import {
   Sparkles
 } from 'lucide-react';
 
-import { featuredBlogs, recentBlogs, categories } from '../data/blogsData';
+// Static imports removed. Data loaded dynamically from backend.
 
 export default function BlogsPage() {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [bookmarkedBlogs, setBookmarkedBlogs] = useState(new Set());
   const [likedBlogs, setLikedBlogs] = useState(new Set());
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch('/api/blogs');
+        const data = await res.json();
+        if (data.success) {
+          setBlogs(data.blogs);
+        } else {
+          setError(data.message || 'Failed to load blogs');
+        }
+      } catch (err) {
+        console.error(err);
+        setError('Failed to connect to the server');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
+  }, []);
 
   const getCategoryColor = (category) => {
     const colors = {
@@ -51,22 +75,33 @@ export default function BlogsPage() {
     return colors[category] || 'bg-gray-500 text-white';
   };
 
+  const featured = blogs.filter(b => b.is_featured);
+  const recent = blogs.filter(b => b.is_recent);
+
   const filteredBlogs = activeCategory === 'All'
-    ? featuredBlogs
-    : featuredBlogs.filter(blog => blog.category === activeCategory);
+    ? featured
+    : featured.filter(blog => blog.category === activeCategory);
 
   const filteredRecentBlogs = activeCategory === 'All'
-    ? recentBlogs
-    : recentBlogs.filter(blog => blog.category === activeCategory);
+    ? recent
+    : recent.filter(blog => blog.category === activeCategory);
 
   const searchFilteredBlogs = searchTerm
     ? filteredBlogs.filter(blog =>
       blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      blog.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (blog.excerpt && blog.excerpt.toLowerCase().includes(searchTerm.toLowerCase())) ||
       blog.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
       blog.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
     )
     : filteredBlogs;
+
+  const categoryNames = ['All', 'Study Tips', 'Entrance Prep', 'Career Guidance', 'Scholarships', 'Campus Life'];
+  const dynamicCategories = categoryNames.map(name => ({
+    name,
+    count: name === 'All' 
+      ? blogs.length 
+      : blogs.filter(b => b.category === name).length
+  }));
 
   const handleBookmark = (e, blogId) => {
     e.preventDefault();
@@ -149,7 +184,7 @@ export default function BlogsPage() {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-200 pb-6 mb-8">
           {/* Categories Pill View (Desktop) */}
           <div className="hidden md:flex flex-wrap gap-2">
-            {categories.map((category) => (
+            {dynamicCategories.map((category) => (
               <button
                 key={category.name}
                 onClick={() => setActiveCategory(category.name)}
@@ -202,7 +237,7 @@ export default function BlogsPage() {
                 </button>
               </div>
               <div className="grid grid-cols-2 gap-2.5">
-                {categories.map((category) => (
+                {dynamicCategories.map((category) => (
                   <button
                     key={category.name}
                     onClick={() => {
@@ -226,8 +261,17 @@ export default function BlogsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
           {/* Main Grid: Blog Cards */}
           <div className="lg:col-span-2 space-y-8">
-            {searchFilteredBlogs.length === 0 ? (
-              <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center shadow-sm">
+            {loading ? (
+              <div className="flex flex-col items-center justify-center p-12 bg-white rounded-2xl border border-slate-200 shadow-sm w-full animate-pulse">
+                <BookOpen size={48} className="text-slate-300 animate-bounce" />
+                <p className="text-slate-400 mt-4 font-semibold text-sm">Loading amazing articles...</p>
+              </div>
+            ) : error ? (
+              <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center shadow-sm w-full">
+                <p className="text-red-500 font-semibold text-sm">{error}</p>
+              </div>
+            ) : searchFilteredBlogs.length === 0 ? (
+              <div className="bg-white border border-slate-200 rounded-2xl p-12 text-center shadow-sm w-full">
                 <div className="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4">
                   <BookOpen size={28} />
                 </div>

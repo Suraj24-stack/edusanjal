@@ -1,10 +1,20 @@
 import BlogDetailClient from './BlogDetailClient';
+import { BlogModel } from '../../../../../server/models/blogModel';
 import { featuredBlogs, recentBlogs } from '../../data/blogsData';
 
 // Dynamically generate metadata for each blog article page
 export async function generateMetadata({ params }) {
   const blogId = parseInt(params.id);
-  const blog = [...featuredBlogs, ...recentBlogs].find((b) => b.id === blogId);
+  let blog = null;
+  try {
+    blog = await BlogModel.getById(blogId);
+  } catch (error) {
+    console.error('Failed to load blog for metadata:', error);
+  }
+
+  if (!blog) {
+    blog = [...featuredBlogs, ...recentBlogs].find((b) => b.id === blogId);
+  }
 
   if (!blog) {
     return {
@@ -54,9 +64,18 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function Page({ params }) {
+export default async function Page({ params }) {
   const blogId = parseInt(params.id);
-  const blog = [...featuredBlogs, ...recentBlogs].find((b) => b.id === blogId);
+  let blog = null;
+  try {
+    blog = await BlogModel.getById(blogId);
+  } catch (error) {
+    console.error('Failed to load blog for server page schema:', error);
+  }
+
+  if (!blog) {
+    blog = [...featuredBlogs, ...recentBlogs].find((b) => b.id === blogId);
+  }
 
   if (!blog) {
     return <BlogDetailClient />;

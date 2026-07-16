@@ -1,5 +1,6 @@
 import { schoolsData } from './data/schoolsData';
 import { featuredBlogs, recentBlogs } from './data/blogsData';
+import { BlogModel } from '../../../server/models/blogModel';
 
 export default async function sitemap() {
   const baseUrl = 'https://edulink.surajkhadka7.com.np';
@@ -28,7 +29,15 @@ export default async function sitemap() {
     priority: 0.7,
   }));
 
-  const blogUrls = [...featuredBlogs, ...recentBlogs].map((blog) => ({
+  let blogs = [];
+  try {
+    blogs = await BlogModel.getAll();
+  } catch (error) {
+    console.error('Failed to load blogs for sitemap, falling back to static data:', error);
+    blogs = [...featuredBlogs, ...recentBlogs];
+  }
+
+  const blogUrls = blogs.map((blog) => ({
     url: `${baseUrl}/blogs/${blog.id}`,
     lastModified: new Date().toISOString().split('T')[0],
     changeFrequency: 'weekly',
@@ -37,3 +46,4 @@ export default async function sitemap() {
 
   return [...routes, ...schoolUrls, ...blogUrls];
 }
+

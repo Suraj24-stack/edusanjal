@@ -20,15 +20,17 @@ import {
   Sparkles
 } from 'lucide-react';
 
-import { featuredBlogs, recentBlogs } from '../../data/blogsData';
+// Static imports removed. Data loaded dynamically from backend.
 
 export default function BlogDetailClient() {
   const params = useParams();
   const router = useRouter();
   const blogId = parseInt(params.id);
 
-  const allBlogs = [...featuredBlogs, ...recentBlogs];
-  const blog = allBlogs.find((b) => b.id === blogId);
+  const [blog, setBlog] = useState(null);
+  const [allBlogs, setAllBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // States
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -40,8 +42,38 @@ export default function BlogDetailClient() {
   const [isShareAlertVisible, setIsShareAlertVisible] = useState(false);
 
   useEffect(() => {
+    const fetchBlogDetail = async () => {
+      try {
+        setLoading(true);
+        const resBlog = await fetch(`/api/blogs/${blogId}`);
+        const dataBlog = await resBlog.json();
+        if (dataBlog.success) {
+          setBlog(dataBlog.blog);
+          setLikesCount(dataBlog.blog.likes || 0);
+        } else {
+          setError(dataBlog.message || 'Blog not found');
+        }
+
+        const resAll = await fetch('/api/blogs');
+        const dataAll = await resAll.json();
+        if (dataAll.success) {
+          setAllBlogs(dataAll.blogs);
+        }
+      } catch (err) {
+        console.error(err);
+        setError('Failed to fetch blog details');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (blogId) {
+      fetchBlogDetail();
+    }
+  }, [blogId]);
+
+  useEffect(() => {
     if (blog) {
-      setLikesCount(blog.likes || 0);
       // Add default dummy comments to make layout populated and realistic
       setComments([
         {
@@ -60,7 +92,18 @@ export default function BlogDetailClient() {
     }
   }, [blog]);
 
-  if (!blog) {
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+        <div className="flex flex-col items-center justify-center p-12 bg-white rounded-2xl border border-slate-200 shadow-lg max-w-md w-full animate-pulse">
+          <BookOpen size={48} className="text-slate-300 animate-bounce" />
+          <p className="text-slate-400 mt-4 font-semibold text-sm">Loading article details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !blog) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="bg-white border border-slate-200 p-8 rounded-2xl max-w-md w-full shadow-lg text-center">
@@ -69,7 +112,7 @@ export default function BlogDetailClient() {
           </div>
           <h2 className="text-xl font-bold text-slate-800">Article Not Found</h2>
           <p className="text-slate-500 mt-2 text-sm">
-            We couldn't locate the blog article you were looking for. It might have been moved or deleted.
+            {error || "We couldn't locate the blog article you were looking for. It might have been moved or deleted."}
           </p>
           <button
             onClick={() => router.push('/blogs')}

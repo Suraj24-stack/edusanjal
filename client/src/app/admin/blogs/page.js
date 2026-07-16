@@ -3,8 +3,6 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { 
-  getBlogs, 
-  saveBlogs, 
   logActivity 
 } from '../dataStore';
 import { 
@@ -26,6 +24,8 @@ function AdminBlogsContent() {
   const [filteredBlogs, setFilteredBlogs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('All');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Modal states
   const [modalOpen, setModalOpen] = useState(false);
@@ -40,14 +40,32 @@ function AdminBlogsContent() {
     category: 'Entrance Prep',
     author: 'Suraj Khadka',
     readTime: '4 min read',
-    tags: ''
+    tags: '',
+    image: ''
   });
 
   // Load data
+  const loadBlogs = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch('/api/blogs');
+      const data = await res.json();
+      if (data.success) {
+        setBlogs(data.blogs);
+        setFilteredBlogs(data.blogs);
+      } else {
+        setError(data.message || 'Failed to fetch blogs');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('An error occurred while loading data');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const list = getBlogs();
-    setBlogs(list);
-    setFilteredBlogs(list);
+    loadBlogs();
 
     // If query has ?add=true, trigger add modal
     if (searchParams.get('add') === 'true') {
@@ -63,8 +81,8 @@ function AdminBlogsContent() {
       const term = searchTerm.toLowerCase();
       result = result.filter(b => 
         b.title.toLowerCase().includes(term) || 
-        b.excerpt.toLowerCase().includes(term) || 
-        b.author.toLowerCase().includes(term)
+        (b.excerpt && b.excerpt.toLowerCase().includes(term)) || 
+        (b.author && b.author.toLowerCase().includes(term))
       );
     }
 
@@ -86,7 +104,8 @@ function AdminBlogsContent() {
       category: 'Entrance Prep',
       author: 'Suraj Khadka',
       readTime: '4 min read',
-      tags: 'Education, Admission, Guide'
+      tags: 'Education, Admission, Guide',
+      image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=450&fit=crop'
     });
     setIsEditMode(false);
     setModalOpen(true);
@@ -100,19 +119,31 @@ function AdminBlogsContent() {
       category: blog.category || 'Entrance Prep',
       author: blog.author || 'Suraj Khadka',
       readTime: blog.readTime || '4 min read',
-      tags: blog.tags ? blog.tags.join(', ') : ''
+      tags: blog.tags ? blog.tags.join(', ') : '',
+      image: blog.image || ''
     });
     setCurrentBlogId(blog.id);
     setIsEditMode(true);
     setModalOpen(true);
   };
 
-  const handleDeleteBlog = (id, title) => {
+  const handleDeleteBlog = async (id, title) => {
     if (window.confirm(`Are you sure you want to delete "${title}"?`)) {
-      const updated = blogs.filter(b => b.id !== id);
-      setBlogs(updated);
-      saveBlogs(updated);
-      logActivity(`Deleted blog post "${title}".`, 'blog');
+      try {
+        const res = await fetch(`/api/blogs/${id}`, {
+          method: 'DELETE',
+        });
+        const data = await res.json();
+        if (data.success) {
+          setBlogs(prev => prev.filter(b => b.id !== id));
+          logActivity(`Deleted blog post "${title}".`, 'blog');
+        } else {
+          alert(`Error deleting blog post: ${data.message}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('An error occurred while deleting the blog post');
+      }
     }
   };
 
@@ -129,7 +160,7 @@ function AdminBlogsContent() {
     return new Date().toLocaleDateString('en-US', options);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.title.trim()) return;
@@ -141,41 +172,75 @@ function AdminBlogsContent() {
     const blogData = {
       ...formData,
       tags: tagsArray,
-      date: formatDate(),
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=450&fit=crop"
+      image: formData.image || "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=450&fit=crop"
     };
 
-    let updatedList = [];
     if (isEditMode) {
       const original = blogs.find(b => b.id === currentBlogId);
-      updatedList = blogs.map(b => 
-        b.id === currentBlogId 
-          ? { 
-              ...b, 
-              ...blogData,
-              // Keep original views/likes/comments if edit
-              views: original.views || 0,
-              likes: original.likes || 0,
-              comments: original.comments || 0
-            } 
-          : b
-      );
-      logActivity(`Updated blog post "${formData.title}".`, 'blog');
+      const updatePayload = {
+        ...blogData,
+        views: original.views || 0,
+        likes: original.likes || 0,
+        comments: original.comments || 0,
+        date: original.date || formatDate(),
+        is_featured: original.is_featured !== undefined ? original.is_featured : true,
+        is_recent: original.is_recent !== undefined ? original.is_recent : false,
+        is_new: original.is_new !== undefined ? original.is_new : false,
+      };
+
+      try {
+        const res = await fetch(`/api/blogs/${currentBlogId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatePayload),
+        });
+        const data = await res.json();
+        if (data.success) {
+          logActivity(`Updated blog post "${formData.title}".`, 'blog');
+          loadBlogs();
+          setModalOpen(false);
+        } else {
+          alert(`Error updating blog post: ${data.message}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('An error occurred while updating the blog post');
+      }
     } else {
-      const newBlog = {
-        id: Date.now(),
+      const newBlogPayload = {
+        ...blogData,
+        date: formatDate(),
         views: 0,
         likes: 0,
         comments: 0,
-        ...blogData
+        is_featured: true,
+        is_recent: false,
+        is_new: false,
       };
-      updatedList = [newBlog, ...blogs];
-      logActivity(`Published new blog post "${formData.title}".`, 'blog');
-    }
 
-    setBlogs(updatedList);
-    saveBlogs(updatedList);
-    setModalOpen(false);
+      try {
+        const res = await fetch('/api/blogs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newBlogPayload),
+        });
+        const data = await res.json();
+        if (data.success) {
+          logActivity(`Published new blog post "${formData.title}".`, 'blog');
+          loadBlogs();
+          setModalOpen(false);
+        } else {
+          alert(`Error publishing blog post: ${data.message}`);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('An error occurred while publishing the blog post');
+      }
+    }
   };
 
   return (
@@ -240,7 +305,19 @@ function AdminBlogsContent() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50 text-slate-700">
-              {filteredBlogs.length === 0 ? (
+              {loading ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-10 text-slate-400 font-semibold text-sm animate-pulse">
+                    Loading articles...
+                  </td>
+                </tr>
+              ) : error ? (
+                <tr>
+                  <td colSpan="5" className="text-center py-10 text-red-500 font-semibold text-sm">
+                    {error}
+                  </td>
+                </tr>
+              ) : filteredBlogs.length === 0 ? (
                 <tr>
                   <td colSpan="5" className="text-center py-10 text-slate-400 font-semibold text-sm">
                     No articles match your search parameters.
@@ -407,7 +484,7 @@ function AdminBlogsContent() {
                   </select>
                 </div>
 
-                {/* Tags */}
+                 {/* Tags */}
                 <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Tags (Comma Separated)</label>
                   <input
@@ -415,6 +492,19 @@ function AdminBlogsContent() {
                     name="tags"
                     placeholder="e.g. TU, CMAT, Entrance Exam"
                     value={formData.tags}
+                    onChange={handleFormChange}
+                    className="w-full bg-slate-50 text-xs text-slate-800 px-4 py-3 rounded-xl border border-slate-200 outline-none focus:bg-white focus:border-[#0B3C5D] transition-all"
+                  />
+                </div>
+
+                {/* Cover Image URL */}
+                <div className="md:col-span-2">
+                  <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Cover Image URL</label>
+                  <input
+                    type="text"
+                    name="image"
+                    placeholder="e.g. https://images.unsplash.com/..."
+                    value={formData.image}
                     onChange={handleFormChange}
                     className="w-full bg-slate-50 text-xs text-slate-800 px-4 py-3 rounded-xl border border-slate-200 outline-none focus:bg-white focus:border-[#0B3C5D] transition-all"
                   />
